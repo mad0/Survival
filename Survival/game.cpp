@@ -7,7 +7,9 @@ Game::Game() {
 
 void Game::mainLoop(GameState* state) {
 	while (okno.isOpen()) {
-
+		okno.clear(sf::Color::Black);
+		state->draw();
+		okno.display();
 
 	};
 

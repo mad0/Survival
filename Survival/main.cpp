@@ -5,7 +5,7 @@
 
 int main() {
 	Game gra;
-	gra.mainLoop(new MainMenu());
+	gra.mainLoop(new MainMenu(&gra));
 
 	return 0;
 };

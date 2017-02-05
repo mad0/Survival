@@ -6,13 +6,13 @@
 
 class MainMenu : public GameState {
 public:
-	/*sf::Text t_menu;
+	sf::Text t_menu;
 	sf::Font f_menu;
-	std::vector <std::string> t_menu;
-	*/
+	std::vector <std::string> menu;
+	
 	virtual void inputs();
 	virtual void update();
 	virtual void draw();
-	MainMenu();
+	MainMenu(Game* gra);
 	~MainMenu();
 };
