@@ -1,25 +1,24 @@
 #include "MainMenu.h"
+#include <iostream>
 
-MainMenu::MainMenu(Game* gra) {
-	f_menu.loadFromFile("font.ttf");
-	t_menu.setFont(f_menu);
-	t_menu.setString("Nowa gra");
+MainMenu::MainMenu(Game* gra)
+{
+	game = gra;
+	std::cout << "MAINMENU\n";
+	font.loadFromFile("font.ttf");
+	text.setFont(font);
+	text.setString("lalala");
 }
 
-MainMenu::~MainMenu() {
-
-
+void MainMenu::input() {
 }
 
-void MainMenu::inputs() {
-
-
+void MainMenu::draw() {
+	std::cout << "dupa";
+	game->okno.draw(text);
 }
 
 void MainMenu::update() {
 
-}
 
-void MainMenu::draw() {
-	gra->okno.draw(t_menu);
 }

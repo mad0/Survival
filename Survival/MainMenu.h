@@ -1,18 +1,17 @@
 #pragma once
-#include "GameState.h"
 #include <SFML\Graphics.hpp>
-#include <string>
-#include <map>
+#include "GameState.h"
+
 
 class MainMenu : public GameState {
 public:
-	sf::Text t_menu;
-	sf::Font f_menu;
-	std::vector <std::string> menu;
-	
-	virtual void inputs();
+	sf::Text text;
+	sf::Font font;
+
+
+	virtual void input();
 	virtual void update();
 	virtual void draw();
 	MainMenu(Game* gra);
-	~MainMenu();
+
 };

@@ -2,9 +2,10 @@
 #include "Game.h"
 
 class GameState {
+
 public:
-	Game* gra;
-	virtual void inputs()=0;
-	virtual void update()=0;
-	virtual void draw()=0;
+	Game* game;
+	virtual void input() = 0;
+	virtual void update() = 0;
+	virtual void draw() = 0;
 };

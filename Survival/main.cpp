@@ -1,11 +1,12 @@
 #include "Game.h"
-#include "MainMenu.h"
 #include <SFML\Graphics.hpp>
+#include "MainMenu.h"
 
 
 int main() {
 	Game gra;
-	gra.mainLoop(new MainMenu(&gra));
-
+	gra.push(new MainMenu(&gra));
+	gra.run();
+	
 	return 0;
 };
