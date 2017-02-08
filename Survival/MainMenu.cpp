@@ -3,22 +3,26 @@
 
 MainMenu::MainMenu(Game* gra)
 {
-	game = gra;
-	std::cout << "MAINMENU\n";
-	font.loadFromFile("font.ttf");
+	std::cout << "Tworze menu\n";
+	//std::cout << typeid(gameStatePTR).name();
+	gameStatePTR = gra;
+	font.loadFromFile("retro.ttf");
 	text.setFont(font);
-	text.setString("lalala");
+	text.setString("Nowa Gra");
 }
 
 void MainMenu::input() {
 }
 
 void MainMenu::draw() {
-	std::cout << "dupa";
-	game->okno.draw(text);
+	gameStatePTR->okno.clear(sf::Color::Black);
+	gameStatePTR->okno.draw(text);
 }
 
 void MainMenu::update() {
 
+}
 
+MainMenu::~MainMenu() {
+	std::cout << "Zamykam MENU\n";
 }

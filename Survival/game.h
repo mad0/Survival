@@ -5,12 +5,15 @@
 class GameState;
 
 class Game {
-public:
 	std::stack<GameState*> obiekty;
-	sf::RenderWindow okno;
-	void push(GameState*);
-	GameState* pop();
+public:
 	Game();
-	void run();
+
+	sf::RenderWindow okno;
+	void mainLoop();
+	void push(GameState*);
+	GameState* top();
+	void del();
+
 	~Game();
 };
