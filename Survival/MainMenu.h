@@ -4,9 +4,10 @@
 #include "GameState.h"
 
 class MainMenu : public GameState {
-	sf::Text text;
+	sf::Text t;
 	sf::Font font;
-	std::vector <std::string>menu;
+	std::vector<sf::Text> text;
+	std::vector<std::string> menu;
 public:
 	virtual void input();
 	virtual void update();

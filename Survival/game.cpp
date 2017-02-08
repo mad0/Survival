@@ -13,8 +13,11 @@ void Game::mainLoop() {
 		while (okno.pollEvent(zdarz)) {
 			if (zdarz.type == sf::Event::Closed)
 				okno.close();
-			if ((zdarz.type == sf::Event::KeyPressed) && (zdarz.key.code == sf::Keyboard::Escape))
+			if ((zdarz.type == sf::Event::KeyPressed) && (zdarz.key.code == sf::Keyboard::Escape)) {
+				del();
 				okno.close();
+			}
+				
 			if ((zdarz.type == sf::Event::KeyPressed) && (zdarz.key.code == sf::Keyboard::D)) {
 				del();
 				okno.close();
@@ -35,7 +38,6 @@ GameState* Game::top() {
 }
 
 void Game::del() {
-	//std::cout << typeid(obiekty.top()).name();
 	delete obiekty.top();
 	obiekty.pop();
 }

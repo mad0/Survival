@@ -1,10 +1,10 @@
 #pragma once
 #include "Game.h"
-#include <memory>
 
 class GameState {
 	
 public:
+
 	Game* gameStatePTR;
 	virtual void input() = 0;
 	virtual void update() = 0;
