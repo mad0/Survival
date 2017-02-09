@@ -6,7 +6,7 @@ class GameState {
 public:
 
 	Engine* gameStatePTR;
-	virtual void main() = 0;
+	virtual void inputs() = 0;
 	virtual void update() = 0;
 	virtual void draw() = 0;
 	virtual  ~GameState() = 0;

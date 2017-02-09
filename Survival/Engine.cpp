@@ -1,7 +1,6 @@
 #include <iostream>
 #include "GameState.h"
 #include "Engine.h"
-#include "Game.h"
 
 Engine::Engine() {
 	okno.create(sf::VideoMode(1440, 800), "Syrvival - Alpha");
@@ -10,24 +9,31 @@ Engine::Engine() {
 }
 
 void Engine::mainLoop() {
-		obiekty.top()->main();
-		del();
+	while (okno.isOpen()) {
+		std::cout << "CZYTAM???!!\n";
+
+		stos()->inputs();
+		stos()->draw();
+		okno.display();
+	}
 }
 
 
 void Engine::push(GameState* stan) {
 	obiekty.push(stan);
+	std::cout << obiekty.size() << "\n";
+	
 }
 
-GameState* Engine::top() {
-		return obiekty.top();
+GameState* Engine::stos() {
+		return this->obiekty.top();
 }
 
 void Engine::del() {
-	delete obiekty.top();
+	//delete obiekty.top();
 	obiekty.pop();
 }
  
 Engine::~Engine() {
-	std::cout << "Zamykam GRE\n";
+	std::cout << "Zamykam ENGINE\n";
 }

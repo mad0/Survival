@@ -1,6 +1,6 @@
-#include "MainMenu.h"
 #include <iostream>
-
+#include "MainMenu.h"
+#include "Game.h"
 
 MainMenu::MainMenu(Engine* gra)
 {
@@ -9,43 +9,43 @@ MainMenu::MainMenu(Engine* gra)
 	std::cout << "Tworze menu\n";
 	menu = { "Nowa Gra","Opcje", "Wyjscie" };
 	font.loadFromFile("retro.ttf");
-	//std::cout << position.x;
-	//std::cout << typeid(gameStatePTR).name();
-	
 	for (int x = 0; x < 3;x++) {
 		text.push_back(t);
 		text[x].setFont(font);
 		text[x].setString(menu[x]);
 		text[x].setPosition(position.x/2-text[x].getGlobalBounds().width/2, position.y/4 + x * 120);
 	}
-	std::cout << text.size();
 }
 
-void MainMenu::main() {
-	while (gameStatePTR->okno.isOpen()) {
+void MainMenu::inputs() {
 		sf::Event zdarz;
+		sf::Vector2f mouse(sf::Mouse::getPosition(gameStatePTR->okno));
 		while (gameStatePTR->okno.pollEvent(zdarz)) {
 			if (zdarz.type == sf::Event::Closed)
 				gameStatePTR->okno.close();
-			if ((zdarz.type == sf::Event::KeyPressed) && (zdarz.key.code == sf::Keyboard::Escape)) {
-				break;
+			else if ((zdarz.type == sf::Event::KeyPressed) && (zdarz.key.code == sf::Keyboard::Escape)) {
 				gameStatePTR->okno.close();
 			}
-
-			if ((zdarz.type == sf::Event::KeyPressed) && (zdarz.key.code == sf::Keyboard::Q)) {
-				//del();
-				gameStatePTR->okno.close();
+			else if ((text[0].getGlobalBounds().contains(mouse)) && (zdarz.type == sf::Event::MouseButtonReleased) && (zdarz.key.code == sf::Mouse::Left)) {
+				gameStatePTR->push(new Game(this->gameStatePTR));
+				gameStatePTR->mainLoop();
 			}
+				
+			else if ((text[2].getGlobalBounds().contains(mouse)) && (zdarz.type == sf::Event::MouseButtonReleased) && (zdarz.key.code == sf::Mouse::Left))
+				gameStatePTR->okno.close();
 		}
-		draw();
-	}
+		for (int x = 0; x < 3; x++) {
+			if (text[x].getGlobalBounds().contains(mouse))
+				text[x].setFillColor(sf::Color::Red);
+			else 
+				text[x].setFillColor(sf::Color::White);
+		}
 }
 
 void MainMenu::draw() {
 	this->gameStatePTR->okno.clear(sf::Color::Black);
 	for (auto& p : text)
 		this->gameStatePTR->okno.draw(p);
-	gameStatePTR->okno.display();
 }
 
 void MainMenu::update() {

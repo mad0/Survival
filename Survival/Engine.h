@@ -12,7 +12,7 @@ public:
 	sf::RenderWindow okno;
 	void mainLoop();
 	void push(GameState*);
-	GameState* top();
+	GameState* stos();
 	void del();
 
 	~Engine();

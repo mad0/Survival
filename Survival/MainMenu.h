@@ -9,7 +9,7 @@ class MainMenu : public GameState {
 	std::vector<sf::Text> text;
 	std::vector<std::string> menu;
 public:
-	virtual void main();
+	virtual void inputs();
 	virtual void update();
 	virtual void draw();
 	MainMenu(Engine* gra);
