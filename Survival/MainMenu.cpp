@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-MainMenu::MainMenu(Game* gra)
+MainMenu::MainMenu(Engine* gra)
 {
 	gameStatePTR = gra;
 	sf::Vector2u position = gameStatePTR->okno.getSize();
@@ -21,16 +21,35 @@ MainMenu::MainMenu(Game* gra)
 	std::cout << text.size();
 }
 
-void MainMenu::input() {
+void MainMenu::main() {
+	while (gameStatePTR->okno.isOpen()) {
+		sf::Event zdarz;
+		while (gameStatePTR->okno.pollEvent(zdarz)) {
+			if (zdarz.type == sf::Event::Closed)
+				gameStatePTR->okno.close();
+			if ((zdarz.type == sf::Event::KeyPressed) && (zdarz.key.code == sf::Keyboard::Escape)) {
+				break;
+				gameStatePTR->okno.close();
+			}
+
+			if ((zdarz.type == sf::Event::KeyPressed) && (zdarz.key.code == sf::Keyboard::Q)) {
+				//del();
+				gameStatePTR->okno.close();
+			}
+		}
+		draw();
+	}
 }
 
 void MainMenu::draw() {
-	gameStatePTR->okno.clear(sf::Color::Black);
+	this->gameStatePTR->okno.clear(sf::Color::Black);
 	for (auto& p : text)
-		gameStatePTR->okno.draw(p);
+		this->gameStatePTR->okno.draw(p);
+	gameStatePTR->okno.display();
 }
 
 void MainMenu::update() {
+	
 }
 
 MainMenu::~MainMenu() {
