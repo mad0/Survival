@@ -23,12 +23,11 @@ void MainMenu::inputs() {
 		while (gameStatePTR->okno.pollEvent(zdarz)) {
 			if (zdarz.type == sf::Event::Closed)
 				gameStatePTR->okno.close();
-			else if ((zdarz.type == sf::Event::KeyPressed) && (zdarz.key.code == sf::Keyboard::Escape)) {
+			else if ((zdarz.type == sf::Event::KeyReleased) && (zdarz.key.code == sf::Keyboard::Escape)) {
 				gameStatePTR->okno.close();
 			}
 			else if ((text[0].getGlobalBounds().contains(mouse)) && (zdarz.type == sf::Event::MouseButtonReleased) && (zdarz.key.code == sf::Mouse::Left)) {
-				gameStatePTR->push(new Game(this->gameStatePTR));
-				gameStatePTR->mainLoop();
+				gameStatePTR->push(new Game(gameStatePTR));
 			}
 				
 			else if ((text[2].getGlobalBounds().contains(mouse)) && (zdarz.type == sf::Event::MouseButtonReleased) && (zdarz.key.code == sf::Mouse::Left))

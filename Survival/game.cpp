@@ -1,8 +1,11 @@
 #include "Game.h"
 #include <iostream>
 
+int Game::num(0);
+
 Game::Game(Engine* gra) {
-	std::cout << "---------------------------\n";
+	num++;
+	std::cout << "Stworzono "<<num<< "obiektow GRY\n";
 	gameStatePTR = gra;
 	std::cout << "Wchodze z MENU do GRY\n";
 	font.loadFromFile("retro.ttf");
@@ -17,9 +20,8 @@ void Game::inputs() {
 		if (zdarz.type == sf::Event::Closed)
 			gameStatePTR->okno.close();
 
-		else if ((zdarz.type == sf::Event::KeyPressed) && (zdarz.key.code == sf::Keyboard::Escape)) {
+		else if ((zdarz.type == sf::Event::KeyReleased) && (zdarz.key.code == sf::Keyboard::Escape)) {
 			gameStatePTR->del();
-				
 		}
 		/*else if ((text[0].getGlobalBounds().contains(mouse)) && (zdarz.type == sf::Event::MouseButtonReleased) && (zdarz.key.code == sf::Mouse::Left))
 			gameStatePTR->okno.close();
@@ -40,5 +42,6 @@ void Game::update() {
 }
 
 Game::~Game() {
+	num--;
 	std::cout << "Wychodze z GRY do MENU\n";
 }

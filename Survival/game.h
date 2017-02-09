@@ -7,6 +7,7 @@ private:
 	sf::Text text;
 	sf::Font font;
 public:
+	static int num;
 	virtual void inputs();
 	virtual void update();
 	virtual void draw();
