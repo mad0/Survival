@@ -6,6 +6,14 @@ MainMenu::MainMenu(Engine* gra)
 {
 	gameStatePTR = gra;
 	sf::Vector2u position = gameStatePTR->okno.getSize();
+	//Menu background
+	bkg.loadFromFile("bkg.jpg");
+	float scaleX = (float)(gameStatePTR->okno.getSize().x) / (bkg.getSize().x);
+	float scaleY = (float)(gameStatePTR->okno.getSize().y) / (bkg.getSize().y);
+	std::cout << scaleX << scaleY;
+	bkg_sprite.setTexture(bkg);
+	bkg_sprite.setScale(scaleX,scaleY);
+	//Menu options
 	std::cout << "Tworze menu\n";
 	menu = { "Nowa Gra","Opcje", "Wyjscie" };
 	font.loadFromFile("retro.ttf");
@@ -15,6 +23,10 @@ MainMenu::MainMenu(Engine* gra)
 		text[x].setString(menu[x]);
 		text[x].setPosition(position.x/2-text[x].getGlobalBounds().width/2, position.y/4 + x * 120);
 	}
+	//Menu options - background
+	ramka.setSize(sf::Vector2f(300.0,400.0));
+	ramka.setFillColor(sf::Color(0, 0, 0, 150));
+	ramka.setPosition(text[0].getPosition().x-50, text[0].getPosition().y-50);
 }
 
 void MainMenu::inputs() {
@@ -43,6 +55,8 @@ void MainMenu::inputs() {
 
 void MainMenu::draw() {
 	this->gameStatePTR->okno.clear(sf::Color::Black);
+	gameStatePTR->okno.draw(bkg_sprite);
+	gameStatePTR->okno.draw(ramka);
 	for (auto& p : text)
 		this->gameStatePTR->okno.draw(p);
 }

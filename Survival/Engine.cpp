@@ -3,7 +3,7 @@
 #include "Engine.h"
 
 Engine::Engine() {
-	okno.create(sf::VideoMode(1440, 800), "Syrvival - Alpha");
+	okno.create(sf::VideoMode(1440,800), "Syrvival - Alpha", sf::Style::Fullscreen);
 	okno.setFramerateLimit(60);
 	okno.setVerticalSyncEnabled(true);
 }
@@ -14,7 +14,6 @@ void Engine::push(GameState* stan) {
 }
 
 GameState* Engine::stos() {
-	if (this->obiekty.empty()) return nullptr;
 	return this->obiekty.top();
 }
 
@@ -26,11 +25,11 @@ void Engine::del() {
 
 void Engine::mainLoop() {
 	while (okno.isOpen()) {
-		//std::cout << "CZYTAM???!!\n";
 		stos()->inputs();
 		stos()->draw();
 		okno.display();
 	}
+	std::cout << "Usuwam ostatni obiekt ze stosu\n";
 	del();
 }
  
