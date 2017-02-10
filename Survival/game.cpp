@@ -20,17 +20,16 @@ void Game::inputs() {
 		if (zdarz.type == sf::Event::Closed)
 			gameStatePTR->okno.close();
 
-		else if ((zdarz.type == sf::Event::KeyReleased) && (zdarz.key.code == sf::Keyboard::Escape)) {
-			gameStatePTR->del();
-		}
+		
 		/*else if ((text[0].getGlobalBounds().contains(mouse)) && (zdarz.type == sf::Event::MouseButtonReleased) && (zdarz.key.code == sf::Mouse::Left))
 			gameStatePTR->okno.close();
 		else if ((text[2].getGlobalBounds().contains(mouse)) && (zdarz.type == sf::Event::MouseButtonReleased) && (zdarz.key.code == sf::Mouse::Left))
 			gameStatePTR->okno.close();
 		*/
 	}
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)))
+		gameStatePTR->del();
 }
-
 
 void Game::draw() {
 	gameStatePTR->okno.clear(sf::Color::Black);

@@ -10,18 +10,17 @@ Engine::Engine() {
 
 void Engine::push(GameState* stan) {
 	obiekty.push(stan);
-	std::cout << obiekty.size() << "\n";
-	
+	std::cout << obiekty.size() << "\n"; 
 }
 
 GameState* Engine::stos() {
-		return this->obiekty.top();
+	if (this->obiekty.empty()) return nullptr;
+	return this->obiekty.top();
 }
 
 void Engine::del() {
 	delete obiekty.top();
 	obiekty.pop();
-	std::cout << typeid(*obiekty.top()).name() << "\n";
 	std::cout << obiekty.size() << "\n";
 }
 
@@ -32,6 +31,7 @@ void Engine::mainLoop() {
 		stos()->draw();
 		okno.display();
 	}
+	del();
 }
  
 Engine::~Engine() {
