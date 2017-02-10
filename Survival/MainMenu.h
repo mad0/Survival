@@ -8,7 +8,6 @@ class MainMenu : public GameState {
 	sf::Font font;
 	sf::Texture bkg;
 	sf::Sprite bkg_sprite;
-	sf::RectangleShape ramka;
 	std::vector<sf::Text> text;
 	std::vector<std::string> menu;
 public:

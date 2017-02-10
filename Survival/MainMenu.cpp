@@ -23,10 +23,6 @@ MainMenu::MainMenu(Engine* gra)
 		text[x].setString(menu[x]);
 		text[x].setPosition(position.x/2-text[x].getGlobalBounds().width/2, position.y/4 + x * 120);
 	}
-	//Menu options - background
-	ramka.setSize(sf::Vector2f(300.0,400.0));
-	ramka.setFillColor(sf::Color(0, 0, 0, 150));
-	ramka.setPosition(text[0].getPosition().x-50, text[0].getPosition().y-50);
 }
 
 void MainMenu::inputs() {
@@ -49,14 +45,13 @@ void MainMenu::inputs() {
 				if (text[x].getGlobalBounds().contains(mouse))
 					text[x].setFillColor(sf::Color::Red);
 				else
-					text[x].setFillColor(sf::Color::White);
+					text[x].setFillColor(sf::Color::Blue);
 			}
 }
 
 void MainMenu::draw() {
 	this->gameStatePTR->okno.clear(sf::Color::Black);
 	gameStatePTR->okno.draw(bkg_sprite);
-	gameStatePTR->okno.draw(ramka);
 	for (auto& p : text)
 		this->gameStatePTR->okno.draw(p);
 }

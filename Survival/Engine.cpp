@@ -3,8 +3,8 @@
 #include "Engine.h"
 
 Engine::Engine() {
-	okno.create(sf::VideoMode(1440,800), "Syrvival - Alpha", sf::Style::Fullscreen);
-	okno.setFramerateLimit(60);
+	okno.create(sf::VideoMode(1440,800), "Ice Syrvival - Alpha 0.0.01", sf::Style::Fullscreen);
+	okno.setFramerateLimit(35);
 	okno.setVerticalSyncEnabled(true);
 }
 
