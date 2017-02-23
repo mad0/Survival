@@ -18,7 +18,10 @@ void Game::inputs() {
 		if (zdarz.type == sf::Event::Closed)
 			gameStatePTR->okno.close();
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::I) {
-			//Items::Inventory();
+			if (!inv)
+				inv = true;
+			else
+				inv = false;
 		}
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::L) {
 			
@@ -37,8 +40,8 @@ void Game::inputs() {
 
 void Game::draw() {
 	gameStatePTR->okno.clear(sf::Color::Black);
-	//if (InvPressed)
-		//gameStatePTR->okno.draw(DialogBox);
+	if (inv)
+		gui.draw(gameStatePTR->okno);
 }
 
 void Game::update() {
