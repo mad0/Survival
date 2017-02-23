@@ -1,11 +1,12 @@
 #pragma once
 #include "GameState.h"
+#include "Items.h"
+#include "Quests.h"
 #include <SFML\Graphics.hpp>
 
 class Game : public GameState {
 private:
-	sf::Text text;
-	sf::Font font;
+	
 public:
 	static int num;
 	virtual void inputs();

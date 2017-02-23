@@ -32,7 +32,7 @@ void MainMenu::inputs() {
 				//std::cout << typeid(gameStatePTR->stos()).name() << "\n";
 				if (zdarz.type == sf::Event::Closed)
 					gameStatePTR->okno.close();
-				else if ((zdarz.type == sf::Event::KeyReleased) && (zdarz.key.code == sf::Keyboard::E)) {
+				else if ((zdarz.type == sf::Event::KeyReleased) && (zdarz.key.code == sf::Keyboard::Q)) {
 					gameStatePTR->okno.close();
 				}
 				else if ((text[0].getGlobalBounds().contains(mouse)) && (zdarz.type == sf::Event::MouseButtonReleased) && (zdarz.key.code == sf::Mouse::Left)) {

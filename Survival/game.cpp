@@ -1,16 +1,14 @@
 #include "Game.h"
 #include <iostream>
 
-int Game::num(0);
+int Game::num = 0;
 
 Game::Game(Engine* gra) {
+
 	num++;
 	std::cout << "Stworzono "<<num<< "obiektow GRY\n";
 	gameStatePTR = gra;
 	std::cout << "Wchodze z MENU do GRY\n";
-	font.loadFromFile("retro.ttf");
-	text.setFont(font);
-	text.setString("W GRZE\n");
 }
 
 void Game::inputs() {
@@ -19,8 +17,13 @@ void Game::inputs() {
 	while (gameStatePTR->okno.pollEvent(zdarz)) {
 		if (zdarz.type == sf::Event::Closed)
 			gameStatePTR->okno.close();
+		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::I) {
+			//Items::Inventory();
+		}
+		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::L) {
+			
+		}
 
-		
 		/*else if ((text[0].getGlobalBounds().contains(mouse)) && (zdarz.type == sf::Event::MouseButtonReleased) && (zdarz.key.code == sf::Mouse::Left))
 			gameStatePTR->okno.close();
 		else if ((text[2].getGlobalBounds().contains(mouse)) && (zdarz.type == sf::Event::MouseButtonReleased) && (zdarz.key.code == sf::Mouse::Left))
@@ -31,9 +34,11 @@ void Game::inputs() {
 		gameStatePTR->del();
 }
 
+
 void Game::draw() {
 	gameStatePTR->okno.clear(sf::Color::Black);
-	gameStatePTR->okno.draw(text);
+	//if (InvPressed)
+		//gameStatePTR->okno.draw(DialogBox);
 }
 
 void Game::update() {
