@@ -2,15 +2,23 @@
 #include <SFML\Graphics.hpp>
 class GUI {
 private:
-	sf::Text text;
-	sf::Font font;
-	sf::Sprite DialogBox;
-	sf::Texture DialogBG;
+	
+	
 public:
 	void draw(sf::RenderWindow& okno);
-	void Inventory();
-	GUI();
+	GUI(GUIText, GUIShapes);
 	~GUI();
+};
 
+class GUIShapes {
+public:
+	sf::Sprite DialogBox;
+	sf::Texture DialogBG;
+};
+
+class GUIText {
+public:
+	sf::Text text;
+	sf::Font font;
 };
 
