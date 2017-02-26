@@ -1,45 +1,19 @@
 #include "GUI.h"
 #include <iostream>
+#include <SFML\Graphics.hpp>
 
 //Main GUI
-GUI::GUI(GUIText text, GUIShapes shape) {
-	
-	
+GUI::GUI() {
+	T_bg.loadFromFile("gui.png");
+	bg.setTexture(T_bg);
 }
 
-void GUI::draw(sf::RenderWindow& okno) {
+void GUI::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	std::cout << "dra..\n";
-	//okno.draw();
-};
+	target.draw(bg);
+}
 
 
 GUI::~GUI()
 {
-}
-
-
-
-//Ksztalty
-GUIShapes::GUIShapes() {
-	DialogBG.loadFromFile("dialog.png");
-	DialogBox.setTexture(DialogBG);
-	DialogBox.setScale(0.3f, 0.3f);
-	DialogBox.setPosition(800, 300);
-}
-
-GUIShapes::~GUIShapes() {
-	
-}
-
-
-//Teksty
-GUIText::GUIText() {
-	font.loadFromFile("retro.ttf");
-	text.setFont(font);
-	text.setString("Inventory...\n");
-}
-
-GUIText::~GUIText() {
-
-
 }

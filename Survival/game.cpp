@@ -4,7 +4,6 @@
 int Game::num = 0;
 
 Game::Game(Engine* gra) {
-
 	num++;
 	std::cout << "Stworzono "<<num<< "obiektow GRY\n";
 	gameStatePTR = gra;
@@ -40,8 +39,9 @@ void Game::inputs() {
 
 void Game::draw() {
 	gameStatePTR->okno.clear(sf::Color::Black);
-	if (inv)
-		gui.draw(gameStatePTR->okno);
+	//if (inv)
+	//	gui.gameStatePTR->okno);
+	gameStatePTR->okno.draw(gui);
 }
 
 void Game::update() {

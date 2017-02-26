@@ -1,24 +1,14 @@
 #pragma once
 #include <SFML\Graphics.hpp>
-class GUI {
+
+class GUI : public sf::Drawable, public sf::Transformable {
 private:
-	
-	
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	sf::Sprite bg;
+	sf::Texture T_bg;
 public:
-	void draw(sf::RenderWindow& okno);
-	GUI(GUIText, GUIShapes);
+	GUI();
 	~GUI();
 };
 
-class GUIShapes {
-public:
-	sf::Sprite DialogBox;
-	sf::Texture DialogBG;
-};
-
-class GUIText {
-public:
-	sf::Text text;
-	sf::Font font;
-};
 
