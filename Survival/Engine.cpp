@@ -3,9 +3,11 @@
 #include "Engine.h"
 
 Engine::Engine() {
-	okno.create(sf::VideoMode(1920, 1080), "Ice Syrvival - Alpha 0.0.01", sf::Style::Fullscreen);
+	std::cout << "Uruchamiam ENGINE...\n";
+	okno.create(sf::VideoMode(1024, 768), "Ice Syrvival - Alpha 0.0.01", sf::Style::Default);
 	okno.setFramerateLimit(35);
 	okno.setVerticalSyncEnabled(true);
+	okno.setKeyRepeatEnabled(true);
 }
 
 void Engine::push(GameState* stan) {
@@ -20,7 +22,7 @@ GameState* Engine::stos() {
 void Engine::del() {
 	delete obiekty.top();
 	obiekty.pop();
-	std::cout << obiekty.size() << "\n";
+	std::cout <<"Ilosc obiektow na stosie, dziedziczacych po GameState "<<obiekty.size() << "\n";
 }
 
 void Engine::mainLoop() {
@@ -34,5 +36,5 @@ void Engine::mainLoop() {
 }
  
 Engine::~Engine() {
-	std::cout << "Zamykam ENGINE\n";
+	std::cout << "Zamykam ENGINE...\n";
 }

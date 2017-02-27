@@ -4,9 +4,11 @@
 int Game::num = 0;
 
 Game::Game(Engine* gra) {
+	gameStatePTR = gra;
+	Wsize = sf::Vector2f(gameStatePTR->okno.getSize());
+	ui = std::make_unique<GUI>("UI", Wsize);
 	num++;
 	std::cout << "Stworzono "<<num<< "obiektow GRY\n";
-	gameStatePTR = gra;
 	std::cout << "Wchodze z MENU do GRY\n";
 }
 
@@ -16,16 +18,16 @@ void Game::inputs() {
 	while (gameStatePTR->okno.pollEvent(zdarz)) {
 		if (zdarz.type == sf::Event::Closed)
 			gameStatePTR->okno.close();
-		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::I) {
-			if (!inv)
-				inv = true;
+		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::K) {
+			if (!quests)
+				quests = std::make_unique<GUI>("GUIQuests", sf::Vector2f(400,400));
 			else
-				inv = false;
+				quests = NULL;
 		}
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::L) {
 			
 		}
-
+		
 		/*else if ((text[0].getGlobalBounds().contains(mouse)) && (zdarz.type == sf::Event::MouseButtonReleased) && (zdarz.key.code == sf::Mouse::Left))
 			gameStatePTR->okno.close();
 		else if ((text[2].getGlobalBounds().contains(mouse)) && (zdarz.type == sf::Event::MouseButtonReleased) && (zdarz.key.code == sf::Mouse::Left))
@@ -39,9 +41,9 @@ void Game::inputs() {
 
 void Game::draw() {
 	gameStatePTR->okno.clear(sf::Color::Black);
-	//if (inv)
-	//	gui.gameStatePTR->okno);
-	gameStatePTR->okno.draw(gui);
+	gameStatePTR->okno.draw(*ui);
+	if (quests)
+		gameStatePTR->okno.draw(*quests);
 }
 
 void Game::update() {
