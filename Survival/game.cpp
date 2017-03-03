@@ -1,15 +1,12 @@
 #include "Game.h"
 #include <iostream>
 
-int Game::num = 0;
-
 Game::Game(Engine* gra) {
 	gameStatePTR = gra;
-	Wsize = sf::Vector2f(gameStatePTR->okno.getSize());
-	ui = std::make_unique<GUI>("UI", Wsize);
-	num++;
-	std::cout << "Stworzono "<<num<< "obiektow GRY\n";
+	//Wsize = sf::Vector2f(gameStatePTR->okno.getSize());
+	//ui = std::make_unique<GUI>("UI");
 	std::cout << "Wchodze z MENU do GRY\n";
+	txt.emplace_back(new Text("Obudzilem sie w jakiejs ciemnej piwnicy, z przodu widze korytarz\nCo robic?", "fonts/FBI.ttf"));
 }
 
 void Game::inputs() {
@@ -19,10 +16,11 @@ void Game::inputs() {
 		if (zdarz.type == sf::Event::Closed)
 			gameStatePTR->okno.close();
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::K) {
-			if (!quests)
-				quests = std::make_unique<GUI>("GUIQuests", sf::Vector2f(400,400));
-			else
-				quests = NULL;
+			//if (!quests) {
+			//	quests = std::make_unique<GUI>("GUIQuests");
+			//}
+			//else
+			//	quests = NULL;
 		}
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::L) {
 			
@@ -41,9 +39,9 @@ void Game::inputs() {
 
 void Game::draw() {
 	gameStatePTR->okno.clear(sf::Color::Black);
-	gameStatePTR->okno.draw(*ui);
-	if (quests)
-		gameStatePTR->okno.draw(*quests);
+	txt[0]->draw(gameStatePTR->okno);
+	//if (quests)
+	//	gameStatePTR->okno.draw(*quests);
 }
 
 void Game::update() {
@@ -51,6 +49,5 @@ void Game::update() {
 }
 
 Game::~Game() {
-	num--;
 	std::cout << "Wychodze z GRY do MENU\n";
 }

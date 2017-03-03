@@ -1,15 +1,15 @@
 #pragma once
 #include <SFML\Graphics.hpp>
-#include <vector>
 #include "GameState.h"
+#include "Text.h"
+#include <vector>
+#include <memory>
 
 class MainMenu : public GameState {
-	sf::Text t;
-	sf::Font font;
-	sf::Texture bkg;
-	sf::Sprite bkg_sprite;
-	std::vector<sf::Text> text;
-	std::vector<std::string> menu;
+	//sf::Texture bkg;
+	//sf::Sprite bkg_sprite;
+	std::vector <std::unique_ptr<Text>> mItems;
+	std::vector<std::string> mTxt;
 public:
 	virtual void inputs();
 	virtual void update();

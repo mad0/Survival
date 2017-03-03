@@ -1,18 +1,19 @@
 #pragma once
-#include "GameState.h"
-#include "GUI.h"
 #include <SFML\Graphics.hpp>
+#include <vector>
 #include <memory>
+#include "GameState.h"
+#include "Text.h"
 
 class Game : public GameState {
 private:
-	
+	bool game_type;
 public:
-	std::unique_ptr<GUI> ui;
-	std::unique_ptr<GUI> quests;
-	std::unique_ptr<GUI> map;
-	sf::Vector2f Wsize;
-	static int num;
+	//std::unique_ptr<GUI> ui;
+	//std::unique_ptr<GUI> quests;
+	//std::unique_ptr<GUI> map;
+	//sf::Vector2f Wsize;
+	std::vector <std::unique_ptr<Text>> txt;
 	virtual void inputs();
 	virtual void update();
 	virtual void draw();
