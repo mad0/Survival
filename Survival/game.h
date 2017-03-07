@@ -7,7 +7,7 @@
 
 class Game : public GameState {
 private:
-	bool game_type;
+	bool startMsg;
 public:
 	//std::unique_ptr<GUI> ui;
 	//std::unique_ptr<GUI> quests;

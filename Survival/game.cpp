@@ -2,6 +2,7 @@
 #include <iostream>
 
 Game::Game(Engine* gra) {
+	startMsg = true;
 	gameStatePTR = gra;
 	//Wsize = sf::Vector2f(gameStatePTR->okno.getSize());
 	//ui = std::make_unique<GUI>("UI");
@@ -22,8 +23,8 @@ void Game::inputs() {
 			//else
 			//	quests = NULL;
 		}
-		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::L) {
-			
+		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::Space) {
+			startMsg = false;
 		}
 		
 		/*else if ((text[0].getGlobalBounds().contains(mouse)) && (zdarz.type == sf::Event::MouseButtonReleased) && (zdarz.key.code == sf::Mouse::Left))
@@ -39,7 +40,8 @@ void Game::inputs() {
 
 void Game::draw() {
 	gameStatePTR->okno.clear(sf::Color::Black);
-	txt[0]->draw(gameStatePTR->okno);
+	if (startMsg)
+		txt[0]->draw(gameStatePTR->okno);
 	//if (quests)
 	//	gameStatePTR->okno.draw(*quests);
 }
