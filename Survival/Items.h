@@ -1,12 +1,16 @@
 #pragma once
-#include <SFML\Graphics.hpp>
+#include <iostream>
+#include <string>
 
 class Items {
-
+private:
+	std::string name;
+	int Ldmg;
+	int Hdmg;
 public:
-	
-	static bool InvPressed;
-	
-	Items();
+	std::string Sname();
+	int SLdmg();
+	int SHdmg();
+	Items(const std::string&, int, int);
 	~Items();
 };
