@@ -56,7 +56,7 @@ void MainMenu::draw() {
 }
 
 void MainMenu::update() {
-	
+
 }
 
 MainMenu::~MainMenu() {

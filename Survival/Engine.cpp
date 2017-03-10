@@ -28,6 +28,7 @@ void Engine::del() {
 void Engine::mainLoop() {
 	while (okno.isOpen()) {
 		stos()->inputs();
+		stos()->update();
 		stos()->draw();
 		okno.display();
 	}

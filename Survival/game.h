@@ -5,14 +5,15 @@
 #include "GameState.h"
 #include "Map.h"
 #include "Character.h"
+#include "Items.h"
 
 class Game : public GameState {
 private:
-	bool startMsg;
-	sf::Text gui[4];
+	sf::Text gui[3];
 	std::string guiStr[4];
 	sf::Font font;
 	sf::Vector2f Wsize;
+	std::unique_ptr<Weapons> weapon;
 public:
 	std::unique_ptr<Character> p1;
 	//Map map1;
