@@ -16,7 +16,7 @@ MainMenu::MainMenu(Engine* gra)
 	//Menu options
 	std::cout<<position.x;
 	std::cout << "Tworze menu\n";
-	mTxt = { "Nowa Gra","Opcje", "Wyjscie" };
+	mTxt = { "New game","Options", "Exit" };
 	//font.loadFromFile("fonts/Game2.ttf");
 	for (int x = 0; x < 3;x++) {
 		mItems.push_back(std::make_unique<Text>(mTxt[x], "fonts/Game2.ttf"));

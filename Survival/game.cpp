@@ -4,24 +4,32 @@
 
 
 Game::Game(Engine* gra) {
+	p1 = std::make_unique<Character>(128);
 	startMsg = true;
 	gameStatePTR = gra;
-	p1 = Player(120);
-	font.loadFromFile("fonts/FBI.ttf");
-	guiStr[0] = "Ilosc zycia: ";
-	guiStr[1] = "Plecak: ";
-	gui[0].setString(guiStr[0]+std::to_string(p1.show_hp()));
+	Wsize = sf::Vector2f(gameStatePTR->okno.getSize());
+	font.loadFromFile("fonts/Vecna.otf");
+	guiStr[0] = "Health points ";
+	guiStr[1] = "Weapon: ";
+	guiStr[2] = "Damage: ";
+	//HP
+	gui[0].setString(guiStr[0]+"\n      "+std::to_string(p1->show_hp()));
 	gui[0].setFont(font);
-	gui[0].setPosition(50, 30);
-	gui[0].setCharacterSize(45);
-
-	gui[1].setString(guiStr[1] + std::to_string(p1.bagSize()));
+	gui[0].setPosition(50, Wsize.y-100);
+	gui[0].setCharacterSize(25);
+	//Plecak
+	//Nazwa broni
+	gui[1].setString(guiStr[1] + p1->ItemName());
 	gui[1].setFont(font);
-	gui[1].setPosition(250, 30);
-	gui[1].setCharacterSize(45);
-	//p1 = new Player(100, 1, 1);
-	//Wsize = sf::Vector2f(gameStatePTR->okno.getSize());
-	//ui = std::make_unique<GUI>("UI");
+	gui[1].setPosition(gui[0].getGlobalBounds().width + 100, Wsize.y - 100);
+	gui[1].setCharacterSize(25);
+	//Obrazenia
+	gui[2].setString(guiStr[2] + std::to_string(p1->Ldmg())+"-"+ std::to_string(p1->Hdmg()));
+	gui[2].setFont(font);
+	gui[2].setPosition(gui[0].getGlobalBounds().width + 100, Wsize.y - 75);
+	gui[2].setCharacterSize(25);
+	
+
 	std::cout << "Wchodze z MENU do GRY\n";
 }
 
@@ -40,7 +48,7 @@ void Game::inputs() {
 		}
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::Space) {
 			startMsg = false;
-			p1.show_hp();
+			//p1.show_hp();
 		}
 		
 		/*else if ((text[0].getGlobalBounds().contains(mouse)) && (zdarz.type == sf::Event::MouseButtonReleased) && (zdarz.key.code == sf::Mouse::Left))

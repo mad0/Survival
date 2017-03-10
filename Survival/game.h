@@ -4,16 +4,17 @@
 #include <memory>
 #include "GameState.h"
 #include "Map.h"
-#include "Player.h"
+#include "Character.h"
 
 class Game : public GameState {
 private:
 	bool startMsg;
-	sf::Text gui[2];
-	std::string guiStr[2];
+	sf::Text gui[4];
+	std::string guiStr[4];
 	sf::Font font;
+	sf::Vector2f Wsize;
 public:
-	Player p1;
+	std::unique_ptr<Character> p1;
 	//Map map1;
 	//std::unique_ptr<GUI> ui;
 	//std::unique_ptr<GUI> quests;
