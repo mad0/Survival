@@ -6,15 +6,15 @@
 class Items  {
 private:
 	
-	std::string file;
-	sf::Sprite icon;
-	sf::Texture texture;
 public:
 	std::string getName();
 	Items(const std::string&, const std::string&);
 	~Items();
 protected:
+	std::string file;
 	std::string name;
+	sf::Sprite icon;
+	sf::Texture texture;
 };
 
 
@@ -28,4 +28,6 @@ public:
 	int getLdmg();
 	int getHdmg();
 	void newWeapon();
+	void Icon(sf::Vector2f);
+	void IconDraw(sf::RenderWindow&);
 };

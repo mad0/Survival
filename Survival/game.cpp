@@ -5,7 +5,8 @@ Game::Game(Engine* gra) {
 	p1 = std::make_unique<Character>(128);
 	gameStatePTR = gra;
 	Wsize = sf::Vector2f(gameStatePTR->okno.getSize());
-	weapon = std::make_unique<Weapons>("Stick", "stick.jpg", 1, 4);
+	weapon = std::make_unique<Weapons>("Sword", "gfx/sword1.png", 1, 4);
+	weapon->Icon(Wsize);
 	font.loadFromFile("fonts/Vecna.otf");
 	guiStr[0] = "Health points ";
 	guiStr[1] = "Weapon: ";
@@ -35,21 +36,12 @@ void Game::inputs() {
 		if (zdarz.type == sf::Event::Closed)
 			gameStatePTR->okno.close();
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::S) {
-			//if (!quests) {
-			//	quests = std::make_unique<GUI>("GUIQuests");
-			//}
-			//else
-			//	quests = NULL;
+
 		}
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::Space) {
 			weapon->newWeapon();
 		}
-		
-		/*else if ((text[0].getGlobalBounds().contains(mouse)) && (zdarz.type == sf::Event::MouseButtonReleased) && (zdarz.key.code == sf::Mouse::Left))
-			gameStatePTR->okno.close();
-		else if ((text[2].getGlobalBounds().contains(mouse)) && (zdarz.type == sf::Event::MouseButtonReleased) && (zdarz.key.code == sf::Mouse::Left))
-			gameStatePTR->okno.close();
-		*/
+
 	}
 	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)))
 		gameStatePTR->del();
@@ -60,8 +52,7 @@ void Game::draw() {
 	gameStatePTR->okno.clear(sf::Color::Black);
 	for (auto x: gui)
 		gameStatePTR->okno.draw(x);
-	//if (quests)
-	//	gameStatePTR->okno.draw(*quests);
+	weapon->IconDraw(gameStatePTR->okno);
 }
 
 void Game::update() {

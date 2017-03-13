@@ -35,4 +35,19 @@ void Weapons::newWeapon() {
 	Ldmg = 10;
 	Hdmg = 35;
 	name = "Mlot";
+	file = "gfx/hala.png";
+	texture.loadFromFile(file);
+	icon.setTexture(texture);
+}
+
+void Weapons::Icon(sf::Vector2f wsize) {
+	texture.loadFromFile(file);
+	icon.setTexture(texture);
+	//icon.setScale(0.7,0.7);
+	icon.setPosition(sf::Vector2f(wsize.x/2-icon.getGlobalBounds().width/2, wsize.y - 150));
+}
+
+void Weapons::IconDraw(sf::RenderWindow & okno)
+{
+	okno.draw(icon);
 }
