@@ -2,7 +2,7 @@
 #include <iostream>
 
 Game::Game(Engine* gra) {
-	map = std::make_unique<Map>("gfx/wall.png");
+	map = std::make_unique<Map>("gfx/tile.png");
 	map->LoadTile();
 	p1 = std::make_unique<Character>(128);
 	gameStatePTR = gra;
