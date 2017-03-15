@@ -2,6 +2,8 @@
 #include <iostream>
 
 Game::Game(Engine* gra) {
+	map = std::make_unique<Map>("gfx/wall.png");
+	map->LoadTile();
 	p1 = std::make_unique<Character>(128);
 	gameStatePTR = gra;
 	Wsize = sf::Vector2f(gameStatePTR->okno.getSize());
@@ -53,6 +55,7 @@ void Game::draw() {
 	for (auto x: gui)
 		gameStatePTR->okno.draw(x);
 	weapon->IconDraw(gameStatePTR->okno);
+	map->draw(gameStatePTR->okno);
 }
 
 void Game::update() {

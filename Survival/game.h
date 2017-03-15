@@ -14,6 +14,7 @@ private:
 	sf::Font font;
 	sf::Vector2f Wsize;
 	std::unique_ptr<Weapons> weapon;
+	std::unique_ptr<Map> map;
 public:
 	std::unique_ptr<Character> p1;
 	//Map map1;
