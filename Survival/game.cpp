@@ -51,7 +51,7 @@ void Game::inputs() {
 
 
 void Game::draw() {
-	gameStatePTR->okno.clear(sf::Color::Black);
+	gameStatePTR->okno.clear();
 	for (auto x: gui)
 		gameStatePTR->okno.draw(x);
 	weapon->IconDraw(gameStatePTR->okno);
