@@ -2,11 +2,11 @@
 #include <iostream>
 
 Game::Game(Engine* gra) {
-	map = std::make_unique<Map>("gfx/tile.png");
-	map->LoadTile();
-	p1 = std::make_unique<Character>(128);
 	gameStatePTR = gra;
 	Wsize = sf::Vector2f(gameStatePTR->okno.getSize());
+	map = std::make_unique<Map>("gfx/tile.png", Wsize);
+	map->LoadTile();
+	p1 = std::make_unique<Character>(128, gameStatePTR->okno);
 	weapon = std::make_unique<Weapons>("Sword", "gfx/sword1.png", 1, 4);
 	weapon->Icon(Wsize);
 	font.loadFromFile("fonts/Vecna.otf");
@@ -43,10 +43,17 @@ void Game::inputs() {
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::Space) {
 			weapon->newWeapon();
 		}
-
 	}
-	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		gameStatePTR->del();
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		p1->move(0, -3);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		p1->move(0, 3);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		p1->move(-3,0);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		p1->move(3, 0);
 }
 
 
@@ -56,6 +63,7 @@ void Game::draw() {
 		gameStatePTR->okno.draw(x);
 	weapon->IconDraw(gameStatePTR->okno);
 	map->draw(gameStatePTR->okno);
+	p1->draw();
 }
 
 void Game::update() {

@@ -4,7 +4,7 @@
 
 Engine::Engine() {
 	std::cout << "Uruchamiam ENGINE...\n";
-	okno.create(sf::VideoMode(1280,720), "Ice Syrvival - Alpha 0.0.01", sf::Style::Default);
+	okno.create(sf::VideoMode(1280, 720), "Ice Syrvival - Alpha 0.0.01", sf::Style::Default);
 	okno.setFramerateLimit(35);
 	okno.setVerticalSyncEnabled(true);
 	okno.setKeyRepeatEnabled(true);
@@ -31,6 +31,7 @@ void Engine::mainLoop() {
 		stos()->update();
 		stos()->draw();
 		okno.display();
+		okno.setView(okno.getDefaultView());
 	}
 	std::cout << "Usuwam ostatni obiekt ze stosu\n";
 	del();

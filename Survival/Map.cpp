@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-Map::Map(const std::string& TextureFile) : TextureFile(TextureFile) {
+Map::Map(const std::string& TextureFile, sf::Vector2f Wsize) : TextureFile(TextureFile), Wsize(Wsize){
 	_Texture.loadFromFile(TextureFile);
 	std::cout << "Tworze kafelek...\n";
 }
