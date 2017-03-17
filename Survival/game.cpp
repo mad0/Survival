@@ -5,7 +5,7 @@ Game::Game(Engine* gra) {
 	gameStatePTR = gra;
 	Wsize = sf::Vector2f(gameStatePTR->okno.getSize());
 	map = std::make_unique<Map>("gfx/tile.png", Wsize);
-	map->LoadTile();
+	LoadMap();
 	p1 = std::make_unique<Character>(128, gameStatePTR->okno);
 	weapon = std::make_unique<Weapons>("Sword", "gfx/sword1.png", 1, 4);
 	weapon->Icon(Wsize);
@@ -74,4 +74,22 @@ void Game::update() {
 
 Game::~Game() {
 	std::cout << "Wychodze z GRY do MENU\n";
+}
+
+
+void Game::LoadMap() {
+	std::vector<std::vector<int>> Load = {
+		
+		{ 0,0,0,0,0,0,0,0,0,0 },
+		{ 0,1,1,1,1,1,0,1,1,0 },
+		{ 0,1,1,1,1,1,0,1,1,0 },
+		{ 0,1,1,1,1,1,0,0,1,0 },
+		{ 0,1,0,0,0,1,1,1,1,0 },
+		{ 0,1,1,1,0,1,1,1,1,0 },
+		{ 0,1,1,1,0,1,1,1,1,0 },
+		{ 0,1,1,1,0,1,1,1,1,0 },
+		{ 0,1,1,1,0,1,1,1,1,0 },
+		{ 0,0,0,0,0,0,0,0,0,0 }
+	};
+	map->LoadTile(Load, 10, 10);
 }

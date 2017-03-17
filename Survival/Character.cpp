@@ -25,8 +25,8 @@ void Character::move(float x, float y) {
 	Char.move(x, y);
 	std::cout << "x "<<Char.getPosition().x << "\n";
 	std::cout << "y"<<Char.getPosition().y << "\n";
-	if (Char.getPosition().x<0)
-		gra.move(50,y);
+	//if (Char.getPosition().x<0)
+	//	gra.move(50,y);
 	//std::cout<<widok.getSize().x;
 }
 

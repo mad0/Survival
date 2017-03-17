@@ -17,6 +17,7 @@ private:
 	std::unique_ptr<Map> map;
 public:
 	std::unique_ptr<Character> p1;
+	void LoadMap();
 	//Map map1;
 	//std::unique_ptr<GUI> ui;
 	//std::unique_ptr<GUI> quests;
