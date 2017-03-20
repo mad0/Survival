@@ -2,6 +2,7 @@
 #include <string>
 #include <SFML\Graphics.hpp>
 #include <memory>
+#include "Character.h"
 #include <vector>
 
 class Map{
@@ -20,5 +21,6 @@ public:
 	 ~Map();
 	 void draw(sf::RenderWindow& okno);
 	 void LoadTile(const std::vector<std::vector<int>>& Load, int loadX, int loadY);
+	 bool collision(Character&);
 };
 

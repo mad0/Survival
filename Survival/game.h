@@ -15,6 +15,7 @@ private:
 	sf::Vector2f Wsize;
 	std::unique_ptr<Weapons> weapon;
 	std::unique_ptr<Map> map;
+	bool coll;
 public:
 	std::unique_ptr<Character> p1;
 	void LoadMap();

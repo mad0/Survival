@@ -2,6 +2,7 @@
 #include <iostream>
 
 Game::Game(Engine* gra) {
+	coll = false;
 	gameStatePTR = gra;
 	Wsize = sf::Vector2f(gameStatePTR->okno.getSize());
 	map = std::make_unique<Map>("gfx/tile.png", Wsize);
@@ -46,14 +47,15 @@ void Game::inputs() {
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		gameStatePTR->del();
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-		p1->move(0, -3);
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) 
+		p1->move(coll, sf::Vector2f(0, -5));
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		p1->move(0, 3);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		p1->move(-3,0);
+		p1->move(coll, sf::Vector2f(0, 5));
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) 
+		p1->move(coll, sf::Vector2f(-30, 0));
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		p1->move(3, 0);
+		p1->move(coll, sf::Vector2f(30,0));
 }
 
 
@@ -70,6 +72,7 @@ void Game::update() {
 	gui[0].setString(guiStr[0] + "\n      " + std::to_string(p1->show_hp()));
 	gui[1].setString(guiStr[1] + weapon->getName());
 	gui[2].setString(guiStr[2] + std::to_string(weapon->getLdmg()) + "-" + std::to_string(weapon->getHdmg()));
+	coll = map->collision(*p1);
 }
 
 Game::~Game() {

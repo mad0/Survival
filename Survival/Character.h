@@ -17,8 +17,10 @@ public:
 	~Character();
 	int show_hp();
 	int bagSize();
-	void move(float, float);
+	void move(bool, sf::Vector2f);
 	void draw();
-
+	sf::FloatRect getBounds();
+	sf::Vector2f getPosition();
+	void setPosition(float, float);
 };
 
