@@ -11,6 +11,7 @@ private:
 	sf::Texture _Texture;
 	sf::Vector2f Wsize;
 	std::vector<std::unique_ptr<sf::Sprite>> TileMap;
+	sf::VertexArray vertex;
 public:
 	Map(const std::string& TextureFile, sf::Vector2f);
 	 ~Map();
