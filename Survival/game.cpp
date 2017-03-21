@@ -5,7 +5,7 @@ Game::Game(Engine* gra) {
 	coll = false;
 	gameStatePTR = gra;
 	Wsize = sf::Vector2f(gameStatePTR->okno.getSize());
-	map = std::make_unique<Map>("gfx/tile.png", Wsize);
+	map = std::make_unique<Map>("gfx/tile2.png", Wsize);
 	LoadMap();
 	p1 = std::make_unique<Character>(128, gameStatePTR->okno);
 	weapon = std::make_unique<Weapons>("Sword", "gfx/sword1.png", 1, 4);
@@ -27,8 +27,6 @@ Game::Game(Engine* gra) {
 	//Obrazenia
 	gui[2].setString(guiStr[2] + std::to_string(weapon->getLdmg()) + "-" + std::to_string(weapon->getHdmg()));
 	gui[2].setPosition(gui[0].getGlobalBounds().width + 100, Wsize.y - 75);
-	
-
 	std::cout << "Wchodze z MENU do GRY\n";
 }
 
@@ -39,7 +37,6 @@ void Game::inputs() {
 		if (zdarz.type == sf::Event::Closed)
 			gameStatePTR->okno.close();
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::S) {
-
 		}
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::Space) {
 			weapon->newWeapon();
@@ -49,15 +46,14 @@ void Game::inputs() {
 		gameStatePTR->del();
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) 
-		p1->move(coll, sf::Vector2f(0, -5));
+		p1->move(coll, sf::Vector2f(0, -3));
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		p1->move(coll, sf::Vector2f(0, 5));
+		p1->move(coll, sf::Vector2f(0, 3));
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) 
-		p1->move(coll, sf::Vector2f(-30, 0));
+		p1->move(coll, sf::Vector2f(-3, 0));
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		p1->move(coll, sf::Vector2f(30,0));
+		p1->move(coll, sf::Vector2f(3,0));
 }
-
 
 void Game::draw() {
 	gameStatePTR->okno.clear();
@@ -82,17 +78,32 @@ Game::~Game() {
 
 void Game::LoadMap() {
 	std::vector<std::vector<int>> Load = {
-		
+	{ 1,1,1,1,1,1,1,1,1,1 },
+	{ 1,2,2,2,2,2,2,2,2,1 },
+	{ 1,2,2,2,2,2,2,2,2,1 },
+	{ 1,2,2,2,2,2,2,2,2,1 },
+	{ 1,2,2,2,2,2,2,2,2,1 },
+	{ 1,2,2,2,2,2,2,2,2,1 },
+	{ 1,2,2,2,2,2,2,2,2,1 },
+	{ 1,2,2,2,2,2,2,2,2,1 },
+	{ 1,2,2,2,2,2,2,2,2,1 },
+	{ 1,1,1,1,1,1,1,1,1,1 }
+	};
+	std::vector<std::vector<int>> Load2 = {
 		{ 0,0,0,0,0,0,0,0,0,0 },
-		{ 0,1,1,1,1,1,0,1,1,0 },
-		{ 0,1,1,1,1,1,0,1,1,0 },
-		{ 0,1,1,1,1,1,0,0,1,0 },
-		{ 0,1,0,0,0,1,1,1,1,0 },
-		{ 0,1,1,1,0,1,1,1,1,0 },
-		{ 0,1,1,1,0,1,1,1,1,0 },
-		{ 0,1,1,1,0,1,1,1,1,0 },
-		{ 0,1,1,1,0,1,1,1,1,0 },
+		{ 0,0,0,0,0,0,0,0,0,0 },
+		{ 0,0,0,0,0,0,0,0,0,0 },
+		{ 0,0,0,0,0,0,0,0,0,0 },
+		{ 0,0,3,0,0,0,0,0,0,0 },
+		{ 0,0,0,0,0,0,0,0,0,0 },
+		{ 0,0,0,0,0,0,0,0,0,0 },
+		{ 0,0,0,0,0,0,0,0,0,0 },
+		{ 0,0,0,0,0,0,0,0,0,0 },
 		{ 0,0,0,0,0,0,0,0,0,0 }
 	};
-	map->LoadTile(Load, 10, 10);
+	std::map<std::string, const std::vector<std::vector<int>>> LoadV = {
+		std::make_pair("Layer1", Load),
+		std::make_pair("Layer2", Load2)
+	};
+	map->LoadTile(LoadV, 10, 10);
 }

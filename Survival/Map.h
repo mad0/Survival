@@ -20,7 +20,7 @@ public:
 	Map(const std::string& TextureFile, sf::Vector2f);
 	 ~Map();
 	 void draw(sf::RenderWindow& okno);
-	 void LoadTile(const std::vector<std::vector<int>>& Load, int loadX, int loadY);
+	 void LoadTile(const std::map<std::string, const std::vector<std::vector<int>>>& Load, int loadX, int loadY);
 	 bool collision(Character&);
 };
 
