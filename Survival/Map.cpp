@@ -13,31 +13,33 @@ Map::~Map(){
 }
 
 void Map::LoadTile(const std::map<std::string, const std::vector<std::vector<int>>>& Load) {
-	std::cout << "Rozmiar: " << Load.size()<<"\n";
+	std::cout << "Rozmiar: " << Load.size() << "\n";
 	int r = 0;
 	vertex.setPrimitiveType(sf::Quads);
-	vertex.resize(2*(10 * 10 * 4));
+	vertex.resize(2 * (10 * 10 * 4));
 	for (auto& coords : Load) {
-		std::cout << coords.second.size() << "\n";
-		for (int y = 0; y < 10; y++)
+		//std::cout << coords.second.size() << "\n";
+		for (int y = 0; y < 10; y++) {
 			for (int x = 0; x < 10; x++) {
 				sf::Vertex* quad = &vertex[(x + y * 10) * 4];
-				int tileNumber = coords.second[x][]
-
+				//std::cout << coords.second[x][y];
+				//	if (x == 9)
+				//		std::cout << "\n";
 				// znalezienie jego pozycji na tileset
-				int tu = tileNumber % (m_tileset.getSize().x / tileSize.x);
-				int tv = tileNumber / (m_tileset.getSize().x / tileSize.x);
-
+				//int tu = tileNumber % (m_tileset.getSize().x / tileSize.x);
+				//int tv = tileNumber / (m_tileset.getSize().x / tileSize.x);
+				std::cout << "x=" << x << "y=" << y << " suma=" << x + y * 10 << "\n";
 				quad[0].position = sf::Vector2f(x * 32, y * 32);
 				quad[1].position = sf::Vector2f((x + 1) * 32, y * 32);
 				quad[2].position = sf::Vector2f((x + 1) * 32, (y + 1) * 32);
-				quad[3].position = sf::Vector2f(x * 32, (y + 1) * 32);
-				std::cout << coords.second[x][y] << "\n";
-				quad[0].texCoords = sf::Vector2f(coords.second[x][y]*32, 0);
-				quad[1].texCoords = sf::Vector2f((coords.second[x][y]) * 32, 0);
-				quad[2].texCoords = sf::Vector2f(coords.second[x][y] * 32, coords.second[x][y] * 32);
-				quad[3].texCoords = sf::Vector2f(coords.second[x][y]+1, 32);
+				quad[3].position = sf::Vector2f(x * 32, (y + 1) *32);
+				//std::cout << coords.second[x][y] << "\n";
+				quad[0].texCoords = sf::Vector2f(coords.second[y][x] * 32, 0);
+				quad[1].texCoords = sf::Vector2f((coords.second[y][x] + 1) * 32, 0);
+				quad[2].texCoords = sf::Vector2f((coords.second[y][x] + 1) * 32, 32);
+				quad[3].texCoords = sf::Vector2f(coords.second[y][x] * 32, 32);
 			}
+		}
 	}
 }
 
@@ -45,7 +47,7 @@ void Map::draw(sf::RenderWindow& okno) {
 	//for (int z = 0; z < 200; z++) {
 	//for (auto& p: TileMap)
 		//okno.draw(*p);
-	okno.draw(vertex);
+	okno.draw(vertex, &_Texture);
 }
 
 bool Map::collision(Character& player) {
