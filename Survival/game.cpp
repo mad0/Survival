@@ -5,7 +5,7 @@ Game::Game(Engine* gra) {
 	coll = false;
 	gameStatePTR = gra;
 	Wsize = sf::Vector2f(gameStatePTR->okno.getSize());
-	map = std::make_unique<Map>("gfx/tile2.png", Wsize);
+	map = std::make_unique<Map>(gameStatePTR->okno, "gfx/tile2.png", Wsize);
 	LoadMap();
 	p1 = std::make_unique<Character>(128, gameStatePTR->okno);
 	weapon = std::make_unique<Weapons>("Sword", "gfx/sword1.png", 1, 4);
@@ -60,7 +60,7 @@ void Game::draw() {
 	for (auto x: gui)
 		gameStatePTR->okno.draw(x);
 	weapon->IconDraw(gameStatePTR->okno);
-	map->draw(gameStatePTR->okno);
+	map->draw();
 	p1->draw();
 }
 

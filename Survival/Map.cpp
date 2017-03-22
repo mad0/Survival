@@ -3,7 +3,7 @@
 #include <SFML\Graphics.hpp>
 
 
-Map::Map(const std::string& TextureFile, sf::Vector2f Wsize) : TextureFile(TextureFile), Wsize(Wsize){
+Map::Map(sf::RenderWindow& okno, const std::string& TextureFile, sf::Vector2f Wsize) : okno(okno), TextureFile(TextureFile), Wsize(Wsize){
 	_Texture.loadFromFile(TextureFile);
 	std::cout << "Tworze kafelek...\n";
 }
@@ -14,14 +14,14 @@ Map::~Map(){
 
 void Map::LoadTile(const std::map<std::string, const std::vector<std::vector<int>>>& Load) {
 	std::cout << "Rozmiar: " << Load.size() << "\n";
-	int r = 0;
-	vertex.setPrimitiveType(sf::Quads);
-	vertex.resize(2 * (10 * 10 * 4));
+	int Layer = 0;
 	for (auto& coords : Load) {
+		vertex[Layer].setPrimitiveType(sf::Quads);
+		vertex[Layer].resize(10 * 10 * 4);
 		//std::cout << coords.second.size() << "\n";
 		for (int y = 0; y < 10; y++) {
 			for (int x = 0; x < 10; x++) {
-				sf::Vertex* quad = &vertex[(x + y * 10) * 4];
+				sf::Vertex* quad = &vertex[Layer][(x + y * 10) * 4];
 				//std::cout << coords.second[x][y];
 				//	if (x == 9)
 				//		std::cout << "\n";
@@ -39,15 +39,15 @@ void Map::LoadTile(const std::map<std::string, const std::vector<std::vector<int
 				quad[2].texCoords = sf::Vector2f((coords.second[y][x] + 1) * 32, 32);
 				quad[3].texCoords = sf::Vector2f(coords.second[y][x] * 32, 32);
 			}
+			
 		}
+		Layer++;
 	}
 }
 
-void Map::draw(sf::RenderWindow& okno) {
-	//for (int z = 0; z < 200; z++) {
-	//for (auto& p: TileMap)
-		//okno.draw(*p);
-	okno.draw(vertex, &_Texture);
+void Map::draw() {
+	for (auto& p: vertex)
+		okno.draw(p, &_Texture);
 }
 
 bool Map::collision(Character& player) {
