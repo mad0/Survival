@@ -17,7 +17,7 @@ public:
 	Map(sf::RenderWindow&, const std::string& TextureFile, sf::Vector2f);
 	 ~Map();
 	 void draw();
-	 void LoadTile(const std::map<std::string, const std::vector<std::vector<int>>>& Load);
+	 void LoadTile(const std::map<std::string, const std::vector<int>>& Load);
 	 bool collision(Character&);
 };
 

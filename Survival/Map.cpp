@@ -12,34 +12,28 @@ Map::~Map(){
 	std::cout << "Niszcze kafelek...\n";
 }
 
-void Map::LoadTile(const std::map<std::string, const std::vector<std::vector<int>>>& Load) {
+void Map::LoadTile(const std::map<std::string, const std::vector<int>>& Load) {
 	std::cout << "Rozmiar: " << Load.size() << "\n";
 	int Layer = 0;
 	for (auto& coords : Load) {
 		vertex[Layer].setPrimitiveType(sf::Quads);
 		vertex[Layer].resize(10 * 10 * 4);
 		//std::cout << coords.second.size() << "\n";
-		for (int y = 0; y < 10; y++) {
-			for (int x = 0; x < 10; x++) {
+		for (int x = 0; x < 10; x++) {
+			for (int y = 0; y < 10; y++) {
 				sf::Vertex* quad = &vertex[Layer][(x + y * 10) * 4];
-				//std::cout << coords.second[x][y];
-				//	if (x == 9)
-				//		std::cout << "\n";
-				// znalezienie jego pozycji na tileset
-				//int tu = tileNumber % (m_tileset.getSize().x / tileSize.x);
-				//int tv = tileNumber / (m_tileset.getSize().x / tileSize.x);
-				std::cout << "x=" << x << "y=" << y << " suma=" << x + y * 10 << "\n";
+				//std::cout << "x=" << x << "y=" << y << " suma=" << x + y * 10 << "\n";
 				quad[0].position = sf::Vector2f(x * 32, y * 32);
 				quad[1].position = sf::Vector2f((x + 1) * 32, y * 32);
 				quad[2].position = sf::Vector2f((x + 1) * 32, (y + 1) * 32);
 				quad[3].position = sf::Vector2f(x * 32, (y + 1) *32);
-				//std::cout << coords.second[x][y] << "\n";
-				quad[0].texCoords = sf::Vector2f(coords.second[y][x] * 32, 0);
-				quad[1].texCoords = sf::Vector2f((coords.second[y][x] + 1) * 32, 0);
-				quad[2].texCoords = sf::Vector2f((coords.second[y][x] + 1) * 32, 32);
-				quad[3].texCoords = sf::Vector2f(coords.second[y][x] * 32, 32);
+				//std::cout << "x= "<<x<<" "<<coords.second[y+x*10]<< "\n";
+				int  tile = coords.second[x + y * 10];
+				quad[0].texCoords = sf::Vector2f(tile * 32, 0);
+				quad[1].texCoords = sf::Vector2f((tile + 1) * 32, 0);
+				quad[2].texCoords = sf::Vector2f((tile + 1) * 32, 32);
+				quad[3].texCoords = sf::Vector2f(tile * 32, 32);
 			}
-			
 		}
 		Layer++;
 	}

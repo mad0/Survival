@@ -36,15 +36,14 @@ void Game::inputs() {
 	while (gameStatePTR->okno.pollEvent(zdarz)) {
 		if (zdarz.type == sf::Event::Closed)
 			gameStatePTR->okno.close();
-		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::S) {
-		}
+		//if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::Escape)
+
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::Space) {
 			weapon->newWeapon();
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		gameStatePTR->del();
-
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) 
 		p1->move(coll, sf::Vector2f(0, -3));
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
@@ -77,31 +76,13 @@ Game::~Game() {
 
 
 void Game::LoadMap() {
-	std::vector<std::vector<int>> Load = {
-	{ 1,1,1,1,1,1,1,1,1,1 },
-	{ 1,2,1,2,2,2,2,2,2,1 },
-	{ 1,2,1,2,2,2,2,2,2,1 },
-	{ 1,2,1,1,2,2,2,2,2,1 },
-	{ 1,2,2,2,2,2,2,2,2,1 },
-	{ 1,2,2,2,2,2,2,2,2,1 },
-	{ 1,2,1,1,1,2,2,2,2,1 },
-	{ 1,2,1,2,2,2,2,2,2,1 },
-	{ 1,2,2,2,2,2,2,2,2,1 },
-	{ 1,1,1,1,1,1,1,1,1,1 }
+	std::vector<int> Load = {
+	0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0
 	};
-	std::vector<std::vector<int>> Load2 = {
-		{ 0,0,0,0,0,0,0,0,0,0 },
-		{ 0,0,0,0,3,0,0,0,0,0 },
-		{ 0,0,0,0,0,0,0,0,0,0 },
-		{ 0,0,0,0,0,4,0,0,0,0 },
-		{ 0,3,0,0,0,5,0,0,3,0 },
-		{ 0,0,0,0,0,0,0,0,0,0 },
-		{ 0,0,0,0,0,0,0,0,0,0 },
-		{ 0,0,0,0,0,0,0,0,0,0 },
-		{ 0,0,0,0,3,0,0,0,0,0 },
-		{ 0,0,0,0,0,0,0,0,0,0 }
+	std::vector<int> Load2 = {
+	3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3
 	};
-	std::map<std::string, const std::vector<std::vector<int>>> LoadV = {
+	std::map<std::string, const std::vector<int>> LoadV = {
 		std::make_pair("Layer1", Load),
 		std::make_pair("Layer2", Load2)
 	};
