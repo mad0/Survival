@@ -13,6 +13,18 @@ private:
 	std::vector<std::unique_ptr<sf::Sprite>> TileMap;
 	sf::VertexArray vertex[2];
 	sf::RenderWindow& okno;
+	enum TileType {
+		EMPTY,
+		STONE,
+		GRASS,
+		MUSHROOM
+	};
+	struct TileProp {
+		bool collision;
+		bool interaction;
+	};
+	void CollisionMap(int tile);
+	std::map<int, TileProp> PropMap;
 public:
 	Map(sf::RenderWindow&, const std::string& TextureFile, sf::Vector2f);
 	 ~Map();
