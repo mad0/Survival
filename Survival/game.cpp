@@ -45,13 +45,25 @@ void Game::inputs() {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		gameStatePTR->del();
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) 
-		p1->move(coll, sf::Vector2f(0, -3));
+			movePlayer(0, -1);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		p1->move(coll, sf::Vector2f(0, 3));
+			movePlayer(0, 1);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) 
-		p1->move(coll, sf::Vector2f(-3, 0));
+			movePlayer(-1, 0);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		p1->move(coll, sf::Vector2f(3,0));
+			movePlayer(1, 0);
+}
+
+void Game::movePlayer(short x, short y) {
+	sf::Vector2f actPos(p1->getPosition().x, p1->getPosition().y);
+	sf::Vector2f nextPos((p1->getPosition().x / 32)+x, (p1->getPosition().y / 32)+y);
+	if (!map->collision(actPos.x, actPos.y))
+		p1->move(x, y);
+	//p1->getPosition().x / 32 << " " << p1->getPosition().y / 32
+	
+	
+	
+	//std::cout << p1->getPosition().x << " " << p1->getPosition().y << "\n";
 }
 
 void Game::draw() {
@@ -67,7 +79,12 @@ void Game::update() {
 	gui[0].setString(guiStr[0] + "\n      " + std::to_string(p1->show_hp()));
 	gui[1].setString(guiStr[1] + weapon->getName());
 	gui[2].setString(guiStr[2] + std::to_string(weapon->getLdmg()) + "-" + std::to_string(weapon->getHdmg()));
-	coll = map->collision(*p1);
+	//sf::Vector2f kafel(p1->getPosition().x / 32, p1->getPosition().y / 32);
+	//std::cout << "Aktualny kafel: " << int(kafel.x) << " " << int(kafel.y) << "\n";
+	//coll = map->collision(*p1);
+	//std::cout << p1->getPosition().x << " " << p1->getPosition().y  << "\n";
+	//sf::Vector2f nextPos(p1->getPosition().x + 1, p1->getPosition().y + 1);
+	//std::cout << nextPos.x << " " << nextPos.y << "\n";
 }
 
 Game::~Game() {
@@ -87,4 +104,5 @@ void Game::LoadMap() {
 		std::make_pair("Layer2", Load2)
 	};
 	map->LoadTile(LoadV);
+	map->drawMap();
 }

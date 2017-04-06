@@ -24,12 +24,14 @@ private:
 		bool interaction;
 	};
 	void CollisionMap(int tile);
-	std::map<int, TileProp> PropMap;
+	std::vector<TileProp> PropMap;
+	
 public:
 	Map(sf::RenderWindow&, const std::string& TextureFile, sf::Vector2f);
 	 ~Map();
+	 void drawMap();
 	 void draw();
 	 void LoadTile(const std::map<std::string, const std::vector<int>>& Load);
-	 bool collision(Character&);
+	 bool collision(int, int);
 };
 

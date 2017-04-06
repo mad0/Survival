@@ -17,7 +17,7 @@ public:
 	~Character();
 	int show_hp();
 	int bagSize();
-	void move(bool, sf::Vector2f);
+	void move(short, short);
 	void draw();
 	sf::FloatRect getBounds();
 	sf::Vector2f getPosition();

@@ -16,6 +16,7 @@ private:
 	std::unique_ptr<Weapons> weapon;
 	std::unique_ptr<Map> map;
 	bool coll;
+	void movePlayer(short, short);
 public:
 	std::unique_ptr<Character> p1;
 	void LoadMap();

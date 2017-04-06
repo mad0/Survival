@@ -41,37 +41,50 @@ void Map::LoadTile(const std::map<std::string, const std::vector<int>>& Load) {
 
 void Map::CollisionMap(int tile) {
 	TileProp tileprop;
-	switch (tile) {
+	switch (TileType(tile)) {
 		case Map::EMPTY:
-			tileprop.collision = false;
+			//std::cout <<tile<< " PUSTY: ";
+			tileprop.collision =false;
 			tileprop.interaction = false;
 			break;
 		case Map::STONE:
-			std::cout << "MUR\n";
+			//std::cout <<tile<< " KAMIEN: ";
 			tileprop.collision = true;
 			tileprop.interaction = false;
 			break;
 		case Map::GRASS:
+			//std::cout <<tile<< " TRAWA: ";
 			tileprop.collision = false;
 			tileprop.interaction = false;
 			break;
 		case Map::MUSHROOM:
+			//std::cout <<tile<< " GRZYB: ";
 			tileprop.collision = true;
-			tileprop.interaction = true;
+			tileprop.interaction = false;
 			break;
 		default:
+			//std::cout << "NIC";
+			tileprop.collision = false;
+			tileprop.interaction = false;
 			break;
 	}
-	PropMap.insert(std::make_pair(tile, tileprop));
+	PropMap.push_back(tileprop);
 }
 
+
+void Map::drawMap() {
+	std::cout << "Rozmiar: " << PropMap.size() << "\n";
+	for (auto& i : PropMap)
+		std::cout << i.collision << "" << i.interaction<< "\n";
+ }
 void Map::draw() {
 	for (auto& p: vertex)
 		okno.draw(p, &_Texture);
 }
 
-bool Map::collision(Character& player) {
-	sf::Vector2f curPos = player.getPosition();
+bool Map::collision(int x, int y) {
+	std::cout << x << " " << y << "\n";
+	//sf::Vector2f curPos = player.getPosition();
 	//std::cout << player.getPosition().x << " " << player.getPosition().y << "\n";
 	//if (TileMap[11]->getGlobalBounds().intersects(player.getBounds()))
 	//	return true;
