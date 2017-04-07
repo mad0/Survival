@@ -5,9 +5,11 @@
 Engine::Engine() {
 	std::cout << "Uruchamiam ENGINE...\n";
 	okno.create(sf::VideoMode(1280, 720), "Ice Syrvival - Alpha 0.0.01", sf::Style::Default);
-	okno.setFramerateLimit(59);
+	okno.setFramerateLimit(60);
 	okno.setVerticalSyncEnabled(true);
-	okno.setKeyRepeatEnabled(true);
+	okno.setKeyRepeatEnabled(false);
+	//speed = sf::seconds(1 / 10);
+	//time = sf::Time::Zero;
 }
 
 void Engine::push(GameState* stan) {
@@ -27,11 +29,16 @@ void Engine::del() {
 
 void Engine::mainLoop() {
 	while (okno.isOpen()) {
-		stos()->inputs();
-		stos()->update();
+		//time += clock.restart();
+		//while (time > speed) {
+		//	std::cout << time.asSeconds() << "\n";
+			stos()->inputs();
+			stos()->update();
+		//	time -= speed;
+		//}
 		stos()->draw();
 		okno.display();
-		okno.setView(okno.getDefaultView());
+		//okno.setView(okno.getDefaultView());
 	}
 	std::cout << "Usuwam ostatni obiekt ze stosu\n";
 	del();

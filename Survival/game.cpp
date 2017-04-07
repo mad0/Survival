@@ -45,13 +45,13 @@ void Game::inputs() {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		gameStatePTR->del();
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) 
-			movePlayer(0, -32);
+			movePlayer(0, -1);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-			movePlayer(0, 32);
+			movePlayer(0, 1);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) 
-			movePlayer(-32, 0);
+			movePlayer(-1, 0);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-			movePlayer(32, 0);
+			movePlayer(5, 0);
 }
 
 void Game::movePlayer(short x, short y) {
@@ -97,7 +97,7 @@ Game::~Game() {
 
 void Game::LoadMap() {
 	std::vector<int> Load = {
-	0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0
+	0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 2, 1, 1, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0
 	};
 	std::vector<int> Load2 = {
 	3, 3, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3

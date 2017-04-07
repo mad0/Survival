@@ -5,7 +5,11 @@
 class GameState;
 
 class Engine {
+private:
 	std::stack<GameState*> obiekty;
+	//sf::Clock clock;
+	//sf::Time time;
+	//sf::Time speed;
 public:
 	Engine();
 
