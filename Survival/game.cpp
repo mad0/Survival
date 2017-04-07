@@ -45,20 +45,23 @@ void Game::inputs() {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		gameStatePTR->del();
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) 
-			movePlayer(0, -1);
+			movePlayer(0, -32);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-			movePlayer(0, 1);
+			movePlayer(0, 32);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) 
-			movePlayer(-1, 0);
+			movePlayer(-32, 0);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-			movePlayer(1, 0);
+			movePlayer(32, 0);
 }
 
 void Game::movePlayer(short x, short y) {
 	sf::Vector2f actPos(p1->getPosition().x, p1->getPosition().y);
-	sf::Vector2f nextPos((p1->getPosition().x / 32)+x, (p1->getPosition().y / 32)+y);
-	if (!map->collision(actPos.x, actPos.y))
+	sf::Vector2f nextPos(actPos.x + x, actPos.y + y);
+	if (map->collision(int(nextPos.x / 32), int(nextPos.y / 32)))
+		std::cout << "KOLIZJA!\n";
+	else
 		p1->move(x, y);
+
 	//p1->getPosition().x / 32 << " " << p1->getPosition().y / 32
 	
 	
@@ -79,8 +82,8 @@ void Game::update() {
 	gui[0].setString(guiStr[0] + "\n      " + std::to_string(p1->show_hp()));
 	gui[1].setString(guiStr[1] + weapon->getName());
 	gui[2].setString(guiStr[2] + std::to_string(weapon->getLdmg()) + "-" + std::to_string(weapon->getHdmg()));
-	//sf::Vector2f kafel(p1->getPosition().x / 32, p1->getPosition().y / 32);
-	//std::cout << "Aktualny kafel: " << int(kafel.x) << " " << int(kafel.y) << "\n";
+	sf::Vector2f kafel(p1->getPosition().x , p1->getPosition().y);
+	std::cout << "Aktualny kafel: " << int(kafel.x/32) << " " << int(kafel.y/32) << "\n";
 	//coll = map->collision(*p1);
 	//std::cout << p1->getPosition().x << " " << p1->getPosition().y  << "\n";
 	//sf::Vector2f nextPos(p1->getPosition().x + 1, p1->getPosition().y + 1);
@@ -94,14 +97,14 @@ Game::~Game() {
 
 void Game::LoadMap() {
 	std::vector<int> Load = {
-	0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0
+	0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0
 	};
 	std::vector<int> Load2 = {
-	3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3
+	3, 3, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3
 	};
 	std::map<std::string, const std::vector<int>> LoadV = {
 		std::make_pair("Layer1", Load),
-		std::make_pair("Layer2", Load2)
+		//std::make_pair("Layer2", Load2)
 	};
 	map->LoadTile(LoadV);
 	map->drawMap();

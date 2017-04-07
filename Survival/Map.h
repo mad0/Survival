@@ -23,8 +23,8 @@ private:
 		bool collision;
 		bool interaction;
 	};
-	void CollisionMap(int tile);
-	std::vector<TileProp> PropMap;
+	void CollisionMap(int x, int y, int tile);
+	std::vector<std::vector<TileProp>> PropMap;
 	
 public:
 	Map(sf::RenderWindow&, const std::string& TextureFile, sf::Vector2f);

@@ -6,6 +6,7 @@
 Map::Map(sf::RenderWindow& okno, const std::string& TextureFile, sf::Vector2f Wsize) : okno(okno), TextureFile(TextureFile), Wsize(Wsize){
 	_Texture.loadFromFile(TextureFile);
 	std::cout << "Tworze kafelek...\n";
+	PropMap.assign(10, std::vector<TileProp>(10));
 }
 
 Map::~Map(){
@@ -23,7 +24,7 @@ void Map::LoadTile(const std::map<std::string, const std::vector<int>>& Load) {
 				sf::Vertex* quad = &vertex[Layer][(x + y * 10) * 4];
 				//std::cout << "x=" << x << "y=" << y << " suma=" << x + y * 10 << "\n";
 				int  tile = coords.second[x + y * 10];
-				CollisionMap(tile);
+				CollisionMap(x, y, tile);
 				quad[0].position = sf::Vector2f(x * 32, y * 32);
 				quad[1].position = sf::Vector2f((x + 1) * 32, y * 32);
 				quad[2].position = sf::Vector2f((x + 1) * 32, (y + 1) * 32);
@@ -39,7 +40,7 @@ void Map::LoadTile(const std::map<std::string, const std::vector<int>>& Load) {
 	}
 }
 
-void Map::CollisionMap(int tile) {
+void Map::CollisionMap(int x, int y, int tile) {
 	TileProp tileprop;
 	switch (TileType(tile)) {
 		case Map::EMPTY:
@@ -68,14 +69,16 @@ void Map::CollisionMap(int tile) {
 			tileprop.interaction = false;
 			break;
 	}
-	PropMap.push_back(tileprop);
+	std::cout << "x=" << x << "y=" <<y<< "\n";
+	PropMap[x][y]=tileprop;
 }
 
 
 void Map::drawMap() {
-	std::cout << "Rozmiar: " << PropMap.size() << "\n";
-	for (auto& i : PropMap)
-		std::cout << i.collision << "" << i.interaction<< "\n";
+	//std::cout << "Rozmiar: " << PropMap.size() << "\n";
+	//std::cout << PropMap[0][0].collision;
+	//for (auto& i : PropMap)
+	//	std::cout << i.collision << "" << i.interaction<< "\n";
  }
 void Map::draw() {
 	for (auto& p: vertex)
@@ -83,12 +86,18 @@ void Map::draw() {
 }
 
 bool Map::collision(int x, int y) {
-	std::cout << x << " " << y << "\n";
+	//std::cout << "x= " << x << " y= " << y << "\n";
+	if (PropMap[x][y].collision) {
+		std::cout << PropMap[x][y].collision;
+		return true;
+	}
+		
+	//std::cout << x << " " << y << "\n";
 	//sf::Vector2f curPos = player.getPosition();
 	//std::cout << player.getPosition().x << " " << player.getPosition().y << "\n";
 	//if (TileMap[11]->getGlobalBounds().intersects(player.getBounds()))
 	//	return true;
-	return false;
+	
 	//if (TileMap[1]->getGlobalBounds().intersects(player.getPosition()))
 	//	std::cout << "KAFEL11111111111\n";
 }
