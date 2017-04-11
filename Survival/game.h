@@ -9,6 +9,7 @@
 
 class Game : public GameState {
 private:
+	enum Directions { UP, DOWN, LEFT, RIGHT };
 	sf::Text gui[3];
 	std::string guiStr[4];
 	sf::Font font;
@@ -16,7 +17,8 @@ private:
 	std::unique_ptr<Weapons> weapon;
 	std::unique_ptr<Map> map;
 	bool coll;
-	void movePlayer(short, short);
+	void movePlayer(Directions);
+	void playerDirection(int x, int y);
 public:
 	std::unique_ptr<Character> p1;
 	void LoadMap();

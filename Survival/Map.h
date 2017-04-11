@@ -2,7 +2,6 @@
 #include <string>
 #include <SFML\Graphics.hpp>
 #include <memory>
-#include "Character.h"
 #include <vector>
 
 class Map{
@@ -32,6 +31,6 @@ public:
 	 void drawMap();
 	 void draw();
 	 void LoadTile(const std::map<std::string, const std::vector<int>>& Load);
-	 bool collision(int, int);
+	 bool collision(int x, int y);
 };
 

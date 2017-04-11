@@ -22,8 +22,10 @@ void Map::LoadTile(const std::map<std::string, const std::vector<int>>& Load) {
 		for (int x = 0; x < 10; x++) {
 			for (int y = 0; y < 10; y++) {
 				sf::Vertex* quad = &vertex[Layer][(x + y * 10) * 4];
+				
 				//std::cout << "x=" << x << "y=" << y << " suma=" << x + y * 10 << "\n";
 				int  tile = coords.second[x + y * 10];
+				sf::FloatRect vertexBounds(x*32, y*32,32,32);
 				CollisionMap(x, y, tile);
 				quad[0].position = sf::Vector2f(x * 32, y * 32);
 				quad[1].position = sf::Vector2f((x + 1) * 32, y * 32);
@@ -45,7 +47,7 @@ void Map::CollisionMap(int x, int y, int tile) {
 	switch (TileType(tile)) {
 		case Map::EMPTY:
 			//std::cout <<tile<< " PUSTY: ";
-			tileprop.collision =false;
+			tileprop.collision = false;
 			tileprop.interaction = false;
 			break;
 		case Map::STONE:
@@ -60,7 +62,7 @@ void Map::CollisionMap(int x, int y, int tile) {
 			break;
 		case Map::MUSHROOM:
 			//std::cout <<tile<< " GRZYB: ";
-			tileprop.collision = true;
+			tileprop.collision = false;
 			tileprop.interaction = false;
 			break;
 		default:
@@ -87,11 +89,11 @@ void Map::draw() {
 
 bool Map::collision(int x, int y) {
 	//std::cout << "x= " << x << " y= " << y << "\n";
-	if (PropMap[x][y].collision) {
-		std::cout << PropMap[x][y].collision;
+	if (PropMap[x][y].collision)
 		return true;
-	}
-		
+	else
+		return false;
+}	
 	//std::cout << x << " " << y << "\n";
 	//sf::Vector2f curPos = player.getPosition();
 	//std::cout << player.getPosition().x << " " << player.getPosition().y << "\n";
@@ -100,4 +102,3 @@ bool Map::collision(int x, int y) {
 	
 	//if (TileMap[1]->getGlobalBounds().intersects(player.getPosition()))
 	//	std::cout << "KAFEL11111111111\n";
-}

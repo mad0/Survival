@@ -8,6 +8,7 @@ Character::Character(int hp, sf::RenderWindow& okno) :hp(hp), okno(okno) {
 	Char.setPosition(32,32);
 	gra.reset(sf::FloatRect(0, 0, 1280, 720));
 	Char.setOrigin(0, 0);
+	//Char.setScale(0.5, 0.5);
 }	
 
 Character::~Character()
