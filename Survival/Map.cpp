@@ -25,17 +25,19 @@ void Map::LoadTile(const std::map<std::string, const std::vector<int>>& Load) {
 				
 				//std::cout << "x=" << x << "y=" << y << " suma=" << x + y * 10 << "\n";
 				int  tile = coords.second[x + y * 10];
-				sf::FloatRect vertexBounds(x*32, y*32,32,32);
+				std::cout <<"Nr kafla: "<< tile << "\n";
 				CollisionMap(x, y, tile);
+				int texX = tile % 9;
+				int texY = tile / 9;
 				quad[0].position = sf::Vector2f(x * 32, y * 32);
 				quad[1].position = sf::Vector2f((x + 1) * 32, y * 32);
 				quad[2].position = sf::Vector2f((x + 1) * 32, (y + 1) * 32);
 				quad[3].position = sf::Vector2f(x * 32, (y + 1) *32);
 				//std::cout << "Typ kafelka: " << tile<<"\n";
-				quad[0].texCoords = sf::Vector2f(tile * 32, 0);
-				quad[1].texCoords = sf::Vector2f((tile + 1) * 32, 0);
-				quad[2].texCoords = sf::Vector2f((tile + 1) * 32, 32);
-				quad[3].texCoords = sf::Vector2f(tile * 32, 32);
+				quad[0].texCoords = sf::Vector2f(texX * 32, texY * 32);
+				quad[1].texCoords = sf::Vector2f((texX + 1) * 32, texY * 32);
+				quad[2].texCoords = sf::Vector2f((texX + 1) * 32, (texY + 1) * 32);
+				quad[3].texCoords = sf::Vector2f(texX * 32, (texY+1) * 32);
 			}
 		}
 		Layer++;
@@ -62,7 +64,7 @@ void Map::CollisionMap(int x, int y, int tile) {
 			break;
 		case Map::MUSHROOM:
 			//std::cout <<tile<< " GRZYB: ";
-			tileprop.collision = false;
+			tileprop.collision = true;
 			tileprop.interaction = false;
 			break;
 		default:

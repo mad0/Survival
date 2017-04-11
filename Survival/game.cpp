@@ -5,7 +5,7 @@ Game::Game(Engine* gra) {
 	coll = false;
 	gameStatePTR = gra;
 	Wsize = sf::Vector2f(gameStatePTR->okno.getSize());
-	map = std::make_unique<Map>(gameStatePTR->okno, "gfx/tile2.png", Wsize);
+	map = std::make_unique<Map>(gameStatePTR->okno, "gfx/maps.gif", Wsize);
 	LoadMap();
 	p1 = std::make_unique<Character>(128, gameStatePTR->okno);
 	weapon = std::make_unique<Weapons>("Sword", "gfx/sword1.png", 1, 4);
@@ -96,9 +96,9 @@ void Game::movePlayer(Directions direct) {
 
 void Game::playerDirection(int x, int y) {
 	sf::Vector2f actPos(p1->getPosition().x/32, p1->getPosition().y/32);
-	std::cout <<"AKTUALNA: "<< int(actPos.x) << " " << int(actPos.y) << "\n";
+	//std::cout <<"AKTUALNA: "<< int(actPos.x) << " " << int(actPos.y) << "\n";
 	sf::Vector2f nextPos(actPos.x + (x/32), actPos.y + (y/32));
-	std::cout << "NASTEPNA: "<<nextPos.x << " " << nextPos.y << "\n";
+	//std::cout << "NASTEPNA: "<<nextPos.x << " " << nextPos.y << "\n";
 	if (map->collision(nextPos.x, nextPos.y))
 		std::cout << "KOLIZJA!\n";
 	else
@@ -133,14 +133,22 @@ Game::~Game() {
 
 void Game::LoadMap() {
 	std::vector<int> Load = {
-	0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 2, 1, 1, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 1, 2, 1, 2, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0
-	};
+		21,3,3,3,3,3,3,3,3,3,
+		3,0,0,0,0,0,0,0,0,3,
+		3,0,0,0,0,0,0,0,0,3,
+		3,0,0,3,0,3,0,3,0,3,
+		3,0,0,0,0,0,0,0,0,3,
+		3,0,3,0,3,0,0,3,0,3,
+		3,0,0,0,0,0,0,0,0,3,
+		3,0,0,3,0,3,0,3,0,3,
+		3,0,0,0,0,0,0,0,0,3,
+		3,3,3,3,3,3,3,3,3,17 };
 	std::vector<int> Load2 = {
 	3, 3, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3
 	};
 	std::map<std::string, const std::vector<int>> LoadV = {
 		std::make_pair("Layer1", Load),
-		std::make_pair("Layer2", Load2)
+		//std::make_pair("Layer2", Load2)
 	};
 	map->LoadTile(LoadV);
 	map->drawMap();
