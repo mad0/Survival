@@ -14,7 +14,7 @@ private:
 	sf::RenderWindow& okno;
 	enum TileType {
 		EMPTY,
-		STONE,
+		STONE=37,
 		GRASS,
 		MUSHROOM
 	};
