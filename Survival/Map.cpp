@@ -61,7 +61,7 @@ void Map::CollisionMap(int x, int y, int tile) {
 			break;
 		case Map::GRASS:
 			//std::cout <<tile<< " TRAWA: ";
-			tileprop.collision = false;
+			tileprop.collision = true;
 			tileprop.interaction = false;
 			break;
 		case Map::MUSHROOM:

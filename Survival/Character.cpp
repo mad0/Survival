@@ -3,13 +3,13 @@
 Character::Character(int hp, sf::RenderWindow& okno) :hp(hp), okno(okno) {
 	//bag.push_back(std::make_unique<Weapons>("Mlotek", 1,3));
 	
-	CharIdle.loadFromFile("gfx/char/char.png");
+	CharIdle.loadFromFile("gfx/char/icons/x32.png");
 	Char.setTexture(CharIdle);
-	Char.setTextureRect(sf::IntRect(32, 0, 32, 32));
+	//Char.setTextureRect(sf::IntRect(32, 0, 32, 32));
 	Char.setPosition(32,32);
 	gra.reset(sf::FloatRect(0, 0, 1280, 720));
-	Char.setOrigin(0, 0);
-	//Char.setScale(0.5, 0.5);
+	//Char.setOrigin(32, 32);
+	//Char.setScale(0.7, 0.7);
 }	
 
 Character::~Character()
@@ -25,7 +25,7 @@ int Character::bagSize() {
 }
 
 void Character::move(short x, short y) {
-	anim(x, y);
+	//anim(x, y);
 	Char.move(x, y);
 	
 	//sf::Vector2f cur = Char.getPosition();

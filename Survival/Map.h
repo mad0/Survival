@@ -15,7 +15,7 @@ private:
 	enum TileType {
 		EMPTY,
 		STONE=37,
-		GRASS,
+		GRASS=43,
 		MUSHROOM
 	};
 	struct TileProp {
