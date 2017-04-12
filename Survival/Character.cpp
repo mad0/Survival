@@ -3,8 +3,9 @@
 Character::Character(int hp, sf::RenderWindow& okno) :hp(hp), okno(okno) {
 	//bag.push_back(std::make_unique<Weapons>("Mlotek", 1,3));
 	
-	CharTexture.loadFromFile("gfx/player.jpg");
-	Char.setTexture(CharTexture);
+	CharIdle.loadFromFile("gfx/char/char.png");
+	Char.setTexture(CharIdle);
+	Char.setTextureRect(sf::IntRect(32, 0, 32, 32));
 	Char.setPosition(32,32);
 	gra.reset(sf::FloatRect(0, 0, 1280, 720));
 	Char.setOrigin(0, 0);
@@ -24,7 +25,9 @@ int Character::bagSize() {
 }
 
 void Character::move(short x, short y) {
+	anim(x, y);
 	Char.move(x, y);
+	
 	//sf::Vector2f cur = Char.getPosition();
 	//std::cout << "--------------CURR  X=" << cur.x << "CURR  Y=" << cur.y << "\n";
 	//std::cout << "--------------NEXT  X=" << cur.x + move.x << "NEXT  Y=" << cur.y + move.y << "\n";
@@ -40,15 +43,23 @@ void Character::move(short x, short y) {
 	*/
 }
 
+void Character::anim(int x, int y) {
+	if (x==-32)
+		Char.setTextureRect(sf::IntRect(32, 0, 32, 32));
+	if (x == 32)
+		Char.setTextureRect(sf::IntRect(0, 0, 32, 32));
+	if (y == -32)
+		Char.setTextureRect(sf::IntRect(96, 0, 32, 32));
+	if (y == 32)
+		Char.setTextureRect(sf::IntRect(64, 0, 32, 32));
+}
 
 void Character::draw() {
 	okno.setView(gra);
 	okno.draw(Char);
 }
 
-sf::FloatRect Character::getBounds() {
-	return Char.getGlobalBounds();
-}
+
 
 sf::Vector2f Character::getPosition() {
 	return Char.getPosition();
