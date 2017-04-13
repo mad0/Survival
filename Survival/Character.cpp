@@ -6,7 +6,7 @@ Character::Character(int hp, sf::RenderWindow& okno) :hp(hp), okno(okno) {
 	CharIdle.loadFromFile("gfx/char/icons/x32.png");
 	Char.setTexture(CharIdle);
 	//Char.setTextureRect(sf::IntRect(32, 0, 32, 32));
-	Char.setPosition(32,32);
+	Char.setPosition(0,0);
 	gra.reset(sf::FloatRect(0, 0, 1280, 720));
 	//Char.setOrigin(32, 32);
 	//Char.setScale(0.7, 0.7);

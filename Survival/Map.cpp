@@ -26,7 +26,8 @@ void Map::LoadTile(const std::map<std::string, const std::vector<int>>& Load) {
 				//std::cout << "x=" << x << "y=" << y << " suma=" << x + y * 10 << "\n";
 				int  tile = coords.second[x + y * 40];
 				//std::cout <<"Nr kafla: "<< tile << "\n";
-				CollisionMap(x, y, tile);
+				CollisionMap(x, y, tile, Layer);
+				Interaction(x, y);
 				int texX = ((tile-1) % 9);
 				int texY = ((tile-1) / 9);
 				if (tile > 0) {
@@ -46,9 +47,10 @@ void Map::LoadTile(const std::map<std::string, const std::vector<int>>& Load) {
 	}
 }
 
-void Map::CollisionMap(int x, int y, int tile) {
+void Map::CollisionMap(int x, int y, int tile, int Layer) {
 	TileProp tileprop;
-	switch (TileType(tile)) {
+	if (Layer == 0) {
+		switch (TileType(tile)) {
 		case Map::EMPTY:
 			//std::cout <<tile<< " PUSTY: ";
 			tileprop.collision = false;
@@ -61,8 +63,8 @@ void Map::CollisionMap(int x, int y, int tile) {
 			break;
 		case Map::GRASS:
 			//std::cout <<tile<< " TRAWA: ";
-			tileprop.collision = true;
-			tileprop.interaction = false;
+			tileprop.collision = false;
+			tileprop.interaction = true;
 			break;
 		case Map::MUSHROOM:
 			//std::cout <<tile<< " GRZYB: ";
@@ -74,9 +76,10 @@ void Map::CollisionMap(int x, int y, int tile) {
 			tileprop.collision = false;
 			tileprop.interaction = false;
 			break;
+		}
+		std::cout << "x=" << x << "y=" << y << "\n";
+		PropMap[x][y] = tileprop;
 	}
-	std::cout << "x=" << x << "y=" <<y<< "\n";
-	PropMap[x][y]=tileprop;
 }
 
 
@@ -98,6 +101,13 @@ bool Map::collision(int x, int y) {
 	else
 		return false;
 }	
+
+bool Map::Interaction(int x, int y) {
+	if (PropMap[x][y].collision)
+		return true;
+	else
+		return false;
+}
 	//std::cout << x << " " << y << "\n";
 	//sf::Vector2f curPos = player.getPosition();
 	//std::cout << player.getPosition().x << " " << player.getPosition().y << "\n";

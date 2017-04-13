@@ -14,15 +14,16 @@ private:
 	sf::RenderWindow& okno;
 	enum TileType {
 		EMPTY,
-		STONE=37,
-		GRASS=43,
+		STONE=39,
+		GRASS=51,
 		MUSHROOM
 	};
 	struct TileProp {
 		bool collision;
 		bool interaction;
 	};
-	void CollisionMap(int x, int y, int tile);
+	void CollisionMap(int x, int y, int tile, int);
+	
 	std::vector<std::vector<TileProp>> PropMap;
 	
 public:
@@ -32,5 +33,6 @@ public:
 	 void draw();
 	 void LoadTile(const std::map<std::string, const std::vector<int>>& Load);
 	 bool collision(int x, int y);
+	 bool Interaction(int x, int y);
 };
 
