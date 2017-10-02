@@ -6,18 +6,10 @@ MainMenu::MainMenu(Engine* gra)
 {
 	gameStatePTR = gra;
 	sf::Vector2f position = static_cast<sf::Vector2f>(gameStatePTR->okno.getSize());
-	//Menu background
-	//bkg.loadFromFile("bkg.jpg");
-	//float scaleX = (float)(gameStatePTR->okno.getSize().x) / (bkg.getSize().x);
-	//float scaleY = (float)(gameStatePTR->okno.getSize().y) / (bkg.getSize().y);
-	//std::cout << scaleX << scaleY;
-	//bkg_sprite.setTexture(bkg);
-	//bkg_sprite.setScale(scaleX,scaleY);
 	//Menu options
 	std::cout<<position.x;
 	std::cout << "Tworze menu\n";
 	mTxt = { "New game","Options", "Exit" };
-	//font.loadFromFile("fonts/Game2.ttf");
 	for (int x = 0; x < 3;x++) {
 		mItems.push_back(std::make_unique<Text>(mTxt[x], "fonts/Game2.ttf"));
 		mItems[x]->setSize(15);
@@ -50,7 +42,6 @@ void MainMenu::inputs() {
 
 void MainMenu::draw() {
 	this->gameStatePTR->okno.clear(sf::Color::Black);
-	//gameStatePTR->okno.draw(bkg_sprite);
 	for (auto& p : mItems)
 		p->draw(gameStatePTR->okno);
 }

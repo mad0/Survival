@@ -6,8 +6,6 @@
 #include <memory>
 
 class MainMenu : public GameState {
-	//sf::Texture bkg;
-	//sf::Sprite bkg_sprite;
 	std::vector <std::unique_ptr<Text>> mItems;
 	std::vector<std::string> mTxt;
 public:

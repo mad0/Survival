@@ -2,7 +2,6 @@
 #include <iostream>
 #include <SFML\Graphics.hpp>
 
-
 Map::Map(sf::RenderWindow& okno, const std::string& TextureFile, sf::Vector2f Wsize) : okno(okno), TextureFile(TextureFile), Wsize(Wsize){
 	_Texture.loadFromFile(TextureFile);
 	std::cout << "Tworze kafelek...\n";
@@ -22,12 +21,9 @@ void Map::LoadTile(const std::map<std::string, const std::vector<int>>& Load) {
 		for (int x = 0; x < 40; x++) {
 			for (int y = 0; y < 19; y++) {
 				sf::Vertex* quad = &vertex[Layer][(x + y * 40) * 4];
-				
-				//std::cout << "x=" << x << "y=" << y << " suma=" << x + y * 10 << "\n";
 				int  tile = coords.second[x + y * 40];
 				//std::cout <<"Nr kafla: "<< tile << "\n";
 				CollisionMap(x, y, tile, Layer);
-				Interaction(x, y);
 				int texX = ((tile-1) % 9);
 				int texY = ((tile-1) / 9);
 				if (tile > 0) {
@@ -50,7 +46,7 @@ void Map::LoadTile(const std::map<std::string, const std::vector<int>>& Load) {
 void Map::CollisionMap(int x, int y, int tile, int Layer) {
 	TileProp tileprop;
 	if (Layer == 0) {
-		switch (TileType(tile)) {
+		switch (tile) {
 		case Map::EMPTY:
 			//std::cout <<tile<< " PUSTY: ";
 			tileprop.collision = false;
@@ -77,7 +73,7 @@ void Map::CollisionMap(int x, int y, int tile, int Layer) {
 			tileprop.interaction = false;
 			break;
 		}
-		std::cout << "x=" << x << "y=" << y << "\n";
+		//std::cout << "x=" << x << "y=" << y << "\n";
 		PropMap[x][y] = tileprop;
 	}
 }
@@ -103,7 +99,7 @@ bool Map::collision(int x, int y) {
 }	
 
 bool Map::Interaction(int x, int y) {
-	if (PropMap[x][y].collision)
+	if (PropMap[x][y].interaction)
 		return true;
 	else
 		return false;

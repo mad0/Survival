@@ -53,15 +53,6 @@ void Game::inputs() {
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 		gameStatePTR->del();
-	/*
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) 
-			movePlayer(0, -1);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-			movePlayer(0, 1);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) 
-			movePlayer(-1, 0);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-			movePlayer(1, 0);*/
 }
 
 void Game::movePlayer(Directions direct) {
@@ -97,15 +88,17 @@ void Game::movePlayer(Directions direct) {
 
 void Game::playerDirection(int x, int y) {
 	sf::Vector2f actPos(p1->getPosition().x/32, p1->getPosition().y/32);
-	//std::cout <<"AKTUALNA: "<< int(actPos.x) << " " << int(actPos.y) << "\n";
 	sf::Vector2f nextPos(actPos.x + (x/32), actPos.y + (y/32));
-	//std::cout << "NASTEPNA: "<<nextPos.x << " " << nextPos.y << "\n";
 	if (map->collision(nextPos.x, nextPos.y))
 		std::cout << "KOLIZJA!\n";
 	else
 		p1->move(x, y);
-	if (map->Interaction(p1->getPosition().x/32, p1->getPosition().y/32))
+	if (map->Interaction(nextPos.x, nextPos.y)) {
 		std::cout << "INTERAKCJA!\n";
+		std::cout << p1->getPosition().x / 32 << " : " << p1->getPosition().y / 32 << "\n";
+	}
+		
+		
 }
 
 void Game::draw() {
@@ -176,7 +169,7 @@ void Game::LoadMap() {
 		0,0,0,0,0,0,0,0,0,0,73,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,73,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,0,73,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,73,0,0,0,0,0,0,0,0,0 };
 	std::map<std::string, const std::vector<int>> LoadV = {
-		std::make_pair("Laye", Load),
+		std::make_pair("Layer1", Load),
 		std::make_pair("Layer2", Load2)
 	};
 	map->LoadTile(LoadV);

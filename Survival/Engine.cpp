@@ -7,7 +7,7 @@ Engine::Engine() {
 	okno.create(sf::VideoMode(1280, 720), "Ice Syrvival - Alpha 0.0.01", sf::Style::Default);
 	okno.setFramerateLimit(60);
 	okno.setVerticalSyncEnabled(true);
-	okno.setKeyRepeatEnabled(false);
+	okno.setKeyRepeatEnabled(true);
 	//speed = sf::seconds(1 / 10);
 	//time = sf::Time::Zero;
 }
