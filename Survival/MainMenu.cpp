@@ -2,10 +2,9 @@
 #include "MainMenu.h"
 #include "Game.h"
 
-MainMenu::MainMenu(Engine* gra)
-{
-	gameStatePTR = gra;
-	sf::Vector2f position = static_cast<sf::Vector2f>(gameStatePTR->okno.getSize());
+MainMenu::MainMenu(Engine* _menu) {
+	engine = _menu;
+	sf::Vector2f position = static_cast<sf::Vector2f>(engine->window.getSize());
 	//Menu options
 	std::cout<<position.x;
 	std::cout << "Tworze menu\n";
@@ -19,18 +18,18 @@ MainMenu::MainMenu(Engine* gra)
 
 void MainMenu::inputs() {
 		sf::Event zdarz;
-		sf::Vector2f mouse(sf::Mouse::getPosition(gameStatePTR->okno));
-			while (gameStatePTR->okno.pollEvent(zdarz)) {
+		sf::Vector2f mouse(sf::Mouse::getPosition(engine->window));
+			while (engine->window.pollEvent(zdarz)) {
 				if (zdarz.type == sf::Event::Closed)
-					gameStatePTR->okno.close();
+					engine->window.close();
 				else if ((zdarz.type == sf::Event::KeyReleased) && (zdarz.key.code == sf::Keyboard::Q)) {
-					gameStatePTR->okno.close();
+					engine->window.close();
 				}
 				else if ((mItems[0]->GetSize().contains(mouse)) && (zdarz.type == sf::Event::MouseButtonReleased) && (zdarz.key.code == sf::Mouse::Left)) {
-					gameStatePTR->push(new Game(gameStatePTR));
+					engine->setState(new Game(engine));
 				}
 				else if ((mItems[2]->GetSize().contains(mouse)) && (zdarz.type == sf::Event::MouseButtonReleased) && (zdarz.key.code == sf::Mouse::Left))
-					gameStatePTR->okno.close();
+					engine->window.close();
 			}
 			for (int x = 0; x < 3; x++) {
 				if (mItems[x]->GetSize().contains(mouse))
@@ -41,9 +40,9 @@ void MainMenu::inputs() {
 }
 
 void MainMenu::draw() {
-	this->gameStatePTR->okno.clear(sf::Color::Black);
+	engine->window.clear(sf::Color::Black);
 	for (auto& p : mItems)
-		p->draw(gameStatePTR->okno);
+		p->draw(engine->window);
 }
 
 void MainMenu::update() {

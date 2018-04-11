@@ -14,13 +14,14 @@ private:
 	std::string guiStr[4];
 	sf::Font font;
 	sf::Vector2f Wsize;
-	std::unique_ptr<Weapons> weapon;
+	std::_Vector_val<std::unique_ptr<Weapons> weapon;
 	std::unique_ptr<Map> map;
 	bool coll;
 	void movePlayer(Directions);
 	void playerDirection(int x, int y);
-public:
 	std::unique_ptr<Character> p1;
+public:
+	
 	void LoadMap();
 	//Map map1;
 	//std::unique_ptr<GUI> ui;

@@ -3,11 +3,11 @@
 
 Game::Game(Engine* gra) {
 	coll = false;
-	gameStatePTR = gra;
-	Wsize = sf::Vector2f(gameStatePTR->okno.getSize());
-	map = std::make_unique<Map>(gameStatePTR->okno, "gfx/maps.gif", Wsize);
+	engine = gra;
+	Wsize = sf::Vector2f(engine->window.getSize());
+	map = std::make_unique<Map>(engine->window, "gfx/maps.gif", Wsize);
 	LoadMap();
-	p1 = std::make_unique<Character>(128, gameStatePTR->okno);
+	p1 = std::make_unique<Character>(128, engine->window);
 	p1->setPosition(6*32, 2*32);
 	weapon = std::make_unique<Weapons>("Sword", "gfx/sword1.png", 1, 4);
 	weapon->Icon(Wsize);
@@ -33,12 +33,12 @@ Game::Game(Engine* gra) {
 
 void Game::inputs() {
 	sf::Event zdarz;
-	sf::Vector2f mouse(sf::Mouse::getPosition(gameStatePTR->okno));
-	while (gameStatePTR->okno.pollEvent(zdarz)) {
+	sf::Vector2f mouse(sf::Mouse::getPosition(engine->window));
+	while (engine->window.pollEvent(zdarz)) {
 		if (zdarz.type == sf::Event::Closed)
-			gameStatePTR->okno.close();
+			engine->window.close();
 		//if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::Escape)
-		//	gameStatePTR->del();
+		//	engine->del();
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::Up)
 			movePlayer(Game::UP);
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::Down)
@@ -52,7 +52,8 @@ void Game::inputs() {
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-		gameStatePTR->del();
+		engine->delState();
+
 }
 
 void Game::movePlayer(Directions direct) {
@@ -102,10 +103,10 @@ void Game::playerDirection(int x, int y) {
 }
 
 void Game::draw() {
-	gameStatePTR->okno.clear();
+	engine->window.clear();
 	for (auto x: gui)
-		gameStatePTR->okno.draw(x);
-	weapon->IconDraw(gameStatePTR->okno);
+		engine->window.draw(x);
+	weapon->IconDraw(engine->window);
 	map->draw();
 	p1->draw();
 }
