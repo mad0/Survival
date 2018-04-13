@@ -9,8 +9,18 @@ Game::Game(Engine* gra) {
 	LoadMap();
 	p1 = std::make_unique<Character>(128, engine->window);
 	p1->setPosition(6*32, 2*32);
-	weapon = std::make_unique<Weapons>("Sword", "gfx/sword1.png", 1, 4);
-	weapon->Icon(Wsize);
+	//weapon = std::make_unique<Weapons>(Items::WEAPON, "gfx/sword1.png", "Iron Dagger", 1, 4);'
+	//items.push_back(new Weapons("gfx/sword1.png", "Iron Dagger", 1, 4));
+	//items.push_back(new Potions("gfx/potion.png", "Simple Potion", 5, 11));
+	//assert(nullptr != b);
+	//static_cast<Weapons*>(items[0])->getHdmg();
+//	std::cout << "Inventory size: "<<items.size()<<"\n";
+	//items[1]->
+	
+	
+	//weapon[0]->itemIcon(Wsize);
+	//std::cout<<typeid (items[1]).name();
+	//bag.inventory.push_back()
 	font.loadFromFile("fonts/Vecna.otf");
 	guiStr[0] = "Health points ";
 	guiStr[1] = "Weapon: ";
@@ -23,10 +33,10 @@ Game::Game(Engine* gra) {
 	gui[0].setString(guiStr[0] + "\n      " + std::to_string(p1->show_hp()));
 	gui[0].setPosition(50, Wsize.y-100);
 	//Nazwa broni
-	gui[1].setString(guiStr[1] + weapon->getName());
+	//gui[1].setString(guiStr[1] + weapon->getName());
 	gui[1].setPosition(gui[0].getGlobalBounds().width + 100, Wsize.y - 100);
 	//Obrazenia
-	gui[2].setString(guiStr[2] + std::to_string(weapon->getLdmg()) + "-" + std::to_string(weapon->getHdmg()));
+	//gui[2].setString(guiStr[2] + std::to_string(weapon->getLdmg()) + "-" + std::to_string(weapon->getHdmg()));
 	gui[2].setPosition(gui[0].getGlobalBounds().width + 100, Wsize.y - 75);
 	std::cout << "Wchodze z MENU do GRY\n";
 }
@@ -48,7 +58,7 @@ void Game::inputs() {
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::Right)
 			movePlayer(Game::RIGHT);
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::Space) {
-			weapon->newWeapon();
+			
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
@@ -106,15 +116,15 @@ void Game::draw() {
 	engine->window.clear();
 	for (auto x: gui)
 		engine->window.draw(x);
-	weapon->IconDraw(engine->window);
+	//weapon->itemIconDraw(engine->window);
 	map->draw();
 	p1->draw();
 }
 
 void Game::update() {
 	gui[0].setString(guiStr[0] + "\n      " + std::to_string(p1->show_hp()));
-	gui[1].setString(guiStr[1] + weapon->getName());
-	gui[2].setString(guiStr[2] + std::to_string(weapon->getLdmg()) + "-" + std::to_string(weapon->getHdmg()));
+	//gui[1].setString(guiStr[1] + weapon->getName());
+	//gui[2].setString(guiStr[2] + std::to_string(weapon->getLdmg()) + "-" + std::to_string(weapon->getHdmg()));
 	//sf::Vector2f kafel(p1->getPosition().x , p1->getPosition().y);
 	//std::cout << "Aktualny kafel: " << int(kafel.x/32) << " " << int(kafel.y/32) << "\n";
 	//coll = map->collision(*p1);

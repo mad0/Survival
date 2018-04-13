@@ -5,7 +5,9 @@
 #include "GameState.h"
 #include "Map.h"
 #include "Character.h"
-#include "Items.h"
+//#include "Items.h"
+#include "Inventory.h"
+#include <vector>
 
 class Game : public GameState {
 private:
@@ -14,7 +16,7 @@ private:
 	std::string guiStr[4];
 	sf::Font font;
 	sf::Vector2f Wsize;
-	std::_Vector_val<std::unique_ptr<Weapons> weapon;
+	//Inventory bag;
 	std::unique_ptr<Map> map;
 	bool coll;
 	void movePlayer(Directions);

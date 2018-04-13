@@ -1,7 +1,7 @@
 #include "Items.h"
 #include <iostream>
 
-Items::Items(const std::string& name, const std::string& file) : name(name), file(file) {
+Items::Items(ItemType _itemType, std::string _iconFile, const std::string& _itemName, int _itemID) : itemType(_itemType), iconFile(_iconFile),  itemName(_itemName), itemID(_itemID) {
 	std::cout<<"Tworze item...\n";
 }
 
@@ -9,18 +9,59 @@ Items::~Items() {
 	std::cout << "Niszcze item...\n";
 }
 
-std::string Items::getName() {
-	return name;
+void Items::itemIcon(sf::Vector2f _windowSize) {
+	texture.loadFromFile(iconFile);
+	sprite.setTexture(texture);
+	sprite.setPosition(sf::Vector2f(_windowSize.x / 2 - sprite.getGlobalBounds().width / 2, _windowSize.y - 150));
+}
+
+void Items::itemIconDraw(sf::RenderWindow & _window) {
+	_window.draw(sprite);
+}
+
+std::string Items::getName() const {
+	return itemName;
+}
+
+int Items::getID() const {
+	return itemID;
 }
 
 
-//Weapons
-Weapons::Weapons(const std::string& name, const std::string& file, int Ldmg, int Hdmg) : Items(name, file),  Ldmg(Ldmg), Hdmg(Hdmg) {
+int Weapons::getDamage()
+{
+	return 0;
+}
+
+int Weapons::getLdmg()
+{
+	return 0;
+}
+
+int Weapons::getHdmg()
+{
+	return 0;
+}
+
+void Weapons::setLdmg(int _Ldmg)
+{
+}
+
+void Weapons::setHdmg(int _Hdmg)
+{
+}
+
+/////////////////////////////             Weapons        /////////////////////////////
+Weapons::Weapons(ItemType _itemType, std::string _iconFile, const std::string& _itemName, int _itemID, int _Ldmg, int _Hdmg) : Items(_itemType, _iconFile, _itemName, _itemID), Ldmg(_Ldmg), Hdmg(_Hdmg) {
 	std::cout << "Tworze bron...\n";
 }
 
 Weapons::~Weapons() {
 	std::cout << "Niszcze bron...\n";
+}
+
+int Weapons::getDamage() {
+	return 0;
 }
 
 int Weapons::getLdmg() {
@@ -31,23 +72,34 @@ int Weapons::getHdmg() {
 	return Hdmg;
 }
 
-void Weapons::newWeapon() {
-	Ldmg = 10;
-	Hdmg = 35;
-	name = "Mlot";
-	file = "gfx/hala.png";
-	texture.loadFromFile(file);
-	icon.setTexture(texture);
+void Weapons::setLdmg(int _Ldmg) {
+	this->Ldmg = _Ldmg;
 }
 
-void Weapons::Icon(sf::Vector2f wsize) {
-	texture.loadFromFile(file);
-	icon.setTexture(texture);
-	//icon.setScale(0.7,0.7);
-	icon.setPosition(sf::Vector2f(wsize.x/2-icon.getGlobalBounds().width/2, wsize.y - 150));
+void Weapons::setHdmg(int _Hdmg) {
+	this->Hdmg = _Hdmg;
 }
 
-void Weapons::IconDraw(sf::RenderWindow & okno)
-{
-	okno.draw(icon);
+
+////////////////////////////            CONSUMABLE      //////////////////////////////
+int Consumable::getMinHP() {
+	return minHP;
+}
+
+int Consumable::getMaxHP() {
+	return maxHP;
+}
+
+void Consumable::setMinHP(int _minHP) {
+	this->minHP = _minHP;
+}
+
+void Consumable::setMaxHP(int _maxHP) {
+	this->maxHP = _maxHP;
+}
+
+Consumable::Consumable(ItemType _itemType, std::string _iconFile, const std::string & _itemName, int _itemID, int _maxHP, int _minHP) :Items(_itemType, _iconFile, _itemName, _itemID), minHP(_minHP), maxHP(_maxHP) {
+}
+
+Consumable::~Consumable() {
 }
