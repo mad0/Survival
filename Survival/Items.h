@@ -4,8 +4,6 @@
 #include <string>
 
 class Items  {
-private:
-	
 public:
 	enum ItemType {
 		WEAPON,
@@ -15,6 +13,7 @@ public:
 	};
 	std::string getName() const;
 	int getID() const;
+	ItemType getItemType() const;
 	void itemIcon(sf::Vector2f _windowSize);
 	void itemIconDraw(sf::RenderWindow& _window);
 	Items(ItemType _itemType, std::string _iconFile, const std::string& _itemName, int _itemID);

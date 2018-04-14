@@ -4,12 +4,17 @@
 
 class Inventory {
 private:
-	std::vector<std::unique_ptr<Weapons>> weaponInvent;
-	std::vector<std::unique_ptr<Consumable>> consumableInvent;
+	struct Bag {
+		Items::ItemType itemType;
+		int itemID;
+		std::string itemName;
+	};
+	std::vector<Bag> items;
 public:
-	void addItem(const Items* _item);
+	
+	void addItem(Items::ItemType _itemType, int _itemID, std::string& _itemName, int _index);
 	void removeItem(int _bagIndex);
-	void showItems();
+	void showInventory();
 	Inventory();
 	~Inventory();
 };

@@ -27,29 +27,10 @@ int Items::getID() const {
 	return itemID;
 }
 
-
-int Weapons::getDamage()
-{
-	return 0;
+Items::ItemType Items::getItemType() const {
+	return itemType;
 }
 
-int Weapons::getLdmg()
-{
-	return 0;
-}
-
-int Weapons::getHdmg()
-{
-	return 0;
-}
-
-void Weapons::setLdmg(int _Ldmg)
-{
-}
-
-void Weapons::setHdmg(int _Hdmg)
-{
-}
 
 /////////////////////////////             Weapons        /////////////////////////////
 Weapons::Weapons(ItemType _itemType, std::string _iconFile, const std::string& _itemName, int _itemID, int _Ldmg, int _Hdmg) : Items(_itemType, _iconFile, _itemName, _itemID), Ldmg(_Ldmg), Hdmg(_Hdmg) {
@@ -60,7 +41,9 @@ Weapons::~Weapons() {
 	std::cout << "Niszcze bron...\n";
 }
 
-int Weapons::getDamage() {
+
+int Weapons::getDamage()
+{
 	return 0;
 }
 
