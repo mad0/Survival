@@ -13,7 +13,6 @@ Game::Game(Engine* gra) {
 	consumableInvent.push_back(std::make_unique<Consumable>(Items::FOOD, "gfx/sword1.png", "Simple Potion", 2, 5, 6));
 	bag.addItem(weaponInvent[0]->getItemType(), weaponInvent[0]->getID(), weaponInvent[0]->getName(), 0);
 	bag.addItem(consumableInvent[0]->getItemType(), consumableInvent[0]->getID(), consumableInvent[0]->getName(), 1);
-	bag.showInventory();
 	//items.push_back(new Weapons("gfx/sword1.png", "Iron Dagger", 1, 4));
 	//items.push_back(new Potions("gfx/potion.png", "Simple Potion", 5, 11));
 	//assert(nullptr != b);
@@ -62,7 +61,9 @@ void Game::inputs() {
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::Right)
 			movePlayer(Game::RIGHT);
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::Space) {
-			
+		}
+		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::I) {
+			bag.showInventory();
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))

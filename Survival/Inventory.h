@@ -9,7 +9,7 @@ private:
 		int itemID;
 		std::string itemName;
 	};
-	std::vector<Bag> items;
+	std::vector<std::unique_ptr<Bag>> items;
 public:
 	
 	void addItem(Items::ItemType _itemType, int _itemID, std::string& _itemName, int _index);
