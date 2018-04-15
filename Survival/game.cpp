@@ -12,7 +12,7 @@ Game::Game(Engine* gra) {
 	weaponInvent.push_back(std::make_unique<Weapons>(Items::WEAPON, "gfx/sword1.png", "Iron Dagger", 1, 4, 10));
 	consumableInvent.push_back(std::make_unique<Consumable>(Items::FOOD, "gfx/sword1.png", "Simple Potion", 2, 5, 6));
 	bag.addItem(weaponInvent[0]->getItemType(), weaponInvent[0]->getID(), weaponInvent[0]->getName(), 0);
-	//bag.addItem(weaponInvent[1]->getItemType(), weaponInvent[1]->getID(), weaponInvent[1]->getName(), 1);
+	bag.addItem(consumableInvent[0]->getItemType(), consumableInvent[0]->getID(), consumableInvent[0]->getName(), 1);
 	bag.showInventory();
 	//items.push_back(new Weapons("gfx/sword1.png", "Iron Dagger", 1, 4));
 	//items.push_back(new Potions("gfx/potion.png", "Simple Potion", 5, 11));
