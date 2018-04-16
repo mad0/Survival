@@ -16,7 +16,7 @@ private:
 	sf::Font font;
 	sf::Vector2f Wsize;
 	Inventory bag;
-	std::vector<std::unique_ptr<Weapons>> weaponInvent;
+	std::vector<Weapons> weaponInvent;
 	std::vector<std::unique_ptr<Consumable>> consumableInvent;
 	std::unique_ptr<Map> map;
 	bool coll;

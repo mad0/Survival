@@ -82,7 +82,9 @@ void Consumable::setMaxHP(int _maxHP) {
 }
 
 Consumable::Consumable(ItemType _itemType, std::string _iconFile, const std::string & _itemName, int _itemID, int _maxHP, int _minHP) :Items(_itemType, _iconFile, _itemName, _itemID), minHP(_minHP), maxHP(_maxHP) {
+	std::cout << "Tworze bconsumable...\n";
 }
 
 Consumable::~Consumable() {
+	std::cout << "Niszcze consumable...\n";
 }

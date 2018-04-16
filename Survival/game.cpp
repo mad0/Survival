@@ -9,10 +9,14 @@ Game::Game(Engine* gra) {
 	LoadMap();
 	p1 = std::make_unique<Character>(128, engine->window);
 	p1->setPosition(6*32, 2*32);
-	weaponInvent.push_back(std::make_unique<Weapons>(Items::WEAPON, "gfx/sword1.png", "Iron Dagger", 1, 4, 10));
-	consumableInvent.push_back(std::make_unique<Consumable>(Items::FOOD, "gfx/sword1.png", "Simple Potion", 2, 5, 6));
-	bag.addItem(weaponInvent[0]->getItemType(), weaponInvent[0]->getID(), weaponInvent[0]->getName(), 0);
-	bag.addItem(consumableInvent[0]->getItemType(), consumableInvent[0]->getID(), consumableInvent[0]->getName(), 1);
+	weaponInvent.push_back(Weapons(Items::WEAPON, "gfx/sword1.png", "Iron Dagger", 1, 4, 10));
+	std::cout << "ADRES VECTORA: " << &weaponInvent << "\n";
+	//consumableInvent.push_back(std::make_unique<Consumable>(Items::FOOD, "gfx/sword1.png", "Simple Potion", 2, 5, 6));
+	//bag.addItem(new Weapons(Weapons::WEAPON, "gfx/sword1.png", "Iron Dagger", 1, 4, 10), 0);
+	//bag.addItem(new Consumable(Items::FOOD, "gfx/sword1.png", "Simple Potion", 2, 5, 6), 1);
+	bag.addToInventory(weaponInvent);
+	//bag.addToInventory(weaponInvent[0]->getItemType(), weaponInvent[0]->getID(), weaponInvent[0]->getName(), 0);
+	//bag.addToInventory(consumableInvent[0]->getItemType(), consumableInvent[0]->getID(), consumableInvent[0]->getName(), 1);
 	//items.push_back(new Weapons("gfx/sword1.png", "Iron Dagger", 1, 4));
 	//items.push_back(new Potions("gfx/potion.png", "Simple Potion", 5, 11));
 	//assert(nullptr != b);
@@ -64,6 +68,9 @@ void Game::inputs() {
 		}
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::I) {
 			bag.showInventory();
+		}
+		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::D) {
+			//bag.delFromInventory(0);
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
