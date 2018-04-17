@@ -16,7 +16,7 @@ private:
 	sf::Font font;
 	sf::Vector2f Wsize;
 	Inventory bag;
-	std::vector<Weapons> weaponInvent;
+	std::vector<Weapons*> weaponInvent;
 	std::vector<std::unique_ptr<Consumable>> consumableInvent;
 	std::unique_ptr<Map> map;
 	bool coll;
@@ -24,8 +24,8 @@ private:
 	void playerDirection(int x, int y);
 	std::unique_ptr<Character> p1;
 public:
-	
 	void LoadMap();
+	void addToBag();
 	//Map map1;
 	//std::unique_ptr<GUI> ui;
 	//std::unique_ptr<GUI> quests;
