@@ -5,17 +5,20 @@
 class Inventory {
 private:
 	struct Bag {
-		Items::ItemType itemType;
+		//Items::ItemType itemType;
 		int itemID;
 		std::string itemName;
+		~Bag() {
+			std::cout << "USUWAM ITEM\n";
+		};
 	};
-	std::vector<std::unique_ptr<Bag>> items;
+	std::vector<Bag*> bag;
+
 public:
-	
-	void addItem(Items::ItemType _itemType, int _itemID, std::string& _itemName, int _index);
-	void removeItem(int _bagIndex);
+	void addToInventory(int _itemId, const std::string& _itemname);
+	//void delFromInventory(int _bagIndex);
 	void showInventory();
+	int bagSize();
 	Inventory();
 	~Inventory();
 };
-
