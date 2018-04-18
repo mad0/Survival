@@ -12,10 +12,9 @@ private:
 			std::cout << "USUWAM ITEM\n";
 		};
 	};
-	std::vector<Bag*> bag;
-
+	std::vector<Bag> bag;
 public:
-	void addToInventory(int _itemId, const std::string& _itemname);
+	void addWeapon(Weapons *_weapon);
 	//void delFromInventory(int _bagIndex);
 	void showInventory();
 	int bagSize();

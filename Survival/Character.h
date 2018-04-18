@@ -1,12 +1,14 @@
 #pragma once
 #include <string>
 #include <SFML\Graphics.hpp>
+#include "Inventory.h"
 
 class Weapons;
 
 class Character {
 private:
 	int hp;
+	Inventory bag;
 	std::string Iname;
 	sf::Sprite Char;
 	sf::Texture CharIdle;
@@ -18,10 +20,10 @@ private:
 	sf::RenderWindow& okno;
 	sf::View gra;
 public:
+	Inventory * getBag();
 	Character(int hp, sf::RenderWindow& okno);
 	~Character();
 	int show_hp();
-	int bagSize();
 	void move(short, short);
 	void draw();
 	void anim(int, int);

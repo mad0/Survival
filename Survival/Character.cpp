@@ -1,5 +1,8 @@
 #include "Character.h"
 #include <iostream>
+Inventory * Character::getBag() {
+	return &bag;
+}
 Character::Character(int hp, sf::RenderWindow& okno) :hp(hp), okno(okno) {
 	//bag.push_back(std::make_unique<Weapons>("Mlotek", 1,3));
 	Slots.hand = nullptr;
@@ -17,10 +20,6 @@ Character::~Character() {
 
 int Character::show_hp() {
 	return hp;
-}
-
-int Character::bagSize() {
-	return 200;
 }
 
 void Character::move(short x, short y) {
