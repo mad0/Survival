@@ -1,21 +1,17 @@
 #pragma once
-#include "Items.h"
 #include <memory>
+#include "Items.h"
 
 class Inventory {
 private:
-	struct Bag {
-		//Items::ItemType itemType;
-		int itemID;
-		std::string itemName;
-		~Bag() {
-			std::cout << "USUWAM ITEM\n";
-		};
-	};
-	std::vector<Bag> bag;
+	std::vector<int> bag;
+	std::vector<Weapons*> weaponsInventory;
+	std::vector<Consumable*> itemsInventory;
 public:
 	void addWeapon(Weapons *_weapon);
-	//void delFromInventory(int _bagIndex);
+	void addItem(Consumable *_item);
+	//void delWeapon();
+	void delItem();
 	void showInventory();
 	int bagSize();
 	Inventory();

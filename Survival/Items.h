@@ -18,7 +18,7 @@ public:
 	void itemIcon(sf::Vector2f _windowSize);
 	void itemIconDraw(sf::RenderWindow& _window);
 	Items(ItemType _itemType, std::string _iconFile, const std::string& _itemName, int _itemID);
-	~Items();
+	virtual ~Items();
 protected:
 	ItemType itemType;
 	int itemID;

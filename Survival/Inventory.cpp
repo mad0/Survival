@@ -4,21 +4,36 @@ Inventory::Inventory() {
 }
 
 Inventory::~Inventory() {
+	std::cout << "Niszcze INVENTORY...\n";
 }
 
 void Inventory::addWeapon(Weapons *_weapon) {
-	Bag *tempBag = new Bag();
-	tempBag->itemID = _weapon->getID();
-	tempBag->itemName = _weapon->getName();
-	bag.push_back(*tempBag);
+	weaponsInventory.push_back(_weapon);
+	bag.push_back(_weapon->getID());
+	std::cout << "WEAPONS INVENTORY: " << weaponsInventory.size() << "\n";
+	std::cout << "BAG ITEMS: " << bag.size() << "\n";
 }
 
+void Inventory::addItem(Consumable *_item) {
+	itemsInventory.push_back(_item);
+	bag.push_back(_item->getID());
+	std::cout << "ITEMS INVENTORY: " << itemsInventory.size();
+}
+
+void Inventory::delItem() {
+}
 
 void Inventory::showInventory() {
-	std::cout << bag.size()<<"\n";
 	for (auto& i : bag) {
-		std::cout << "Item ID: "<< i.itemID << "\n";
-		std::cout << "Item name: " << i.itemName << "\n";
+		std::cout << "ITEM ID's:" << i << "\n";
+		for (auto& weap : weaponsInventory) {
+			if (weap->getID() == i)
+				std::cout << weap->getName() << "\n";
+		}
+		for (auto& consum : itemsInventory) {
+			if (consum->getID() == i)
+				std::cout << consum->getName() << "\n";
+		}
 	}
 }
 

@@ -7,21 +7,25 @@ Game::Game(Engine* gra) {
 	Wsize = sf::Vector2f(engine->window.getSize());
 	map = std::make_unique<Map>(engine->window, "gfx/maps.gif", Wsize);
 	LoadMap();
-	weaponInvent.push_back(new Weapons (Items::WEAPON, "gfx/dagger.png", "Simple iron dagger", 1, 2, 6));
-	//consumableInvent.emplace_back(std::make_unique<Consumable>(Items::FOOD, "gfx/potion.png", "Simple Potion", 2, 10, 18));
-	p1 = std::make_unique<Character>(128, engine->window);
-	p1->setPosition(6*32, 2*32);
-	bag.addWeapon(weaponInvent[0]);
+	weapon = new Weapons(Items::WEAPON, "gfx/dagger.png", "Simple iron dagger", 98, 2, 6);
+	//p1->equipWeapon(weapon);
+	food = new  Consumable(Items::POTION, "gfx/potion.png", "Simple potion", 2, 4, 10);
+	bag = new Inventory();
+	bag->addWeapon(weapon);
+	bag->addItem(food);
+	//p1->Slots.hand = weapon;
 
-	//p1->setWeapon(weaponInvent[0]);
+	//bag.addItem(new Consumable(Items::POTION, "gfx/potion.png", "Simple potion", 2, 4, 10));
+	//consumableInvent.emplace_back(std::make_unique<Consumable>(Items::FOOD, "gfx/potion.png", "Simple Potion", 2, 10, 18));
+	p1 = std::make_unique<Character>(engine->window, 128);
+	p1->setPosition(6*32, 2*32);
+	//p1->getBag()->addWeapon(new Weapons(Items::WEAPON, "gfx/dagger.png", "Simple iron dagger", 1, 2, 6));
 	//std::cout << "ADRES VECTORA: " << &weaponInvent << "\n";
 	//consumableInvent.push_back(std::make_unique<Consumable>(Items::FOOD, "gfx/sword1.png", "Simple Potion", 2, 5, 6));
 	//bag.addItem(new Weapons(Weapons::WEAPON, "gfx/sword1.png", "Iron Dagger", 1, 4, 10), 0);
 	//bag.addToInventory(weaponInvent);
 	//bag.addToInventory(weaponInvent[0]->getItemType(), weaponInvent[0]->getID(), weaponInvent[0]->getName(), 0);
-	//bag.addToInventory(consumableInvent[0]->getItemType(), consumableInvent[0]->getID(), consumableInvent[0]->getName(), 1);
-	//items.push_back(new Weapons("gfx/sword1.png", "Iron Dagger", 1, 4));
-	//items.push_back(new Potions("gfx/potion.png", "Simple Potion", 5, 11));
+	
 	//assert(nullptr != b);
 	//static_cast<Weapons*>(items[0])->getHdmg();
 //	std::cout << "Inventory size: "<<items.size()<<"\n";
@@ -40,7 +44,7 @@ Game::Game(Engine* gra) {
 		gui[x].setCharacterSize(25);
 	}
 	//HP
-	gui[0].setString(guiStr[0] + "\n      " + std::to_string(p1->show_hp()));
+	gui[0].setString(guiStr[0] + "\n      " + std::to_string(p1->getmaxHp()));
 	gui[0].setPosition(50, Wsize.y-100);
 	//Nazwa broni
 	//gui[1].setString(guiStr[1] + weapon->getName());
@@ -57,7 +61,7 @@ void Game::inputs() {
 	while (engine->window.pollEvent(zdarz)) {
 		if (zdarz.type == sf::Event::Closed)
 			engine->window.close();
-		//if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::Escape)
+		//if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code =damage= sf::Keyboard::Escape)
 		//	engine->del();
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::Up)
 			movePlayer(Game::UP);
@@ -70,15 +74,11 @@ void Game::inputs() {
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::Space) {
 		}
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::I) {
-			//updateInventory();
-			//std::cout << "BAG SIZE: " << bag.bagSize() << "\n";
-			bag.showInventory();
+			bag->showInventory();
 		}
 		if (zdarz.type == sf::Event::MouseButtonPressed && zdarz.key.code == sf::Mouse::Left) {
-			//std::cout << p1->getBag()->getWaepon()->getName();
-		}
-		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::A) {
-			//bag.addWeapon(new Weapons(Weapons::WEAPON, "gfx/sword1.png", "Iron Dagger", 1, 4, 10));
+			//std::cout << p1->getWeapon()->getName();
+		
 		}
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::D) {
 			//bag.delFromInventory(0);
@@ -139,26 +139,26 @@ void Game::draw() {
 	engine->window.clear();
 	for (auto x: gui)
 		engine->window.draw(x);
-	//p1->->itemIconDraw(engine->window);
+	p1->getWeapon()->itemIconDraw(engine->window);
 	map->draw();
 	p1->draw();
 }
 
 void Game::update() {
-	gui[0].setString(guiStr[0] + "\n      " + std::to_string(p1->show_hp()));
-	//gui[1].setString(guiStr[1] + p1->getWeapon()->getName());
-	//gui[2].setString(guiStr[2] + std::to_string(p1->getWeapon()->getLdmg()) + "-" + std::to_string(p1->getWeapon()->getHdmg()));
+	gui[0].setString(guiStr[0] + "\n      " + std::to_string(p1->getHp()));
+	gui[1].setString(guiStr[1] + p1->getWeapon()->getName());
+	gui[2].setString(guiStr[2] + std::to_string(p1->getWeapon()->getLdmg()) + "-" + std::to_string(p1->getWeapon()->getHdmg()));
 	//sf::Vector2f kafel(p1->getPosition().x , p1->getPosition().y);
 	//std::cout << "Aktualny kafel: " << int(kafel.x/32) << " " << int(kafel.y/32) << "\n";
 	//coll = map->collision(*p1);
 	//std::cout << p1->getPosition().x << " " << p1->getPosition().y  << "\n";
 	//std::cout << kafel.x + (p1->getBounds().height / 2) + 1<<"\n";
-	//p1->getWeapon()->itemIcon(Wsize);
+	weapon->itemIcon(Wsize);
 }
 
 Game::~Game() {
 	std::cout << "Wychodze z GRY do MENU\n";
-	delete weaponInvent[0];
+	delete bag;
 }
 
 
@@ -210,4 +210,3 @@ void Game::LoadMap() {
 	map->LoadTile(LoadV);
 	//map->drawMap();
 }
-
