@@ -14,10 +14,10 @@ private:
 	sf::Text gui[3];
 	std::string guiStr[4];
 	sf::Font font;
+	Inventory *bag;
+	Weapons *weapon;
+	Consumable *food;
 	sf::Vector2f Wsize;
-	Inventory bag;
-	std::vector<Weapons*> weaponInvent;
-	std::vector<std::unique_ptr<Consumable>> consumableInvent;
 	std::unique_ptr<Map> map;
 	bool coll;
 	void movePlayer(Directions);
@@ -25,7 +25,6 @@ private:
 	std::unique_ptr<Character> p1;
 public:
 	void LoadMap();
-	void addToBag();
 	//Map map1;
 	//std::unique_ptr<GUI> ui;
 	//std::unique_ptr<GUI> quests;
