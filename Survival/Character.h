@@ -5,6 +5,10 @@
 
 class Character {
 private:
+	struct characterSlots {
+		Weapons* hand;
+	};
+	characterSlots slots;
 	int hp;
 	int maxHp;
 	sf::Sprite charSprite;
@@ -13,10 +17,6 @@ private:
 	sf::RenderWindow& okno;
 	sf::View gra;
 public:
-	struct characterSlots {
-		Weapons* hand;
-	};
-	characterSlots Slots;
 	Character(sf::RenderWindow& _okno, int _hp);
 	~Character();
 	int getHp();

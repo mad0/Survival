@@ -3,7 +3,6 @@
 
 Character::Character(sf::RenderWindow& _okno, int _hp) :okno(_okno), hp(_hp) {
 	this->maxHp = hp;
-	//this->Slots.hand = nullptr;
 	charTexture.loadFromFile("gfx/char/icons/x32.png");
 	charSprite.setTexture(charTexture);
 	//Char.setTextureRect(sf::IntRect(32, 0, 32, 32));
@@ -39,11 +38,11 @@ void Character::move(short x, short y) {
 //}
 
 void Character::equipWeapon(Weapons * _weapon) {
-	Slots.hand = _weapon;
+	slots.hand = _weapon;
 }
 
 Weapons * Character::getWeapon() {
-	return Slots.hand;
+	return slots.hand;
 }
 
 void Character::draw() {

@@ -7,34 +7,16 @@ Game::Game(Engine* gra) {
 	Wsize = sf::Vector2f(engine->window.getSize());
 	map = std::make_unique<Map>(engine->window, "gfx/maps.gif", Wsize);
 	LoadMap();
-	weapon = new Weapons(Items::WEAPON, "gfx/dagger.png", "Simple iron dagger", 98, 2, 6);
-	//p1->equipWeapon(weapon);
-	food = new  Consumable(Items::POTION, "gfx/potion.png", "Simple potion", 2, 4, 10);
+	p1 = std::make_unique<Character>(engine->window, 128);
+	p1->setPosition(6 * 32, 2 * 32);
 	bag = new Inventory();
+	weapon = new Weapons(Items::WEAPON, "gfx/dagger.png", "Simple iron dagger", 98, 2, 6);
+	food = new  Consumable(Items::POTION, "gfx/potion.png", "Simple potion", 2, 4, 10);
 	bag->addWeapon(weapon);
 	bag->addItem(food);
-	//p1->Slots.hand = weapon;
-
-	//bag.addItem(new Consumable(Items::POTION, "gfx/potion.png", "Simple potion", 2, 4, 10));
-	//consumableInvent.emplace_back(std::make_unique<Consumable>(Items::FOOD, "gfx/potion.png", "Simple Potion", 2, 10, 18));
-	p1 = std::make_unique<Character>(engine->window, 128);
-	p1->setPosition(6*32, 2*32);
-	//p1->getBag()->addWeapon(new Weapons(Items::WEAPON, "gfx/dagger.png", "Simple iron dagger", 1, 2, 6));
-	//std::cout << "ADRES VECTORA: " << &weaponInvent << "\n";
-	//consumableInvent.push_back(std::make_unique<Consumable>(Items::FOOD, "gfx/sword1.png", "Simple Potion", 2, 5, 6));
-	//bag.addItem(new Weapons(Weapons::WEAPON, "gfx/sword1.png", "Iron Dagger", 1, 4, 10), 0);
-	//bag.addToInventory(weaponInvent);
-	//bag.addToInventory(weaponInvent[0]->getItemType(), weaponInvent[0]->getID(), weaponInvent[0]->getName(), 0);
-	
-	//assert(nullptr != b);
-	//static_cast<Weapons*>(items[0])->getHdmg();
-//	std::cout << "Inventory size: "<<items.size()<<"\n";
-	//items[1]->
-	
-	
+	p1->equipWeapon(weapon);
 	//weapon[0]->itemIcon(Wsize);
 	//std::cout<<typeid (items[1]).name();
-	//bag.inventory.push_back()
 	font.loadFromFile("fonts/Vecna.otf");
 	guiStr[0] = "Health points ";
 	guiStr[1] = "Weapon: ";
@@ -77,7 +59,7 @@ void Game::inputs() {
 			bag->showInventory();
 		}
 		if (zdarz.type == sf::Event::MouseButtonPressed && zdarz.key.code == sf::Mouse::Left) {
-			//std::cout << p1->getWeapon()->getName();
+			std::cout << p1->getWeapon()->getName();
 		
 		}
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::D) {
