@@ -1,6 +1,9 @@
 #include "Inventory.h"
 
 Inventory::Inventory() {
+	this->bagTexture.loadFromFile("gfx/Inventory.png");
+	this->bagSprite.setTexture(bagTexture);
+	this->bagSprite.setPosition(460, 150);
 }
 
 Inventory::~Inventory() {
@@ -39,4 +42,14 @@ void Inventory::showInventory() {
 
 int Inventory::bagSize() {
 	return bag.size();
+}
+
+void Inventory::drawInventory(sf::RenderWindow & _window) {
+	_window.draw(bagSprite);
+	for (auto& i : itemsInventory) {
+		sf::Vector2f pos(100, 100);
+		i->itemIcon(sf::Vector2f(_window.getSize()), pos);
+		i->itemIconDraw(_window);
+	}
+	
 }

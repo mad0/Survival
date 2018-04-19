@@ -3,6 +3,7 @@
 
 Game::Game(Engine* gra) {
 	coll = false;
+	inv = false;
 	engine = gra;
 	Wsize = sf::Vector2f(engine->window.getSize());
 	map = std::make_unique<Map>(engine->window, "gfx/maps.gif", Wsize);
@@ -57,6 +58,10 @@ void Game::inputs() {
 		}
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::I) {
 			bag->showInventory();
+			if (inv)
+				inv = false;
+			else 
+				inv = true;	
 		}
 		if (zdarz.type == sf::Event::MouseButtonPressed && zdarz.key.code == sf::Mouse::Left) {
 			std::cout << p1->getWeapon()->getName();
@@ -124,6 +129,8 @@ void Game::draw() {
 	p1->getWeapon()->itemIconDraw(engine->window);
 	map->draw();
 	p1->draw();
+	if (inv)
+		bag->drawInventory(engine->window);
 }
 
 void Game::update() {
@@ -135,12 +142,14 @@ void Game::update() {
 	//coll = map->collision(*p1);
 	//std::cout << p1->getPosition().x << " " << p1->getPosition().y  << "\n";
 	//std::cout << kafel.x + (p1->getBounds().height / 2) + 1<<"\n";
-	weapon->itemIcon(Wsize);
+	weapon->itemIcon(Wsize, sf::Vector2f(Wsize.x / 2 - 64, Wsize.y - 150));
 }
 
 Game::~Game() {
 	std::cout << "Wychodze z GRY do MENU\n";
 	delete bag;
+	delete weapon;
+	delete food;
 }
 
 

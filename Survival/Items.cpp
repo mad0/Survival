@@ -9,10 +9,10 @@ Items::~Items() {
 	std::cout << "Niszcze item...\n";
 }
 
-void Items::itemIcon(sf::Vector2f _windowSize) {
+void Items::itemIcon(sf::Vector2f _windowSize, sf::Vector2f _pos) {
 	texture.loadFromFile(iconFile);
 	sprite.setTexture(texture);
-	sprite.setPosition(sf::Vector2f(_windowSize.x / 2 - sprite.getGlobalBounds().width / 2, _windowSize.y - 150));
+	sprite.setPosition(_pos);
 }
 
 void Items::itemIconDraw(sf::RenderWindow & _window) {
