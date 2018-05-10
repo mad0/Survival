@@ -12,9 +12,11 @@ Game::Game(Engine* gra) {
 	p1->setPosition(6 * 32, 2 * 32);
 	bag = new Inventory();
 	weapon = new Weapons(Items::WEAPON, "gfx/dagger.png", "Simple iron dagger", 98, 2, 6);
-	food = new  Consumable(Items::POTION, "gfx/potion.png", "Simple potion", 2, 4, 10);
-	bag->addWeapon(weapon);
-	bag->addItem(food);
+	//food = new  Consumable(Items::POTION, "gfx/potion.png", "Simple potion", 2, 4, 10);
+	//food = new  Consumable(Items::POTION, "gfx/potion.png", "Simple potion", 2, 4, 10);
+	//bag->addWeapon(weapon);
+	bag->addItem(new  Consumable(Items::POTION, "gfx/potion.png", "Simple potion", 2, 4, 10));
+	bag->addItem(new  Consumable(Items::POTION, "gfx/potion.png", "Simple potion", 2, 4, 10));
 	p1->equipWeapon(weapon);
 	//weapon[0]->itemIcon(Wsize);
 	//std::cout<<typeid (items[1]).name();
@@ -142,7 +144,7 @@ void Game::update() {
 	//coll = map->collision(*p1);
 	//std::cout << p1->getPosition().x << " " << p1->getPosition().y  << "\n";
 	//std::cout << kafel.x + (p1->getBounds().height / 2) + 1<<"\n";
-	weapon->itemIcon(Wsize, sf::Vector2f(Wsize.x / 2 - 64, Wsize.y - 150));
+	weapon->itemIcon(sf::Vector2f(Wsize.x / 2 - 64, Wsize.y - 150));
 }
 
 Game::~Game() {

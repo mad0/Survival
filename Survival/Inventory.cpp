@@ -18,6 +18,9 @@ void Inventory::addWeapon(Weapons *_weapon) {
 }
 
 void Inventory::addItem(Consumable *_item) {
+	int s = itemsInventory.size();
+	sf::Vector2f pos1(465, 155);
+	_item->itemIcon(pos1);
 	itemsInventory.push_back(_item);
 	bag.push_back(_item->getID());
 	std::cout << "ITEMS INVENTORY: " << itemsInventory.size();
@@ -47,9 +50,10 @@ int Inventory::bagSize() {
 void Inventory::drawInventory(sf::RenderWindow & _window) {
 	_window.draw(bagSprite);
 	for (auto& i : itemsInventory) {
-		sf::Vector2f pos(100, 100);
-		i->itemIcon(sf::Vector2f(_window.getSize()), pos);
+		//i->itemIcon(sf::Vector2f(pos1));
+		i->itemSetScale(0.20, 0.20);
 		i->itemIconDraw(_window);
+		std::cout << i << "\n";
 	}
 	
 }

@@ -9,7 +9,7 @@ Items::~Items() {
 	std::cout << "Niszcze item...\n";
 }
 
-void Items::itemIcon(sf::Vector2f _windowSize, sf::Vector2f _pos) {
+void Items::itemIcon(sf::Vector2f _pos) {
 	texture.loadFromFile(iconFile);
 	sprite.setTexture(texture);
 	sprite.setPosition(_pos);
@@ -17,6 +17,10 @@ void Items::itemIcon(sf::Vector2f _windowSize, sf::Vector2f _pos) {
 
 void Items::itemIconDraw(sf::RenderWindow & _window) {
 	_window.draw(sprite);
+}
+
+void Items::itemSetScale(float _scaleX, float _scaleY) {
+	sprite.setScale(_scaleX, _scaleY);
 }
 
 std::string Items::getName() const {
