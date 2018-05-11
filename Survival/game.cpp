@@ -10,11 +10,12 @@ Game::Game(Engine* gra) {
 	LoadMap();
 	p1 = std::make_unique<Character>(engine->window, 128);
 	p1->setPosition(6 * 32, 2 * 32);
-	bag = new Inventory();
+	bag = new Inventory(20);
 	weapon = new Weapons(Items::WEAPON, "gfx/dagger.png", "Simple iron dagger", 98, 2, 6);
 	//food = new  Consumable(Items::POTION, "gfx/potion.png", "Simple potion", 2, 4, 10);
 	//food = new  Consumable(Items::POTION, "gfx/potion.png", "Simple potion", 2, 4, 10);
 	//bag->addWeapon(weapon);
+	bag->addItem(new  Consumable(Items::POTION, "gfx/potion.png", "Simple potion", 2, 4, 10));
 	bag->addItem(new  Consumable(Items::POTION, "gfx/potion.png", "Simple potion", 2, 4, 10));
 	bag->addItem(new  Consumable(Items::POTION, "gfx/potion.png", "Simple potion", 2, 4, 10));
 	p1->equipWeapon(weapon);

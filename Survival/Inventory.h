@@ -7,6 +7,7 @@ private:
 	sf::Sprite bagSprite;
 	sf::Texture bagTexture;
 	std::vector<int> bag;
+	int inventorySize;
 	std::vector<Weapons*> weaponsInventory;
 	std::vector<Consumable*> itemsInventory;
 	bool isVisible = false;
@@ -18,6 +19,6 @@ public:
 	void showInventory();
 	int bagSize();
 	void drawInventory(sf::RenderWindow& _window);
-	Inventory();
+	Inventory(int _bagSize);
 	~Inventory();
 };
