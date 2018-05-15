@@ -2,11 +2,11 @@
 #include <iostream>
 
 Items::Items(ItemType _itemType, std::string _iconFile, const std::string& _itemName, int _itemID) : itemType(_itemType), iconFile(_iconFile),  itemName(_itemName), itemID(_itemID) {
-	std::cout<<"Tworze item...\n";
+	std::cout<<"Tworze item: ";
 }
 
 Items::~Items() {
-	std::cout << "Niszcze item...\n";
+	std::cout << "Niszcze item: ";
 }
 
 void Items::itemIcon(sf::Vector2f _pos) {
@@ -38,11 +38,11 @@ Items::ItemType Items::getItemType() const {
 
 /////////////////////////////             Weapons        /////////////////////////////
 Weapons::Weapons(ItemType _itemType, std::string _iconFile, const std::string& _itemName, int _itemID, int _Ldmg, int _Hdmg) : Items(_itemType, _iconFile, _itemName, _itemID), Ldmg(_Ldmg), Hdmg(_Hdmg) {
-	std::cout << "Tworze bron...\n";
+	std::cout << "Tworze bron.\n";
 }
 
 Weapons::~Weapons() {
-	std::cout << "Niszcze bron...\n";
+	std::cout << "Bron...\n";
 }
 
 
@@ -86,9 +86,9 @@ void Consumable::setMaxHP(int _maxHP) {
 }
 
 Consumable::Consumable(ItemType _itemType, std::string _iconFile, const std::string & _itemName, int _itemID, int _maxHP, int _minHP) :Items(_itemType, _iconFile, _itemName, _itemID), minHP(_minHP), maxHP(_maxHP) {
-	std::cout << "Tworze bconsumable...\n";
+	std::cout << "Tworze consumable...\n";
 }
 
 Consumable::~Consumable() {
-	std::cout << "Niszcze consumable...\n";
+	std::cout << "Consumable...\n";
 }

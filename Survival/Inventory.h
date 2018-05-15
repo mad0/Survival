@@ -4,8 +4,8 @@
 
 class Inventory {
 private:
-	sf::Sprite bagSprite;
-	sf::Texture bagTexture;
+	std::vector<std::unique_ptr<sf::Sprite>> bagSlots;
+	sf::Texture *slotsTexture;
 	std::vector<int> bag;
 	int inventorySize;
 	std::vector<Weapons*> weaponsInventory;

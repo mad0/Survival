@@ -1,29 +1,42 @@
 #include "Inventory.h"
 
 Inventory::Inventory(int _bagSize) {
-	this->bagTexture.loadFromFile("gfx/Inventory.png");
-	this->bagSprite.setTexture(bagTexture);
-	this->bagSprite.setPosition(460, 150);
+	slotsTexture = new sf::Texture;
+	slotsTexture->loadFromFile("gfx/slot.png");
+	for (int x = 0; x < _bagSize; x++) {
+		bagSlots.emplace_back(std::make_unique<sf::Sprite>());
+		bagSlots[x]->setTexture(*slotsTexture);
+		bagSlots[x]->setPosition(460+(x*64), 150);
+	}
+	
 }
 
 Inventory::~Inventory() {
 	std::cout << "Niszcze INVENTORY...\n";
+	delete slotsTexture;
+	///std::cout << bagSlots.size();
+	for (int x = 0; x < itemsInventory.size(); x++)
+		delete itemsInventory[x];
+	for (int x = 0; x < weaponsInventory.size(); x++)
+		delete weaponsInventory[x];
 }
 
 void Inventory::addWeapon(Weapons *_weapon) {
 	weaponsInventory.push_back(_weapon);
 	bag.push_back(_weapon->getID());
-	std::cout << "WEAPONS INVENTORY: " << weaponsInventory.size() << "\n";
-	std::cout << "BAG ITEMS: " << bag.size() << "\n";
+	//std::cout << "WEAPONS INVENTORY: " << weaponsInventory.size() << "\n";
+	//std::cout << "BAG ITEMS: " << bag.size() << "\n";
 }
 
 void Inventory::addItem(Consumable *_item) {
-	int s = itemsInventory.size();
-	sf::Vector2f pos1(465+(s*64), 155+(s*64));
-	_item->itemIcon(pos1);
 	itemsInventory.push_back(_item);
-	bag.push_back(_item->getID());
-	std::cout << "ITEMS INVENTORY: " << itemsInventory.size();
+	std::cout << "SIZE: " << itemsInventory.size() << "\n";
+	for (int x = 0; x < itemsInventory.size(); x++) {
+		sf::Vector2f pos(bagSlots[x]->getPosition().x, bagSlots[x]->getPosition().y);
+		std::cout << "Pozycja X: "<<bagSlots[x]->getPosition().x << "\n";
+		_item->itemIcon(pos);
+		bag.push_back(_item->getID());
+	}
 }
 
 void Inventory::delItem() {
@@ -48,7 +61,9 @@ int Inventory::bagSize() {
 }
 
 void Inventory::drawInventory(sf::RenderWindow & _window) {
-	_window.draw(bagSprite);
+	for (auto& z : bagSlots) {
+		_window.draw(*z);
+	}
 	for (auto& i : itemsInventory) {
 		//i->itemIcon(sf::Vector2f(pos1));
 		i->itemSetScale(0.20, 0.20);
