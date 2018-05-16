@@ -7,13 +7,14 @@ private:
 	std::vector<std::unique_ptr<sf::Sprite>> bagSlots;
 	sf::Texture *slotsTexture;
 	int inventorySize;
-	std::vector<int> bag;
+	std::vector<Items*> bag;
 	std::vector<Weapons*> weaponsInventory;
 	std::vector<Consumable*> consumInventory;
 	bool isVisible = false;
 public:
 	void addWeapon(Weapons *_weapon);
 	void addItem(Consumable *_item);
+	void createItem(Items *_item);
 	//void delWeapon();
 	void delItem();
 	void showInventory();

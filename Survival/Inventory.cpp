@@ -21,19 +21,24 @@ Inventory::~Inventory() {
 
 void Inventory::addWeapon(Weapons *_weapon) {
 	weaponsInventory.push_back(_weapon);
-	bag.push_back(_weapon->getID());
+	//bag.push_back(_weapon->getID());
 	
 }
 
 void Inventory::addItem(Consumable *_item) {
 	consumInventory.push_back(_item);
-	if (std::find(bag.begin(), bag.end(), _item->getID()) == bag.end())
-		bag.push_back(_item->getID());
+	
 	for (int x = 0; x < consumInventory.size(); x++) {
 		sf::Vector2f pos(bagSlots[x]->getPosition().x, bagSlots[x]->getPosition().y+5);
 		_item->itemIcon(pos);
 	}
 }
+void Inventory::createItem(Items *_item) {
+	if (std::find(bag.begin(), bag.end(), _item->getID()) == bag.end()) {
+		bag.push_back(_item);
+	} 
+}
+
 
 void Inventory::delItem() {
 }
