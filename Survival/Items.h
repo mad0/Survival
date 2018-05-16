@@ -18,7 +18,8 @@ public:
 	void itemIcon(sf::Vector2f _pos);
 	void itemIconDraw(sf::RenderWindow& _window);
 	void itemSetScale(float _scaleX, float _scaleY);
-	Items(ItemType _itemType, std::string _iconFile, const std::string& _itemName, int _itemID);
+	Items(int _itemID, ItemType _itemType, std::string _iconFile, const std::string& _itemName);
+	virtual void tooltip();
 	virtual ~Items();
 protected:
 	ItemType itemType;
@@ -39,7 +40,7 @@ public:
 	int getHdmg();
 	void setLdmg(int _Ldmg);
 	void setHdmg(int _Hdmg);
-	Weapons(ItemType _itemType, std::string _iconFile, const std::string& _itemName, int _itemID, int _Ldmg, int _Hdmg);
+	Weapons(int _itemID, ItemType _itemType, std::string _iconFile, const std::string& _itemName,  int _Ldmg, int _Hdmg);
 	virtual ~Weapons();
 };
 
@@ -52,7 +53,7 @@ public:
 	int getMaxHP();
 	void setMinHP(int _minHP);
 	void setMaxHP(int _maxHP);
-	Consumable(ItemType _itemType, std::string _iconFile, const std::string& _itemName, int _itemID, int _maxHP, int _minHP);
+	Consumable(int _itemID, ItemType _itemType, std::string _iconFile, const std::string& _itemName, int _maxHP, int _minHP);
 	virtual ~Consumable();
 };
 

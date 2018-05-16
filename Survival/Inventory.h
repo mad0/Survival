@@ -6,10 +6,10 @@ class Inventory {
 private:
 	std::vector<std::unique_ptr<sf::Sprite>> bagSlots;
 	sf::Texture *slotsTexture;
-	std::vector<int> bag;
 	int inventorySize;
+	std::vector<int> bag;
 	std::vector<Weapons*> weaponsInventory;
-	std::vector<Consumable*> itemsInventory;
+	std::vector<Consumable*> consumInventory;
 	bool isVisible = false;
 public:
 	void addWeapon(Weapons *_weapon);

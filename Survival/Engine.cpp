@@ -15,7 +15,7 @@ Engine::Engine() {
 
 void Engine::setState(GameState* stan) {
 	stos.push(stan);
-	std::cout << stos.size() << "\n"; 
+	std::cout << "Stos size: "<<stos.size() << "\n"; 
 }
 
 GameState* Engine::getState() {

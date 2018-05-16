@@ -1,8 +1,12 @@
 #include "Items.h"
 #include <iostream>
 
-Items::Items(ItemType _itemType, std::string _iconFile, const std::string& _itemName, int _itemID) : itemType(_itemType), iconFile(_iconFile),  itemName(_itemName), itemID(_itemID) {
+Items::Items(int _itemID, ItemType _itemType, std::string _iconFile, const std::string& _itemName) : itemID(_itemID), itemType(_itemType), iconFile(_iconFile),  itemName(_itemName) {
 	std::cout<<"Tworze item: ";
+}
+
+void Items::tooltip()
+{
 }
 
 Items::~Items() {
@@ -37,7 +41,7 @@ Items::ItemType Items::getItemType() const {
 
 
 /////////////////////////////             Weapons        /////////////////////////////
-Weapons::Weapons(ItemType _itemType, std::string _iconFile, const std::string& _itemName, int _itemID, int _Ldmg, int _Hdmg) : Items(_itemType, _iconFile, _itemName, _itemID), Ldmg(_Ldmg), Hdmg(_Hdmg) {
+Weapons::Weapons(int _itemID, ItemType _itemType, std::string _iconFile, const std::string& _itemName,  int _Ldmg, int _Hdmg) : Items(_itemID, _itemType, _iconFile, _itemName), Ldmg(_Ldmg), Hdmg(_Hdmg) {
 	std::cout << "Tworze bron.\n";
 }
 
@@ -85,7 +89,7 @@ void Consumable::setMaxHP(int _maxHP) {
 	this->maxHP = _maxHP;
 }
 
-Consumable::Consumable(ItemType _itemType, std::string _iconFile, const std::string & _itemName, int _itemID, int _maxHP, int _minHP) :Items(_itemType, _iconFile, _itemName, _itemID), minHP(_minHP), maxHP(_maxHP) {
+Consumable::Consumable(int _itemID, ItemType _itemType, std::string _iconFile, const std::string & _itemName,  int _maxHP, int _minHP) :Items(_itemID, _itemType, _iconFile, _itemName), minHP(_minHP), maxHP(_maxHP) {
 	std::cout << "Tworze consumable...\n";
 }
 

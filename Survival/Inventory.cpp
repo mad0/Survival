@@ -8,15 +8,13 @@ Inventory::Inventory(int _bagSize) {
 		bagSlots[x]->setTexture(*slotsTexture);
 		bagSlots[x]->setPosition(460+(x*64), 150);
 	}
-	
 }
 
 Inventory::~Inventory() {
 	std::cout << "Niszcze INVENTORY...\n";
 	delete slotsTexture;
-	///std::cout << bagSlots.size();
-	for (int x = 0; x < itemsInventory.size(); x++)
-		delete itemsInventory[x];
+	for (int x = 0; x < consumInventory.size(); x++)
+		delete consumInventory[x];
 	for (int x = 0; x < weaponsInventory.size(); x++)
 		delete weaponsInventory[x];
 }
@@ -24,18 +22,16 @@ Inventory::~Inventory() {
 void Inventory::addWeapon(Weapons *_weapon) {
 	weaponsInventory.push_back(_weapon);
 	bag.push_back(_weapon->getID());
-	//std::cout << "WEAPONS INVENTORY: " << weaponsInventory.size() << "\n";
-	//std::cout << "BAG ITEMS: " << bag.size() << "\n";
+	
 }
 
 void Inventory::addItem(Consumable *_item) {
-	itemsInventory.push_back(_item);
-	std::cout << "SIZE: " << itemsInventory.size() << "\n";
-	for (int x = 0; x < itemsInventory.size(); x++) {
-		sf::Vector2f pos(bagSlots[x]->getPosition().x, bagSlots[x]->getPosition().y);
-		std::cout << "Pozycja X: "<<bagSlots[x]->getPosition().x << "\n";
-		_item->itemIcon(pos);
+	consumInventory.push_back(_item);
+	if (std::find(bag.begin(), bag.end(), _item->getID()) == bag.end())
 		bag.push_back(_item->getID());
+	for (int x = 0; x < consumInventory.size(); x++) {
+		sf::Vector2f pos(bagSlots[x]->getPosition().x, bagSlots[x]->getPosition().y+5);
+		_item->itemIcon(pos);
 	}
 }
 
@@ -43,32 +39,38 @@ void Inventory::delItem() {
 }
 
 void Inventory::showInventory() {
-	for (auto& i : bag) {
-		std::cout << "ITEM ID's:" << i << "\n";
-		for (auto& weap : weaponsInventory) {
-			if (weap->getID() == i)
-				std::cout << weap->getName() << "\n";
-		}
-		for (auto& consum : itemsInventory) {
-			if (consum->getID() == i)
-				std::cout << consum->getName() << "\n";
-		}
+	for (auto& weap : weaponsInventory) {
+		std::cout << "Item ID: " << weap->getID() << "\tItem name: " << weap->getName() << "\n";
 	}
+	for (auto& consum : consumInventory) {
+		int id = consum->getID();
+			std::cout << "Item ID: " << id << "\tItem name: " << consum->getName() << "\n";
+	}
+	std::cout << "Show number intems in bag: " << bag.size() << "\n";
+	std::cout << "ID's items in bag: ";
+	for (auto&c : bag)
+		std::cout << c << "\n";
 }
 
 int Inventory::bagSize() {
-	return itemsInventory.size() + weaponsInventory.size();
+	return consumInventory.size() + weaponsInventory.size();
 }
 
 void Inventory::drawInventory(sf::RenderWindow & _window) {
+	//BAG SLOTS BACKGROUND
 	for (auto& z : bagSlots) {
 		_window.draw(*z);
 	}
-	for (auto& i : itemsInventory) {
-		//i->itemIcon(sf::Vector2f(pos1));
-		i->itemSetScale(0.20, 0.20);
-		i->itemIconDraw(_window);
-		std::cout << i << "\n";
+
+	//ITEMS IN SLOTS
+	for (auto& i : bag) {
+		for (auto&x : consumInventory) {
+			if (x->getID() == i) {
+				x->itemSetScale(1, 1);
+				x->itemIconDraw(_window);
+			}
+		}
+		
 	}
-	
+			
 }

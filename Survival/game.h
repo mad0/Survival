@@ -17,7 +17,6 @@ private:
 	Inventory *bag;
 	Weapons *weapon;
 	bool inv;
-	Consumable *food;
 	sf::Vector2f Wsize;
 	std::unique_ptr<Map> map;
 	bool coll;
