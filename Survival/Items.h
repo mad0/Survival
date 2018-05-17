@@ -4,6 +4,9 @@
 #include <string>
 
 
+
+
+
 class Items  {
 public:
 	enum ItemType {
@@ -56,4 +59,3 @@ public:
 	Consumable(int _itemID, ItemType _itemType, std::string _iconFile, const std::string& _itemName, int _maxHP, int _minHP);
 	virtual ~Consumable();
 };
-

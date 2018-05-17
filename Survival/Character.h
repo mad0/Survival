@@ -4,7 +4,7 @@
 #include "Items.h"
 
 class Character {
-private:
+protected:
 	struct characterSlots {
 		Weapons* hand;
 	};
@@ -12,22 +12,24 @@ private:
 	int hp;
 	int maxHp;
 	sf::Sprite charSprite;
-	sf::Texture charTexture;
 	//Items jeden;
-	sf::RenderWindow& okno;
 	sf::View gra;
+	sf::Texture charTexture;
 public:
-	Character(sf::RenderWindow& _okno, int _hp);
+	Character(std::string _iconFile,  int _hp);
 	~Character();
 	int getHp();
 	int getmaxHp();
 	void move(short, short);
-	void draw();
+	void draw(sf::RenderWindow & _okno);
 	//void anim(int, int);
 	void equipWeapon(Weapons* _weapon);
+	void setHP(int _hp);
+	void setMaxHP(int _hp);
 	Weapons *getWeapon();
 	//sf::FloatRect getBounds();
 	sf::Vector2f getPosition();
 	void setPosition(float, float);
+	sf::FloatRect collisionBox();
 };
 

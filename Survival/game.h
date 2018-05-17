@@ -7,6 +7,7 @@
 #include "Character.h"
 #include "Items.h"
 #include "Inventory.h"
+#include "Fight.h"
 
 class Game : public GameState {
 private:
@@ -17,14 +18,19 @@ private:
 	Inventory *bag;
 	Weapons *weapon;
 	bool inv;
+	bool fight;
 	sf::Vector2f Wsize;
 	std::unique_ptr<Map> map;
 	bool coll;
 	void movePlayer(Directions);
+	std::vector<Character*> enemies;
 	void playerDirection(int x, int y);
-	std::unique_ptr<Character> p1;
+	//std::unique_ptr<Character> p1;
+	//std::unique_ptr<Character> crab;
+	Character *p1;
 public:
 	void LoadMap();
+	void fighto();
 	//Map map1;
 	//std::unique_ptr<GUI> ui;
 	//std::unique_ptr<GUI> quests;

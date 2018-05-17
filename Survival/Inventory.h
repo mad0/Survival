@@ -19,6 +19,7 @@ public:
 	void delItem();
 	void showInventory();
 	int bagSize();
+	int itemB();
 	void drawInventory(sf::RenderWindow& _window);
 	Inventory(int _bagSize);
 	~Inventory();

@@ -4,12 +4,20 @@
 Game::Game(Engine* gra) {
 	coll = false;
 	inv = false;
+	fight = false;
 	engine = gra;
 	Wsize = sf::Vector2f(engine->window.getSize());
 	map = std::make_unique<Map>(engine->window, "gfx/maps.gif", Wsize);
 	LoadMap();
-	p1 = std::make_unique<Character>(engine->window, 128);
+	p1 = new Character("gfx/player.png", 128);
 	p1->setPosition(6 * 32, 2 * 32);
+	//Character *enem = new Character(200);
+	enemies.push_back(new Character("gfx/m1.png", 200));
+	enemies[0]->setPosition(15 * 32, 9 * 32);
+	enemies.push_back(new Character("gfx/m2.png", 200));
+	enemies[1]->setPosition(10 * 32, 9 * 32);
+	//enemies.push_back(new Skeletor(100));
+	//enemies[]->setPosition(15 * 32, 9 * 32);
 	bag = new Inventory(5);
 	weapon = new Weapons(10, Items::WEAPON, "gfx/dagger.png", "Simple iron dagger", 6, 10);
 	p1->equipWeapon(weapon);
@@ -124,11 +132,19 @@ void Game::playerDirection(int x, int y) {
 
 void Game::draw() {
 	engine->window.clear();
+	map->draw();
 	for (auto x: gui)
 		engine->window.draw(x);
 	p1->getWeapon()->itemIconDraw(engine->window);
-	map->draw();
-	p1->draw();
+	
+	for (auto& e : enemies) {
+		if (e->getHp() > 0)
+			e->draw(engine->window);
+	}
+	//if (crab->getHp()>0)
+	//	crab->draw(engine->window);
+
+	p1->draw(engine->window);
 	if (inv)
 		bag->drawInventory(engine->window);
 }
@@ -137,6 +153,8 @@ void Game::update() {
 	gui[0].setString(guiStr[0] + "\n      " + std::to_string(p1->getHp()));
 	gui[1].setString(guiStr[1] + p1->getWeapon()->getName());
 	gui[2].setString(guiStr[2] + std::to_string(p1->getWeapon()->getLdmg()) + "-" + std::to_string(p1->getWeapon()->getHdmg()));
+	fighto();
+	
 	//sf::Vector2f kafel(p1->getPosition().x , p1->getPosition().y);
 	//std::cout << "Aktualny kafel: " << int(kafel.x/32) << " " << int(kafel.y/32) << "\n";
 	//coll = map->collision(*p1);
@@ -149,8 +167,21 @@ Game::~Game() {
 	std::cout << "Wychodze z GRY do MENU\n";
 	delete bag;
 	delete weapon;
+	delete p1;
 }
 
+void Game::fighto() {
+	if (enemies.size() > 0) {
+		for (auto& e : enemies) {
+			if (p1->collisionBox().intersects(e->collisionBox())) {
+				fight = true;
+				Fight fight1(p1, e);
+				enemies.erase(enemies.begin());
+			}
+				
+		}
+	}
+}
 
 void Game::LoadMap() {
 	std::vector<int> Load = {

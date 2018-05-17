@@ -34,9 +34,9 @@ void Inventory::addItem(Consumable *_item) {
 	}
 }
 void Inventory::createItem(Items *_item) {
-	if (std::find(bag.begin(), bag.end(), _item->getID()) == bag.end()) {
-		bag.push_back(_item);
-	} 
+	//if (std::find(bag.begin(), bag.end(), _item->getID()) == bag.end()) {
+	//	bag.push_back(_item);
+	//} 
 }
 
 
@@ -68,14 +68,14 @@ void Inventory::drawInventory(sf::RenderWindow & _window) {
 	}
 
 	//ITEMS IN SLOTS
-	for (auto& i : bag) {
-		for (auto&x : consumInventory) {
-			if (x->getID() == i) {
-				x->itemSetScale(1, 1);
-				x->itemIconDraw(_window);
-			}
-		}
+	//for (auto& i : bag) {
+	//	for (auto&x : consumInventory) {
+	//		if (x->getID() == i) {
+	////			x->itemSetScale(1, 1);
+	//			x->itemIconDraw(_window);
+	//		}
+	//	}
 		
-	}
+	//}
 			
 }
