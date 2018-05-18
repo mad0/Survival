@@ -13,11 +13,11 @@ Game::Game(Engine* gra) {
 	p1->setPosition(6 * 32, 2 * 32);
 	weapon = new Weapons(10, Items::WEAPON, "gfx/dagger.png", "Simple iron dagger", 6, 10);
 	p1->equipWeapon(weapon);
-	enemy.push_back(new Character("gfx/m1.png", 200));
+	enemy.emplace_back(new Character("gfx/m1.png", 200));
 	enemy[0]->setPosition(4 * 32, 3 * 32);
-	enemy.push_back(new Character("gfx/m2.png", 200));
+	enemy.emplace_back(new Character("gfx/m2.png", 200));
 	enemy[1]->setPosition(3 * 32, 3 * 32);
-	enemy.push_back(new Character("gfx/m2.png", 200));
+	enemy.emplace_back(new Character("gfx/m2.png", 200));
 	enemy[2]->setPosition(3 * 32, 4 * 32);
 	//bag = new Inventory(5);
 	//bag->addItem(new  Consumable(1, Items::POTION, "gfx/potion.png", "Simple potion", 5, 10));
@@ -218,5 +218,11 @@ Game::~Game() {
 	std::cout << "Wychodze z GRY do MENU\n";
 	delete bag;
 	delete weapon;
+	if (enemy.size() > 0) {
+		for (auto& e : enemy) {
+			delete e;
+			enemy.clear();
+		}
+	}
 	delete p1;
 }
