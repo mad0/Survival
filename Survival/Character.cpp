@@ -7,15 +7,12 @@ Character::Character(std::string _iconFile, int _hp) :hp(_hp) {
 	charSprite.setTexture(charTexture);
 	//Char.setTextureRect(sf::IntRect(32, 0, 32, 32));
 	charSprite.setPosition(0,0);
-	gra.reset(sf::FloatRect(0, 0, 1280, 720));
-
-	//Char.setOrigin(32, 32);
-	//Char.setScale(0.7, 0.7);
+//	gra.reset(sf::FloatRect(0, 0, 1280, 720));
 }
 
 
 Character::~Character() {
-	//std::cout << "Zabijam CHARACTER\n";
+	std::cout << "Zabijam CHARACTER\n";
 }
 
 int Character::getHp() {
@@ -24,6 +21,12 @@ int Character::getHp() {
 
 int Character::getmaxHp() {
 	return maxHp;
+}
+
+bool Character::isAlive() {
+	if (hp <= 0)
+		return false;
+	else return true;
 }
 
 void Character::move(short x, short y) {
@@ -54,10 +57,11 @@ void Character::setMaxHP(int _hp) {
 
 Weapons * Character::getWeapon() {
 	return slots.hand;
+
 }
 
 void Character::draw(sf::RenderWindow &_okno) {
-	_okno.setView(gra);
+	//_okno.setView(gra);
 	_okno.draw(charSprite);
 }
 

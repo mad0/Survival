@@ -33,8 +33,8 @@ void Engine::mainLoop() {
 		//time += clock.restart();
 		//while (time > speed) {
 		//	std::cout << time.asSeconds() << "\n";
-			getState()->inputs();
-			getState()->update();
+		getState()->inputs();
+		getState()->update();
 		//	time -= speed;
 		//}
 		getState()->draw();

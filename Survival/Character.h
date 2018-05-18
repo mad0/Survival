@@ -4,7 +4,7 @@
 #include "Items.h"
 
 class Character {
-protected:
+private:
 	struct characterSlots {
 		Weapons* hand;
 	};
@@ -13,13 +13,14 @@ protected:
 	int maxHp;
 	sf::Sprite charSprite;
 	//Items jeden;
-	sf::View gra;
+	//sf::View gra;
 	sf::Texture charTexture;
 public:
 	Character(std::string _iconFile,  int _hp);
 	~Character();
 	int getHp();
 	int getmaxHp();
+	bool isAlive();
 	void move(short, short);
 	void draw(sf::RenderWindow & _okno);
 	//void anim(int, int);
