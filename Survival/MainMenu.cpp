@@ -25,6 +25,9 @@ void MainMenu::inputs() {
 				else if ((zdarz.type == sf::Event::KeyReleased) && (zdarz.key.code == sf::Keyboard::Q)) {
 					engine->window.close();
 				}
+				else if ((zdarz.type == sf::Event::KeyReleased) && (zdarz.key.code == sf::Keyboard::N)) {
+					engine->setState(new Game(engine));
+				}
 				else if ((mItems[0]->GetSize().contains(mouse)) && (zdarz.type == sf::Event::MouseButtonReleased) && (zdarz.key.code == sf::Mouse::Left)) {
 					engine->setState(new Game(engine));
 				}

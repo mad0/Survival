@@ -130,31 +130,12 @@ void Game::playerDirection(int x, int y) {
 		
 }
 
-void Game::draw() {
-	engine->window.clear();
-	map->draw();
-	for (auto x: gui)
-		engine->window.draw(x);
-	p1->getWeapon()->itemIconDraw(engine->window);
-	
-	for (auto& e : enemies) {
-		if (e->getHp() > 0)
-			e->draw(engine->window);
-	}
-	//if (crab->getHp()>0)
-	//	crab->draw(engine->window);
-
-	p1->draw(engine->window);
-	if (inv)
-		bag->drawInventory(engine->window);
-}
-
 void Game::update() {
 	gui[0].setString(guiStr[0] + "\n      " + std::to_string(p1->getHp()));
 	gui[1].setString(guiStr[1] + p1->getWeapon()->getName());
 	gui[2].setString(guiStr[2] + std::to_string(p1->getWeapon()->getLdmg()) + "-" + std::to_string(p1->getWeapon()->getHdmg()));
 	fighto();
-	
+
 	//sf::Vector2f kafel(p1->getPosition().x , p1->getPosition().y);
 	//std::cout << "Aktualny kafel: " << int(kafel.x/32) << " " << int(kafel.y/32) << "\n";
 	//coll = map->collision(*p1);
@@ -162,23 +143,34 @@ void Game::update() {
 	//std::cout << kafel.x + (p1->getBounds().height / 2) + 1<<"\n";
 	p1->getWeapon()->itemIcon(sf::Vector2f(Wsize.x / 2 - 64, Wsize.y - 150));
 }
-
-Game::~Game() {
-	std::cout << "Wychodze z GRY do MENU\n";
-	delete bag;
-	delete weapon;
-	delete p1;
+void Game::draw() {
+	engine->window.clear();
+	map->draw();
+	for (auto x: gui)
+		engine->window.draw(x);
+	p1->getWeapon()->itemIconDraw(engine->window);
+	
+		for (auto& e : enemies) {
+			if (e->getHp() > 0)
+				e->draw(engine->window);
+		}
+	p1->draw(engine->window);
+	if (inv)
+		bag->drawInventory(engine->window);
 }
 
 void Game::fighto() {
 	if (enemies.size() > 0) {
-		for (auto& e : enemies) {
-			if (p1->collisionBox().intersects(e->collisionBox())) {
-				fight = true;
-				Fight fight1(p1, e);
-				enemies.erase(enemies.begin());
+		for (int x=0;x<enemies.size();x++) {
+			if (p1->collisionBox().intersects(enemies[x]->collisionBox())) {
+				std::cout << x << "ZNALAZLEM\n";
+				if (enemies[x]->getHp() > 0) {
+					fight = true;
+					Fight fight1(p1, enemies[x]);
+					fight = false;
+				}
+			delete enemies[x];
 			}
-				
 		}
 	}
 }
@@ -230,4 +222,11 @@ void Game::LoadMap() {
 	};
 	map->LoadTile(LoadV);
 	//map->drawMap();
+}
+
+Game::~Game() {
+	std::cout << "Wychodze z GRY do MENU\n";
+	delete bag;
+	delete weapon;
+	delete p1;
 }

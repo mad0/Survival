@@ -15,6 +15,7 @@ Character::Character(std::string _iconFile, int _hp) :hp(_hp) {
 
 
 Character::~Character() {
+	//std::cout << "Zabijam CHARACTER\n";
 }
 
 int Character::getHp() {
