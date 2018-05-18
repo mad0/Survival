@@ -2,6 +2,10 @@
 #include <iostream>
 
 Game::Game(Engine* gra) {
+	itemsDB.emplace(std::pair<int, Items*>(1, new Potions(1, Items::POTION, "gfx/potion.png", "Simple potion", 5, 11)));
+	itemsDB.emplace(std::pair<int, Items*>(2, new Food(2, Items::FOOD, "gfx/banana.png", "Banana", 12)));
+	itemsDB.emplace(std::pair<int, Items*>(3, new Weapons(3, Items::WEAPON, "gfx/dagger.png", "Simple Dagger", 6, 12)));
+	std::cout << "ItemsDB size: " << itemsDB.size() << "\n";
 	coll = false;
 	inv = false;
 	fight = false;
@@ -16,7 +20,7 @@ Game::Game(Engine* gra) {
 	enemy.emplace_back(new Character("gfx/m1.png", 200));
 	enemy[0]->setPosition(4 * 32, 3 * 32);
 	enemy.emplace_back(new Character("gfx/m2.png", 200));
-	enemy[1]->setPosition(3 * 32, 3 * 32);
+	enemy[1]->setPosition(5 * 32, 3 * 32);
 	enemy.emplace_back(new Character("gfx/m2.png", 200));
 	enemy[2]->setPosition(3 * 32, 4 * 32);
 	//bag = new Inventory(5);
@@ -43,6 +47,12 @@ Game::Game(Engine* gra) {
 	gui[2].setString(guiStr[2] + std::to_string(weapon->getLdmg()) + "-" + std::to_string(weapon->getHdmg()));
 	gui[2].setPosition(gui[0].getGlobalBounds().width + 100, Wsize.y - 75);
 	std::cout << "Wchodze z MENU do GRY\n";
+	
+	if (itemsDB.at(1)->getItemType() == Items::POTION) {
+		Potions *pot = dynamic_cast<Potions*>(itemsDB.at(1));
+		pot->setMaxHP(100);
+		std::cout << pot->getMaxHP() << "nowe hp";
+	}
 }
 
 void Game::inputs() {
@@ -221,8 +231,8 @@ Game::~Game() {
 	if (enemy.size() > 0) {
 		for (auto& e : enemy) {
 			delete e;
-			enemy.clear();
 		}
+	enemy.clear();
 	}
 	delete p1;
 }

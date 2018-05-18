@@ -3,10 +3,6 @@
 #include <iostream>
 #include <string>
 
-
-
-
-
 class Items  {
 public:
 	enum ItemType {
@@ -47,7 +43,7 @@ public:
 	virtual ~Weapons();
 };
 
-class Consumable : public Items {
+class Potions : public Items {
 private:
 	int minHP;
 	int maxHP;
@@ -56,6 +52,16 @@ public:
 	int getMaxHP();
 	void setMinHP(int _minHP);
 	void setMaxHP(int _maxHP);
-	Consumable(int _itemID, ItemType _itemType, std::string _iconFile, const std::string& _itemName, int _maxHP, int _minHP);
-	virtual ~Consumable();
+	Potions(int _itemID, ItemType _itemType, std::string _iconFile, const std::string& _itemName, int _minHP, int _maxHP);
+	virtual ~Potions();
+};
+
+class Food : public Items {
+private:
+	int maxHP;
+public:
+	int getMaxHP();
+	void setMaxHP(int _maxHP);
+	Food(int _itemID, ItemType _itemType, std::string _iconFile, const std::string& _itemName, int _maxHP);
+	virtual ~Food();
 };

@@ -25,7 +25,7 @@ void Inventory::addWeapon(Weapons *_weapon) {
 	
 }
 
-void Inventory::addItem(Consumable *_item) {
+void Inventory::addItem(Items *_item) {
 	consumInventory.push_back(_item);
 	
 	for (int x = 0; x < consumInventory.size(); x++) {
