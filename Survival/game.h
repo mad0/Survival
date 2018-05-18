@@ -23,6 +23,7 @@ private:
 	std::unique_ptr<Map> map;
 	bool coll;
 	void movePlayer(Directions);
+	std::map<int, Items*> itemsDB;
 	std::vector<Character*> enemy;
 	void playerDirection(int x, int y);
 	//std::unique_ptr<Character> p1;

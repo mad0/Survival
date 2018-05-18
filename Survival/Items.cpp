@@ -71,28 +71,35 @@ void Weapons::setHdmg(int _Hdmg) {
 	this->Hdmg = _Hdmg;
 }
 
-
-////////////////////////////            CONSUMABLE      //////////////////////////////
-int Consumable::getMinHP() {
-	return minHP;
-}
-
-int Consumable::getMaxHP() {
+////////////////////////////            Potions      //////////////////////////////
+int Potions::getMaxHP() {
 	return maxHP;
 }
 
-void Consumable::setMinHP(int _minHP) {
-	this->minHP = _minHP;
-}
-
-void Consumable::setMaxHP(int _maxHP) {
+void Potions::setMaxHP(int _maxHP) {
 	this->maxHP = _maxHP;
 }
 
-Consumable::Consumable(int _itemID, ItemType _itemType, std::string _iconFile, const std::string & _itemName,  int _maxHP, int _minHP) :Items(_itemID, _itemType, _iconFile, _itemName), minHP(_minHP), maxHP(_maxHP) {
-	std::cout << "Tworze consumable...\n";
+Potions::Potions(int _itemID, ItemType _itemType, std::string _iconFile, const std::string & _itemName, int _minHP, int _maxHP) :Items(_itemID, _itemType, _iconFile, _itemName), minHP(_minHP), maxHP(_maxHP) {
+	std::cout << "Tworze Potions...\n"; }
+
+Potions::~Potions() {
+	std::cout << "Potions...\n"; }
+
+
+////////////////////////////           FOOD      //////////////////////////////
+int Food::getMaxHP() {
+	return maxHP;
 }
 
-Consumable::~Consumable() {
-	std::cout << "Consumable...\n";
+void Food::setMaxHP(int _maxHP) {
+	this->maxHP = _maxHP;
+}
+
+Food::Food(int _itemID, ItemType _itemType, std::string _iconFile, const std::string & _itemName, int _maxHP) :Items(_itemID, _itemType, _iconFile, _itemName), maxHP(_maxHP) {
+	std::cout << "Tworze Potions...\n";
+}
+
+Food::~Food() {
+	std::cout << "Potions...\n";
 }
