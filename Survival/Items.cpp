@@ -1,7 +1,7 @@
 #include "Items.h"
 #include <iostream>
 
-Items::Items(int _itemID, ItemType _itemType, std::string _iconFile, const std::string& _itemName) : itemID(_itemID), itemType(_itemType), iconFile(_iconFile),  itemName(_itemName) {
+Items::Items(ItemType _itemType, std::string _iconFile, const std::string& _itemName) : itemType(_itemType), iconFile(_iconFile),  itemName(_itemName) {
 	std::cout<<"Tworze item: ";
 }
 
@@ -41,7 +41,7 @@ Items::ItemType Items::getItemType() const {
 
 
 /////////////////////////////             Weapons        /////////////////////////////
-Weapons::Weapons(int _itemID, ItemType _itemType, std::string _iconFile, const std::string& _itemName,  int _Ldmg, int _Hdmg) : Items(_itemID, _itemType, _iconFile, _itemName), Ldmg(_Ldmg), Hdmg(_Hdmg) {
+Weapons::Weapons(ItemType _itemType, std::string _iconFile, const std::string& _itemName,  int _Ldmg, int _Hdmg) : Items(_itemType, _iconFile, _itemName), Ldmg(_Ldmg), Hdmg(_Hdmg) {
 	std::cout << "Tworze bron.\n";
 }
 
@@ -80,7 +80,7 @@ void Potions::setMaxHP(int _maxHP) {
 	this->maxHP = _maxHP;
 }
 
-Potions::Potions(int _itemID, ItemType _itemType, std::string _iconFile, const std::string & _itemName, int _minHP, int _maxHP) :Items(_itemID, _itemType, _iconFile, _itemName), minHP(_minHP), maxHP(_maxHP) {
+Potions::Potions(ItemType _itemType, std::string _iconFile, const std::string & _itemName, int _minHP, int _maxHP) :Items(_itemType, _iconFile, _itemName), minHP(_minHP), maxHP(_maxHP) {
 	std::cout << "Tworze Potions...\n"; }
 
 Potions::~Potions() {
@@ -96,7 +96,7 @@ void Food::setMaxHP(int _maxHP) {
 	this->maxHP = _maxHP;
 }
 
-Food::Food(int _itemID, ItemType _itemType, std::string _iconFile, const std::string & _itemName, int _maxHP) :Items(_itemID, _itemType, _iconFile, _itemName), maxHP(_maxHP) {
+Food::Food(ItemType _itemType, std::string _iconFile, const std::string & _itemName, int _maxHP) :Items(_itemType, _iconFile, _itemName), maxHP(_maxHP) {
 	std::cout << "Tworze Potions...\n";
 }
 

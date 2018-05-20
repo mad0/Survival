@@ -17,7 +17,7 @@ public:
 	void itemIcon(sf::Vector2f _pos);
 	void itemIconDraw(sf::RenderWindow& _window);
 	void itemSetScale(float _scaleX, float _scaleY);
-	Items(int _itemID, ItemType _itemType, std::string _iconFile, const std::string& _itemName);
+	Items(ItemType _itemType, std::string _iconFile, const std::string& _itemName);
 	virtual void tooltip();
 	virtual ~Items();
 protected:
@@ -39,7 +39,7 @@ public:
 	int getHdmg();
 	void setLdmg(int _Ldmg);
 	void setHdmg(int _Hdmg);
-	Weapons(int _itemID, ItemType _itemType, std::string _iconFile, const std::string& _itemName,  int _Ldmg, int _Hdmg);
+	Weapons(ItemType _itemType, std::string _iconFile, const std::string& _itemName,  int _Ldmg, int _Hdmg);
 	virtual ~Weapons();
 };
 
@@ -52,7 +52,7 @@ public:
 	int getMaxHP();
 	void setMinHP(int _minHP);
 	void setMaxHP(int _maxHP);
-	Potions(int _itemID, ItemType _itemType, std::string _iconFile, const std::string& _itemName, int _minHP, int _maxHP);
+	Potions(ItemType _itemType, std::string _iconFile, const std::string& _itemName, int _minHP, int _maxHP);
 	virtual ~Potions();
 };
 
@@ -62,6 +62,6 @@ private:
 public:
 	int getMaxHP();
 	void setMaxHP(int _maxHP);
-	Food(int _itemID, ItemType _itemType, std::string _iconFile, const std::string& _itemName, int _maxHP);
+	Food(ItemType _itemType, std::string _iconFile, const std::string& _itemName, int _maxHP);
 	virtual ~Food();
 };

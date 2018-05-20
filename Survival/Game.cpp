@@ -2,9 +2,9 @@
 #include <iostream>
 
 Game::Game(Engine* gra) {
-	itemsDB.emplace(std::pair<int, Items*>(1, new Potions(1, Items::POTION, "gfx/potion.png", "Simple potion", 5, 11)));
-	itemsDB.emplace(std::pair<int, Items*>(2, new Food(2, Items::FOOD, "gfx/banana.png", "Banana", 12)));
-	itemsDB.emplace(std::pair<int, Items*>(3, new Weapons(3, Items::WEAPON, "gfx/dagger.png", "Simple Dagger", 6, 12)));
+	itemsDB.emplace(std::pair<int, Items*>(1, new Potions(Items::POTION, "gfx/potion.png", "Simple potion", 5, 11)));
+	itemsDB.emplace(std::pair<int, Items*>(2, new Food(Items::FOOD, "gfx/banana.png", "Banana", 12)));
+	itemsDB.emplace(std::pair<int, Items*>(3, new Weapons(Items::WEAPON, "gfx/dagger.png", "Simple Dagger", 6, 12)));
 	std::cout << "ItemsDB size: " << itemsDB.size() << "\n";
 	coll = false;
 	inv = false;
@@ -15,7 +15,7 @@ Game::Game(Engine* gra) {
 	LoadMap();
 	p1 = new Character("gfx/player.png", 128);
 	p1->setPosition(6 * 32, 2 * 32);
-	weapon = new Weapons(10, Items::WEAPON, "gfx/dagger.png", "Simple iron dagger", 6, 10);
+	weapon = new Weapons(Items::WEAPON, "gfx/dagger.png", "Simple iron dagger", 6, 10);
 	p1->equipWeapon(weapon);
 	enemy.emplace_back(new Character("gfx/m1.png", 200));
 	enemy[0]->setPosition(4 * 32, 3 * 32);
