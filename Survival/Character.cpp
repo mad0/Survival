@@ -1,18 +1,18 @@
 #include "Character.h"
 #include <iostream>
 
-Character::Character(sf::RenderWindow& _okno, int _hp) :okno(_okno), hp(_hp) {
+Character::Character(std::string _iconFile, int _hp) :hp(_hp) {
 	this->maxHp = hp;
-	charTexture.loadFromFile("gfx/char/icons/x32.png");
+	charTexture.loadFromFile(_iconFile);
 	charSprite.setTexture(charTexture);
 	//Char.setTextureRect(sf::IntRect(32, 0, 32, 32));
 	charSprite.setPosition(0,0);
-	gra.reset(sf::FloatRect(0, 0, 1280, 720));
-	//Char.setOrigin(32, 32);
-	//Char.setScale(0.7, 0.7);
-}	
+//	gra.reset(sf::FloatRect(0, 0, 1280, 720));
+}
+
 
 Character::~Character() {
+	std::cout << "Zabijam CHARACTER\n";
 }
 
 int Character::getHp() {
@@ -21,6 +21,12 @@ int Character::getHp() {
 
 int Character::getmaxHp() {
 	return maxHp;
+}
+
+bool Character::isAlive() {
+	if (hp <= 0)
+		return false;
+	else return true;
 }
 
 void Character::move(short x, short y) {
@@ -41,13 +47,22 @@ void Character::equipWeapon(Weapons * _weapon) {
 	slots.hand = _weapon;
 }
 
-Weapons * Character::getWeapon() {
-	return slots.hand;
+void Character::setHP(int _hp) {
+	hp = hp - _hp;
 }
 
-void Character::draw() {
-	okno.setView(gra);
-	okno.draw(charSprite);
+void Character::setMaxHP(int _hp) {
+	maxHp = maxHp - _hp;
+}
+
+Weapons * Character::getWeapon() {
+	return slots.hand;
+
+}
+
+void Character::draw(sf::RenderWindow &_okno) {
+	//_okno.setView(gra);
+	_okno.draw(charSprite);
 }
 
 sf::Vector2f Character::getPosition() {
@@ -56,4 +71,7 @@ sf::Vector2f Character::getPosition() {
 
 void Character::setPosition(float x, float y) {
 	charSprite.setPosition(x, y);
-};
+}
+sf::FloatRect Character::collisionBox() {
+	return charSprite.getGlobalBounds();
+}
