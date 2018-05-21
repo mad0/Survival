@@ -2,10 +2,6 @@
 #include <iostream>
 
 Game::Game(Engine* gra) {
-	itemsDB.emplace(std::pair<int, Items*>(1, new Potions(1, Items::POTION, "gfx/potion.png", "Simple potion", 5, 11)));
-	itemsDB.emplace(std::pair<int, Items*>(2, new Food(2, Items::FOOD, "gfx/banana.png", "Banana", 12)));
-	itemsDB.emplace(std::pair<int, Items*>(3, new Weapons(3, Items::WEAPON, "gfx/dagger.png", "Simple Dagger", 6, 12)));
-	std::cout << "ItemsDB size: " << itemsDB.size() << "\n";
 	coll = false;
 	inv = false;
 	fight = false;
@@ -15,7 +11,9 @@ Game::Game(Engine* gra) {
 	LoadMap();
 	p1 = new Character("gfx/player.png", 128);
 	p1->setPosition(6 * 32, 2 * 32);
-	weapon = new Weapons(10, Items::WEAPON, "gfx/dagger.png", "Simple iron dagger", 6, 10);
+	//weapon = dynamic_cast<Weapons*>(itemsDB.at(3));
+	//weapon = getItem<Weapons>(3);
+	weapon = new Weapons(Items::WEAPON, "gfx/dagger.png", "Simple iron dagger", 6, 10);
 	p1->equipWeapon(weapon);
 	enemy.emplace_back(new Character("gfx/m1.png", 200));
 	enemy[0]->setPosition(4 * 32, 3 * 32);
@@ -23,12 +21,20 @@ Game::Game(Engine* gra) {
 	enemy[1]->setPosition(5 * 32, 3 * 32);
 	enemy.emplace_back(new Character("gfx/m2.png", 200));
 	enemy[2]->setPosition(3 * 32, 4 * 32);
-	//bag = new Inventory(5);
-	//bag->addItem(new  Consumable(1, Items::POTION, "gfx/potion.png", "Simple potion", 5, 10));
-	//bag->addItem(new  Consumable(1, Items::POTION, "gfx/potion.png", "Simple potion", 5, 10));
-	//bag->addItem(new  Consumable(1, Items::POTION, "gfx/potion.png", "Simple potion", 5, 10));
-	//bag->addItem(new  Consumable(2, Items::FOOD, "gfx/banana.png", "Banana", 4, 8));
-	//bag->addItem(new  Consumable(2, Items::FOOD, "gfx/banana.png", "Banana", 4, 8));
+	bag = new Inventory(10);
+	bag->addToBag(1, 98);
+	bag->addToBag(1, 15);
+	bag->addToBag(2, 98);
+	bag->addToBag(2, 1);
+	bag->addToBag(1, 1);
+	bag->addToBag(1, 1);
+	bag->addToBag(1, 1);
+	bag->addToBag(1, 1);
+	bag->addToBag(1, 1);
+	//bag->addToBag(1, 15);
+	//bag->addToBag(1, 1);
+	//bag->addToBag(2, 3);
+	//bag->addToBag(2, 3);
 	font.loadFromFile("fonts/Vecna.otf");
 	guiStr[0] = "Health points ";
 	guiStr[1] = "Weapon: ";
@@ -48,11 +54,11 @@ Game::Game(Engine* gra) {
 	gui[2].setPosition(gui[0].getGlobalBounds().width + 100, Wsize.y - 75);
 	std::cout << "Wchodze z MENU do GRY\n";
 	
-	if (itemsDB.at(1)->getItemType() == Items::POTION) {
-		Potions *pot = dynamic_cast<Potions*>(itemsDB.at(1));
-		pot->setMaxHP(100);
-		std::cout << pot->getMaxHP() << "nowe hp";
-	}
+	//if (itemsDB.at(1)->getItemType() == Items::POTION) {
+	//	Potions *pot = dynamic_cast<Potions*>(itemsDB.at(1));
+	//	pot->setMaxHP(100);
+	//	std::cout << pot->getMaxHP() << "nowe hp";
+	//}
 }
 
 void Game::inputs() {

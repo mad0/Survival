@@ -1,7 +1,7 @@
 #include "Engine.h"
 #include "MainMenu.h"
 #include <iostream>
-//#include "vld.h"
+#include "vld.h"
 
 int main() {
 	Engine gra;

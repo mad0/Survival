@@ -97,9 +97,9 @@ void Food::setMaxHP(int _maxHP) {
 }
 
 Food::Food(ItemType _itemType, std::string _iconFile, const std::string & _itemName, int _maxHP) :Items(_itemType, _iconFile, _itemName), maxHP(_maxHP) {
-	std::cout << "Tworze Potions...\n";
+	std::cout << "Tworze FOOD...\n";
 }
 
 Food::~Food() {
-	std::cout << "Potions...\n";
+	std::cout << "FOOD...\n";
 }
