@@ -6,6 +6,8 @@ class Inventory {
 private:
 	std::map<int, Items*> itemsDB;
 	std::vector<std::unique_ptr<sf::Sprite>> bagSlots;
+	std::vector<std::unique_ptr<sf::Text>> itemsStack;
+	sf::Font font;
 	sf::Texture *slotsTexture;
 	int bagSize;
 	std::vector<std::pair<int, int>> bag;

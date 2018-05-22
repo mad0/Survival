@@ -21,20 +21,24 @@ Game::Game(Engine* gra) {
 	enemy[1]->setPosition(5 * 32, 3 * 32);
 	enemy.emplace_back(new Character("gfx/m2.png", 200));
 	enemy[2]->setPosition(3 * 32, 4 * 32);
-	bag = new Inventory(10);
-	bag->addToBag(1, 98);
-	bag->addToBag(1, 15);
-	bag->addToBag(2, 98);
+	bag = new Inventory(5);
+	bag->addToBag(1, 20);
+	//bag->addToBag(1, 15);
+	//bag->addToBag(1, 30);
 	bag->addToBag(2, 1);
 	bag->addToBag(1, 1);
 	bag->addToBag(1, 1);
+	bag->addToBag(2, 10);
 	bag->addToBag(1, 1);
 	bag->addToBag(1, 1);
+	bag->addToBag(2, 1);
+	bag->addToBag(2, 1);
+	bag->addToBag(1, 15);
 	bag->addToBag(1, 1);
-	//bag->addToBag(1, 15);
-	//bag->addToBag(1, 1);
-	//bag->addToBag(2, 3);
-	//bag->addToBag(2, 3);
+	bag->addToBag(1, 3);
+	bag->addToBag(2, 3);
+	bag->addToBag(2, 100);
+
 	font.loadFromFile("fonts/Vecna.otf");
 	guiStr[0] = "Health points ";
 	guiStr[1] = "Weapon: ";
@@ -78,6 +82,7 @@ void Game::inputs() {
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::Right)
 			movePlayer(Game::RIGHT);
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::Space) {
+			bag->addToBag(1, 1);
 		}
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::I) {
 			bag->showInventory();
