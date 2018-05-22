@@ -17,8 +17,7 @@ public:
 	void addToBag(int _itemID, int _stackSize);
 	template <typename T>
 	T* getItem(int _itemID);
-	//void delWeapon();
-	void delItem();
+	void delItem(int _itemID);
 	void showInventory();
 	//int bagSize();
 	void drawInventory(sf::RenderWindow& _window);

@@ -47,7 +47,17 @@ void Inventory::addToBag(int _itemID, int _stackSize) {
 	}
 } 
 
-void Inventory::delItem() {
+void Inventory::delItem(int _itemID) {
+	for (int x = 0; x < bag.size();x++) {
+		if (bag[x].second == 0) {
+			std::cout << bag.size() << "\n";
+			bag.erase(bag.begin()+x);
+			std::cout << bag.size() << "\n";
+		}
+		if (bag[x].first == _itemID) {
+			bag[x].second -= 1;
+		}
+	}
 }
 
 void Inventory::showInventory() {
@@ -66,8 +76,10 @@ void Inventory::drawInventory(sf::RenderWindow & _window) {
 		_window.draw(*z);
 	}
 
-	for (auto& s : itemsStack)
-		_window.draw(*s);
+	for (auto& s : itemsStack) {
+		if (s->getString() != '0')
+			_window.draw(*s);
+	}
 
 	//ITEMS IN SLOTS
 	for (auto& i : bag) {

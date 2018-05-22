@@ -25,19 +25,9 @@ Game::Game(Engine* gra) {
 	bag->addToBag(1, 20);
 	//bag->addToBag(1, 15);
 	//bag->addToBag(1, 30);
-	bag->addToBag(2, 1);
-	bag->addToBag(1, 1);
-	bag->addToBag(1, 1);
-	bag->addToBag(2, 10);
-	bag->addToBag(1, 1);
-	bag->addToBag(1, 1);
-	bag->addToBag(2, 1);
-	bag->addToBag(2, 1);
-	bag->addToBag(1, 15);
-	bag->addToBag(1, 1);
+	bag->addToBag(2, 4);
 	bag->addToBag(1, 3);
-	bag->addToBag(2, 3);
-	bag->addToBag(2, 100);
+	bag->addToBag(3, 2);
 
 	font.loadFromFile("fonts/Vecna.otf");
 	guiStr[0] = "Health points ";
@@ -83,6 +73,7 @@ void Game::inputs() {
 			movePlayer(Game::RIGHT);
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::Space) {
 			bag->addToBag(1, 1);
+			
 		}
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::I) {
 			bag->showInventory();
@@ -96,7 +87,7 @@ void Game::inputs() {
 		
 		}
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::D) {
-			//bag.delFromInventory(0);
+			bag->delItem(1);
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
@@ -144,7 +135,7 @@ void Game::update() {
 	gui[2].setString(guiStr[2] + std::to_string(p1->getWeapon()->getLdmg()) + "-" + std::to_string(p1->getWeapon()->getHdmg()));
 	p1->getWeapon()->itemIcon(sf::Vector2f(Wsize.x / 2 - 64, Wsize.y - 150));
 	fighto();
-
+	bag->showInventory();
 	//sf::Vector2f kafel(p1->getPosition().x , p1->getPosition().y);
 	//std::cout << "Aktualny kafel: " << int(kafel.x/32) << " " << int(kafel.y/32) << "\n";
 	//coll = map->collision(*p1);
