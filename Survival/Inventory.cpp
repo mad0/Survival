@@ -51,7 +51,7 @@ void Inventory::delItem(int _itemID) {
 	for (int x = 0; x < bag.size();x++) {
 		if (bag[x].second == 0) {
 			std::cout << bag.size() << "\n";
-			bag.erase(bag.begin()+x);
+			//bag.erase(bag.begin()+x);
 			std::cout << bag.size() << "\n";
 		}
 		if (bag[x].first == _itemID) {
