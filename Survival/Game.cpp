@@ -6,7 +6,7 @@ Game::Game(Engine* gra) {
 	inv = false;
 	fight = false;
 	engine = gra;
-	panel1 = new GUI(1, "gfx/Panel1.png", sf::Vector2f(0, 528), true);
+	panel1 = new GUIPanel(1, sf::Vector2f(0, 528), true, sf::Color(48,34,6,255));
 	
 	Wsize = sf::Vector2f(engine->window.getSize());
 	map = std::make_unique<Map>(engine->window, "gfx/maps.gif", Wsize);
@@ -148,17 +148,18 @@ void Game::update() {
 }
 void Game::draw() {
 	engine->window.clear();
-	map->draw();
+	//map->draw();
 	panel1->draw(engine->window);
+
 	for (auto x : gui)
 		engine->window.draw(x);
 	p1->getWeapon()->itemIconDraw(engine->window);
-	for (auto& e:enemy) {
-		if (e->isAlive())
-			e->draw(engine->window);
-	}
-
-	p1->draw(engine->window);
+	//for (auto& e:enemy) {
+	//	if (e->isAlive())
+	//		e->draw(engine->window);
+	//}
+	
+	//p1->draw(engine->window);
 	if (inv)
 		bag->drawInventory(engine->window);
 }
