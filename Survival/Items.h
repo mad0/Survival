@@ -12,7 +12,6 @@ public:
 		POTION
 	};
 	std::string getName() const;
-	int getID() const;
 	ItemType getItemType() const;
 	void itemIcon(sf::Vector2f _pos);
 	void itemIconDraw(sf::RenderWindow& _window);

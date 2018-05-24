@@ -5,13 +5,13 @@ Items::Items(ItemType _itemType, std::string _iconFile, const std::string& _item
 	std::cout<<"Tworze item: ";
 }
 
-void Items::tooltip()
-{
+void Items::tooltip() {
 }
 
 Items::~Items() {
 	std::cout << "Niszcze item: ";
 }
+
 
 void Items::itemIcon(sf::Vector2f _pos) {
 	texture.loadFromFile(iconFile);
@@ -31,9 +31,6 @@ std::string Items::getName() const {
 	return itemName;
 }
 
-int Items::getID() const {
-	return itemID;
-}
 
 Items::ItemType Items::getItemType() const {
 	return itemType;

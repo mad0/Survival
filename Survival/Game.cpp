@@ -6,6 +6,8 @@ Game::Game(Engine* gra) {
 	inv = false;
 	fight = false;
 	engine = gra;
+	panel1 = new GUI(1, "gfx/Panel1.png", sf::Vector2f(0, 528), true);
+	
 	Wsize = sf::Vector2f(engine->window.getSize());
 	map = std::make_unique<Map>(engine->window, "gfx/maps.gif", Wsize);
 	LoadMap();
@@ -35,6 +37,7 @@ Game::Game(Engine* gra) {
 	guiStr[2] = "Damage: ";
 	for (int x=0;x<3;x++) {
 		gui[x].setFont(font);
+		gui[x].setFillColor(sf::Color::White);
 		gui[x].setCharacterSize(25);
 	}
 	//HP
@@ -146,7 +149,8 @@ void Game::update() {
 void Game::draw() {
 	engine->window.clear();
 	map->draw();
-	for (auto x: gui)
+	panel1->draw(engine->window);
+	for (auto x : gui)
 		engine->window.draw(x);
 	p1->getWeapon()->itemIconDraw(engine->window);
 	for (auto& e:enemy) {

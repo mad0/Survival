@@ -7,10 +7,12 @@
 #include "Character.h"
 #include "Inventory.h"
 #include "Fight.h"
+#include "GUI.h"
 
 class Game : public GameState {
 private:
 	enum Directions { UP, DOWN, LEFT, RIGHT };
+	GUI *panel1;
 	sf::Text gui[3];
 	std::string guiStr[4];
 	sf::Font font;
