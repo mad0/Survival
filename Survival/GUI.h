@@ -2,13 +2,15 @@
 #include <SFML\Graphics.hpp>
 
 class GUI  {
-public:
+protected:
 	int GUIid;
 	sf::RectangleShape GUIshape;
-	sf::Vector2f GUIpos;
 	bool isVisible;
+	//sf::Texture shapeTexture;
 public:
-	GUI(int _GUIid, sf::Vector2f _GUIpos, bool _isVisable);
+	GUI();
+	//ID, GUI-POS, GUI-SIZE,  VISIBLE...
+	GUI(int, sf::Vector2f, sf::Vector2f, bool);
 	sf::Vector2f getPosition();
 	void setPosition(sf::Vector2f _newPos);
 	virtual void update() = 0;
@@ -17,14 +19,12 @@ public:
 };
 
 class GUIPanel : public GUI {
-private:
-	sf::Color bgColor;
-	sf::Text panelText;
-	sf::Font panelFont;
-	std::string panelString;
 public:
 	void update();
-	GUIPanel(int _GUIid, sf::Vector2f _GUIpos, bool _isVisible, sf::Color _bgColor);
+	GUIPanel();
+//	//ID, SIZE, VISIBLE...
+	GUIPanel(int, sf::Vector2f, sf::Vector2f, bool, sf::Color);
+	GUIPanel(int, sf::Vector2f, sf::Vector2f, bool, std::string);
 	void draw(sf::RenderWindow &_window) const;
 	virtual ~GUIPanel();
 };

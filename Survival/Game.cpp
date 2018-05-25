@@ -6,8 +6,11 @@ Game::Game(Engine* gra) {
 	inv = false;
 	fight = false;
 	engine = gra;
-	panel1 = new GUIPanel(1, sf::Vector2f(0, 528), true, sf::Color(48,34,6,255));
-	
+	//ID, POS, SIZE, VISIBLE...
+	panel1 = new GUIPanel(1, sf::Vector2f(0, 528), sf::Vector2f(1280, 192), true, sf::Color(8,34,10,255));
+	panel2 = new GUIPanel(2, sf::Vector2f(0, 0), sf::Vector2f(1280, 192), true, sf::Color(8,34,10,255));
+
+	//panel1 = new GUIPanel(1, sf::Vector2f(0, 528), sf::Vector2f(1280, 192), true, "gfx/Panel1.png");
 	Wsize = sf::Vector2f(engine->window.getSize());
 	map = std::make_unique<Map>(engine->window, "gfx/maps.gif", Wsize);
 	LoadMap();
@@ -150,6 +153,7 @@ void Game::draw() {
 	engine->window.clear();
 	//map->draw();
 	panel1->draw(engine->window);
+	panel2->draw(engine->window);
 
 	for (auto x : gui)
 		engine->window.draw(x);
