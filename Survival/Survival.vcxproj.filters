@@ -49,7 +49,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GUI.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GUIPanel.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -83,8 +86,11 @@
     <ClInclude Include="Fight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GUIPanel.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
     <ClInclude Include="GUI.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

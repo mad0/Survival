@@ -1,0 +1,52 @@
+#include "GUIPanel.h"
+#include <iostream>
+
+GUIPanel::GUIPanel() {
+
+}
+
+GUIPanel::GUIPanel(int _GUIid, sf::Vector2f _GUIpos, sf::Vector2f _GUIsize, bool _isVisible) : id(_GUIid), isVisible(_isVisible) {
+	std::cout << isVisible;
+	GUIshape.setPosition(_GUIpos);
+	GUIshape.setSize(sf::Vector2f(_GUIsize));
+	GUIshape.setFillColor(sf::Color(48, 34, 6, 255));
+}
+
+sf::Vector2f GUIPanel::getPosition() {
+	return GUIshape.getPosition();;
+}
+
+void GUIPanel::setPosition(sf::Vector2f _newPos) {
+	GUIshape.setPosition(_newPos);
+}
+
+void GUIPanel::setVisible(bool _isVisible) {
+	isVisible = _isVisible;
+}
+
+bool GUIPanel::getVisible() {
+	return isVisible;
+}
+
+
+void GUIPanel::setTexture(std::string _textureFile) {
+	shapeTexture.loadFromFile(_textureFile);
+	GUIshape.setTexture(&shapeTexture);
+}
+
+void GUIPanel::setColor(sf::Color _color) {
+	GUIshape.setFillColor(_color);
+}
+
+void GUIPanel::update() {
+}
+
+void GUIPanel::draw(sf::RenderWindow & _window) {
+	if (isVisible)
+		_window.draw(GUIshape);
+}
+
+GUIPanel::~GUIPanel() {
+	std::cout << "Niszcze GUI...\n";
+}
+

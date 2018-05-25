@@ -12,8 +12,7 @@
 class Game : public GameState {
 private:
 	enum Directions { UP, DOWN, LEFT, RIGHT };
-	GUIPanel *panel1;
-	GUIPanel *panel2;
+	GUI hud;
 	sf::Text gui[3];
 	std::string guiStr[4];
 	sf::Font font;
