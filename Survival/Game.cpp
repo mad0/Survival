@@ -6,7 +6,7 @@ Game::Game(Engine* gra) {
 	inv = false;
 	fight = false;
 	engine = gra;
-	hud = GUI();
+	hud = new GUI();
 	Wsize = sf::Vector2f(engine->window.getSize());
 	map = std::make_unique<Map>(engine->window, "gfx/maps.gif", Wsize);
 	LoadMap();
@@ -148,7 +148,7 @@ void Game::update() {
 void Game::draw() {
 	engine->window.clear();
 	//map->draw();
-	hud.draw(engine->window);
+	hud->draw(engine->window);
 	for (auto x : gui)
 		engine->window.draw(x);
 	p1->getWeapon()->itemIconDraw(engine->window);
@@ -240,4 +240,5 @@ Game::~Game() {
 	enemy.clear();
 	}
 	delete p1;
+	delete hud;
 }

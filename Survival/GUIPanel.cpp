@@ -6,10 +6,10 @@ GUIPanel::GUIPanel() {
 }
 
 GUIPanel::GUIPanel(int _GUIid, sf::Vector2f _GUIpos, sf::Vector2f _GUIsize, bool _isVisible) : id(_GUIid), isVisible(_isVisible) {
-	std::cout << isVisible;
+	std::cout << "TWORZE GUI PANEL...\n";
+
 	GUIshape.setPosition(_GUIpos);
 	GUIshape.setSize(sf::Vector2f(_GUIsize));
-	GUIshape.setFillColor(sf::Color(48, 34, 6, 255));
 }
 
 sf::Vector2f GUIPanel::getPosition() {
@@ -36,6 +36,9 @@ void GUIPanel::setTexture(std::string _textureFile) {
 
 void GUIPanel::setColor(sf::Color _color) {
 	GUIshape.setFillColor(_color);
+}
+
+void GUIPanel::setSlots() {
 }
 
 void GUIPanel::update() {

@@ -4,7 +4,8 @@
 
 class GUI {
 private:
-	std::vector<GUIPanel> panels;
+	std::vector<GUIPanel*> panels;
+	std::vector<GUIPanel*> slots;
 public:
 	void draw(sf::RenderWindow &_window);
 	GUI();

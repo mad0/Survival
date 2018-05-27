@@ -17,6 +17,7 @@ public:
 	bool getVisible();
 	void setTexture(std::string _textureFile);
 	void setColor(sf::Color);
+	void setSlots();
 	void update();
 	void draw(sf::RenderWindow &_window);
 	~GUIPanel();
