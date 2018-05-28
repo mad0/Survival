@@ -7,11 +7,11 @@ void GUI::draw(sf::RenderWindow &_window) {
 		if (p->getVisible())
 			p->draw(_window);
 	}
-	//for (auto& s : slots) {
-	//	//if (s->getVisible())
-	//	s->draw(_window);
-	//}
-	_window.draw(slots[0]);
+	for (auto& s : slots) {
+		if (s->getVisible())
+		s->draw(_window);
+	}
+
 }
 
 void GUI::update() {
@@ -25,11 +25,10 @@ GUI::GUI() {
 	panels.emplace_back(std::make_unique<GUIPanel>(3, sf::Vector2f(0, 528), sf::Vector2f(1280, 192), true));
 	for (auto& p : panels)
 		p->setColor(sf::Color(48, 34, 6, 255));
-	//for (int x = 0; x < 6; x++) {
-		slots.emplace_back(new GUISlot());
-		slots[0]->setPosition(10, 238);
-		//slots[x]->setColor(sf::Color(255, 0, 0, 150));
-	//}
+	for (int x = 0; x < 6; x++) {
+		slots.emplace_back(new GUIPanel(x, sf::Vector2f(10 + (x * 74), 538), sf::Vector2f(64, 64), true));
+		slots[x]->setColor(sf::Color(255, 0, 0, 150));
+	}
 			
 }
 

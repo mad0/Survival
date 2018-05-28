@@ -54,9 +54,6 @@
     <ClCompile Include="GUIPanel.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="GUISlot.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameState.h">
@@ -94,9 +91,6 @@
     </ClInclude>
     <ClInclude Include="GUI.h">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GUISlot.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -162,7 +162,6 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="GUIPanel.cpp" />
-    <ClCompile Include="GUISlot.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Items.cpp" />
     <ClCompile Include="main.cpp" />
@@ -178,7 +177,6 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="GUIPanel.h" />
-    <ClInclude Include="GUISlot.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Items.h" />
     <ClInclude Include="MainMenu.h" />
