@@ -6,7 +6,7 @@ Game::Game(Engine* gra) {
 	inv = false;
 	fight = false;
 	engine = gra;
-	hud = new GUI();
+	hud = new GUI(engine->window);
 	Wsize = sf::Vector2f(engine->window.getSize());
 	map = std::make_unique<Map>(engine->window, "gfx/maps.gif", Wsize);
 	LoadMap();
@@ -138,6 +138,7 @@ void Game::update() {
 	p1->getWeapon()->itemIcon(sf::Vector2f(Wsize.x / 2 - 64, Wsize.y - 150));
 	fighto();
 	bag->showInventory();
+	hud->update();
 	//sf::Vector2f kafel(p1->getPosition().x , p1->getPosition().y);
 	//std::cout << "Aktualny kafel: " << int(kafel.x/32) << " " << int(kafel.y/32) << "\n";
 	//coll = map->collision(*p1);
@@ -148,7 +149,7 @@ void Game::update() {
 void Game::draw() {
 	engine->window.clear();
 	//map->draw();
-	hud->draw(engine->window);
+	hud->draw();
 	for (auto x : gui)
 		engine->window.draw(x);
 	p1->getWeapon()->itemIconDraw(engine->window);

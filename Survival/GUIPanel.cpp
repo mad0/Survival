@@ -1,9 +1,6 @@
-#include "GUIPanel.h"
+
 #include <iostream>
-
-GUIPanel::GUIPanel() {
-
-}
+#include "GUIPanel.h"
 
 GUIPanel::GUIPanel(int _GUIid, sf::Vector2f _GUIpos, sf::Vector2f _GUIsize, bool _isVisible) : id(_GUIid), isVisible(_isVisible) {
 	std::cout << "TWORZE GUI PANEL...\n";
@@ -13,7 +10,7 @@ GUIPanel::GUIPanel(int _GUIid, sf::Vector2f _GUIpos, sf::Vector2f _GUIsize, bool
 }
 
 sf::Vector2f GUIPanel::getPosition() {
-	return GUIshape.getPosition();;
+	return GUIshape.getPosition();
 }
 
 void GUIPanel::setPosition(sf::Vector2f _newPos) {
@@ -41,8 +38,10 @@ void GUIPanel::setColor(sf::Color _color) {
 void GUIPanel::setSlots() {
 }
 
-void GUIPanel::update() {
+sf::FloatRect GUIPanel::mouseOverSlot() {
+	return GUIshape.getGlobalBounds();
 }
+
 
 void GUIPanel::draw(sf::RenderWindow & _window) {
 	if (isVisible)

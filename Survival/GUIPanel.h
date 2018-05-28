@@ -8,7 +8,6 @@ private:
 	bool isVisible;
 	sf::Texture shapeTexture;
 public:
-	GUIPanel();
 	//ID, GUI-POS, GUI-SIZE,  VISIBLE...
 	GUIPanel(int, sf::Vector2f, sf::Vector2f, bool);
 	sf::Vector2f getPosition();
@@ -18,7 +17,7 @@ public:
 	void setTexture(std::string _textureFile);
 	void setColor(sf::Color);
 	void setSlots();
-	void update();
+	sf::FloatRect mouseOverSlot();
 	void draw(sf::RenderWindow &_window);
 	~GUIPanel();
 };
