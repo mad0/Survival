@@ -9,7 +9,6 @@ private:
 	std::string TextureFile;
 	sf::Texture _Texture;
 	sf::Vector2f Wsize;
-	std::vector<std::unique_ptr<sf::Sprite>> TileMap;
 	sf::VertexArray vertex[2];
 	sf::RenderWindow& okno;
 	enum TileType {
@@ -29,6 +28,7 @@ private:
 public:
 	Map(sf::RenderWindow&, const std::string& TextureFile, sf::Vector2f);
 	 ~Map();
+	 void LoadMap();
 	 void drawMap();
 	 void draw();
 	 void LoadTile(const std::map<std::string, const std::vector<int>>& Load);

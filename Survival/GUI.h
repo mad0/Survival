@@ -4,15 +4,21 @@
 #include "GUIPanel.h"
 #include "GUISlot.h"
 
+class Character;
+
 class GUI {
 private:
+	sf::Texture bgTexture;
+	sf::Texture barTexture;
+	Character *p1;
+	sf::RectangleShape hpBar;
+	sf::RectangleShape hpBG;
 	std::vector<std::unique_ptr<GUIPanel>> panels;
-	std::vector<std::unique_ptr<GUIPanel>> slots;
-	//std::vector<GUISlot*> slots;
 public:
 	void draw(sf::RenderWindow &_window);
+	void drawHP();
 	void update();
-	GUI();
+	GUI(Character *_p1);
 	~GUI();
 };
 

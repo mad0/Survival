@@ -6,29 +6,28 @@ Game::Game(Engine* gra) {
 	inv = false;
 	fight = false;
 	engine = gra;
-	hud = new GUI();
-	Wsize = sf::Vector2f(engine->window.getSize());
-	map = std::make_unique<Map>(engine->window, "gfx/maps.gif", Wsize);
-	LoadMap();
-	p1 = new Character("gfx/player.png", 128);
+	p1 = std::make_unique<Character>("gfx/pLeft.png", 1280);
 	p1->setPosition(6 * 32, 2 * 32);
-	//weapon = dynamic_cast<Weapons*>(itemsDB.at(3));
-	//weapon = getItem<Weapons>(3);
 	weapon = new Weapons(Items::WEAPON, "gfx/dagger.png", "Simple iron dagger", 6, 10);
 	p1->equipWeapon(weapon);
-	enemy.emplace_back(new Character("gfx/m1.png", 200));
-	enemy[0]->setPosition(4 * 32, 3 * 32);
-	enemy.emplace_back(new Character("gfx/m2.png", 200));
-	enemy[1]->setPosition(5 * 32, 3 * 32);
-	enemy.emplace_back(new Character("gfx/m2.png", 200));
-	enemy[2]->setPosition(3 * 32, 4 * 32);
-	bag = new Inventory(5);
-	bag->addToBag(1, 20);
+	//hud = new GUI(p1);
+	Wsize = sf::Vector2f(engine->window.getSize());
+	map = std::make_unique<Map>(engine->window, "gfx/maps.gif", Wsize);
+	//weapon = dynamic_cast<Weapons*>(itemsDB.at(3));
+	//weapon = getItem<Weapons>(3);
+	//enemy.emplace_back(new Character("gfx/m1.png", 200));
+	//enemy[0]->setPosition(4 * 32, 3 * 32);
+	//enemy.emplace_back(new Character("gfx/m2.png", 200));
+	//enemy[1]->setPosition(5 * 32, 3 * 32);
+	//enemy.emplace_back(new Character("gfx/m2.png", 200));
+	//enemy[2]->setPosition(3 * 32, 4 * 32);
+	//bag = new Inventory(5);
+	//bag->addToBag(1, 20);
 	//bag->addToBag(1, 15);
 	//bag->addToBag(1, 30);
-	bag->addToBag(2, 4);
-	bag->addToBag(1, 3);
-	bag->addToBag(3, 2);
+	//bag->addToBag(2, 4);
+	//bag->addToBag(1, 3);
+	//bag->addToBag(3, 2);
 
 	font.loadFromFile("fonts/Vecna.otf");
 	guiStr[0] = "Health points ";
@@ -69,27 +68,29 @@ void Game::inputs() {
 			movePlayer(Game::UP);
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::Down)
 			movePlayer(Game::DOWN);
+		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::D)
+			p1->setHP(-10);
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::Left)
 			movePlayer(Game::LEFT);
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::Right)
 			movePlayer(Game::RIGHT);
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::Space) {
-			bag->addToBag(1, 1);
+			//bag->addToBag(1, 1);
 			
 		}
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::I) {
-			bag->showInventory();
-			if (inv)
-				inv = false;
-			else 
-				inv = true;	
+			//bag->showInventory();
+			//if (inv)
+			//	inv = false;
+			//else 
+			//	inv = true;	
 		}
 		if (zdarz.type == sf::Event::MouseButtonPressed && zdarz.key.code == sf::Mouse::Left) {
 			std::cout << p1->getWeapon()->getName();
 		
 		}
 		if (zdarz.type == sf::Event::KeyPressed && zdarz.key.code == sf::Keyboard::D) {
-			bag->delItem(1);
+			//bag->delItem(1);
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
@@ -132,13 +133,13 @@ void Game::playerDirection(int x, int y) {
 }
 
 void Game::update() {
-	gui[0].setString(guiStr[0] + "\n      " + std::to_string(p1->getHp()));
+	gui[0].setString(guiStr[0] + "\n      " + std::to_string(p1->getHp())+"/"+std::to_string(p1->getmaxHp()));
 	gui[1].setString(guiStr[1] + p1->getWeapon()->getName());
 	gui[2].setString(guiStr[2] + std::to_string(p1->getWeapon()->getLdmg()) + "-" + std::to_string(p1->getWeapon()->getHdmg()));
 	p1->getWeapon()->itemIcon(sf::Vector2f(Wsize.x / 2 - 64, Wsize.y - 150));
 	fighto();
-	bag->showInventory();
-	hud->update();
+	//bag->showInventory();
+	//hud->update();
 	//sf::Vector2f kafel(p1->getPosition().x , p1->getPosition().y);
 	//std::cout << "Aktualny kafel: " << int(kafel.x/32) << " " << int(kafel.y/32) << "\n";
 	//coll = map->collision(*p1);
@@ -148,8 +149,8 @@ void Game::update() {
 }
 void Game::draw() {
 	engine->window.clear();
-	//map->draw();
-	hud->draw(engine->window);
+	map->draw();
+	//hud->draw(engine->window);
 	for (auto x : gui)
 		engine->window.draw(x);
 	p1->getWeapon()->itemIconDraw(engine->window);
@@ -158,88 +159,40 @@ void Game::draw() {
 	//		e->draw(engine->window);
 	//}
 	
-	//p1->draw(engine->window);
-	if (inv)
-		bag->drawInventory(engine->window);
+	p1->draw(engine->window);
+	//if (inv)
+		//bag->drawInventory(engine->window);
 }
 
 void Game::fighto() {
-	if (enemy.size() > 0) {
-		for (int x=0;x<enemy.size();x++) {
-			if (p1->collisionBox().intersects(enemy[x]->collisionBox())) {
-				std::cout << x << "ZNALAZLEM\n";
-				if (enemy[x]->isAlive()) {
-					Fight fight1(p1, enemy[x]);
-				}
-				if (!enemy[x]->isAlive()) {
-					delete enemy[x];
-					enemy.erase(enemy.begin() + x);
-					std::cout << "ENEMy " << enemy.size() << "\n";
-				}
-			}
-		}
-	}
+	//if (enemy.size() > 0) {
+	//	for (int x=0;x<enemy.size();x++) {
+	//		if (p1->collisionBox().intersects(enemy[x]->collisionBox())) {
+	//			std::cout << x << "ZNALAZLEM\n";
+	//			if (enemy[x]->isAlive()) {
+	//				Fight fight1(p1, enemy[x]);
+	//			}
+	//			if (!enemy[x]->isAlive()) {
+	//				delete enemy[x];
+	//				enemy.erase(enemy.begin() + x);
+	//				std::cout << "ENEMy " << enemy.size() << "\n";
+	//			}
+	//		}
+	//	}
+	//}
 }
 
-void Game::LoadMap() {
-	std::vector<int> Load = {
-		0,0,0,0,0,39,39,39,39,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,39,0,0,51,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,39,39,39,39,0,0,39,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,0,39,0,0,0,0,0,39,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,39,39,0,39,39,39,39,39,0,0,0,0,0,0,0,0,0,0,0,0,0,39,39,39,39,39,39,39,49,39,0,0,0,0,0,0,0,0,0,
-		0,39,0,0,39,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,51,0,0,0,0,39,0,0,39,0,0,0,0,0,0,0,0,0,
-		0,39,0,39,39,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,39,39,39,0,0,39,39,0,39,0,0,0,0,39,39,51,39,39,
-		0,39,0,39,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,39,0,0,0,0,0,39,0,0,0,0,39,0,0,0,39,
-		0,39,0,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,39,0,39,0,0,0,0,0,39,0,0,0,0,39,0,0,0,39,
-		0,39,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,39,0,39,39,0,39,39,39,39,0,0,0,0,39,39,0,39,39,
-		0,39,39,39,39,39,39,39,39,39,39,39,0,39,39,39,39,39,39,39,39,0,39,0,0,39,0,39,0,0,0,0,0,0,0,0,39,0,39,0,
-		0,0,0,0,0,0,0,0,0,0,0,39,0,39,0,0,0,0,0,0,39,0,39,0,0,39,0,39,0,0,39,39,39,39,39,39,39,0,39,0,
-		0,0,0,0,0,0,0,39,39,39,39,39,0,39,0,0,0,0,0,0,39,0,39,39,39,39,0,39,39,39,39,0,0,0,0,0,0,0,39,0,
-		0,0,0,0,0,0,0,39,0,0,0,0,0,39,0,0,0,0,0,0,39,0,0,0,0,0,0,0,0,0,0,0,0,39,39,39,39,39,39,0,
-		0,0,0,0,0,0,0,39,0,39,39,39,39,39,0,0,0,0,0,0,39,39,39,39,39,39,39,39,39,39,39,39,0,39,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,39,0,39,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,39,0,39,0,0,0,39,39,39,
-		39,39,39,39,39,39,39,39,0,39,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,39,0,39,39,39,39,39,0,63,
-		19,0,0,0,0,0,0,0,0,39,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,39,0,0,0,0,0,0,0,39,
-		39,39,39,39,39,39,39,39,39,39,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,39,39,39,39,39,39,39,39,39 };
-	std::vector<int> Load2 = {
-		0,0,0,0,73,0,0,0,0,73,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,73,73,73,73,0,0,0,0,73,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		0,73,0,0,0,0,0,0,0,73,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		73,73,0,0,0,0,0,0,0,73,0,0,0,0,0,0,0,0,0,0,0,73,73,73,73,73,73,73,73,73,73,73,0,0,0,0,0,0,0,0,
-		73,0,0,0,0,0,0,0,0,73,0,0,0,0,0,0,0,0,0,0,0,73,0,0,0,0,0,0,0,0,0,73,0,0,0,0,0,0,0,0,
-		73,0,0,0,0,73,73,73,73,73,0,0,0,0,0,0,0,0,0,0,0,73,0,0,0,0,0,0,0,0,0,73,0,0,73,73,73,73,73,73,
-		73,0,0,0,0,73,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,73,0,0,0,0,0,0,0,0,0,73,0,0,73,0,0,0,0,0,
-		73,0,0,0,73,73,73,73,73,73,73,73,73,73,73,73,73,73,73,73,73,73,73,73,0,0,0,0,0,0,0,73,0,0,73,0,0,0,0,0,
-		73,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,73,0,0,0,0,0,0,0,73,0,0,73,0,0,0,0,0,
-		73,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,73,0,0,0,0,0,0,0,73,0,0,73,0,0,0,0,0,
-		73,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,73,73,0,0,0,73,73,73,73,73,73,73,73,0,0,0,73,
-		73,73,73,73,73,73,73,73,73,73,73,0,0,0,73,73,73,73,73,73,0,0,0,73,73,0,0,0,73,73,0,0,0,0,0,0,0,0,0,73,
-		0,0,0,0,0,0,73,0,0,0,0,0,0,0,73,0,0,0,0,73,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,73,
-		0,0,0,0,0,0,73,0,0,0,0,0,0,0,73,0,0,0,0,73,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,73,
-		0,0,0,0,0,0,73,0,0,0,0,0,0,0,73,0,0,0,0,73,0,0,0,0,0,0,0,0,0,0,0,0,0,0,73,73,73,73,73,73,
-		73,73,73,73,73,73,73,0,0,0,73,73,73,73,73,0,0,0,0,73,73,73,73,73,73,73,73,73,73,73,73,0,0,0,73,73,73,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,73,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,73,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,73,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,73,0,0,0,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,73,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,73,0,0,0,0,0,0,0,0,0 };
-	std::map<std::string, const std::vector<int>> LoadV = {
-		std::make_pair("Layer1", Load),
-		std::make_pair("Layer2", Load2)
-	};
-	map->LoadTile(LoadV);
-	//map->drawMap();
-}
 
 Game::~Game() {
 	std::cout << "Wychodze z GRY do MENU\n";
-	delete bag;
+	//delete bag;
 	delete weapon;
-	if (enemy.size() > 0) {
-		for (auto& e : enemy) {
-			delete e;
-		}
-	enemy.clear();
-	}
-	delete p1;
-	delete hud;
+	//if (enemy.size() > 0) {
+	//	for (auto& e : enemy) {
+	//		delete e;
+	//	}
+	//enemy.clear();
+	//}
+	//delete p1;
+	//delete hud;
 }

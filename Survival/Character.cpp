@@ -16,7 +16,10 @@ Character::~Character() {
 }
 
 int Character::getHp() {
-	return hp;
+	if (hp >0)
+		return hp;
+	else 
+		return hp = 0;
 }
 
 int Character::getmaxHp() {
@@ -24,9 +27,10 @@ int Character::getmaxHp() {
 }
 
 bool Character::isAlive() {
-	if (hp <= 0)
+	if (hp > 0)
+		return true;
+	else
 		return false;
-	else return true;
 }
 
 void Character::move(short x, short y) {
@@ -48,7 +52,7 @@ void Character::equipWeapon(Weapons * _weapon) {
 }
 
 void Character::setHP(int _hp) {
-	hp = hp - _hp;
+		hp+= _hp;
 }
 
 void Character::setMaxHP(int _hp) {

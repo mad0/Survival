@@ -10,8 +10,7 @@ MainMenu::MainMenu(Engine* _menu) {
 	std::cout << "Tworze menu\n";
 	mTxt = { "New game","Options", "Exit" };
 	for (int x = 0; x < 3;x++) {
-		mItems.push_back(std::make_unique<Text>(mTxt[x], "fonts/Game2.ttf"));
-		mItems[x]->setSize(15);
+		mItems.emplace_back(std::make_unique<Text>(mTxt[x], "fonts/CGA.ttf"));
 		mItems[x]->setPosition(position.x / 2 - mItems[x]->GetSize().width / 2, position.y / 4 + x * 130);
 	}
 }
