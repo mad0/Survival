@@ -6,13 +6,13 @@ Game::Game(Engine* gra) {
 	inv = false;
 	fight = false;
 	engine = gra;
-	p1 = std::make_unique<Character>("gfx/pLeft.png", 1280);
+	p1 = std::make_unique<Character>("gfx/3.png", 1280);
 	p1->setPosition(6 * 32, 2 * 32);
 	weapon = new Weapons(Items::WEAPON, "gfx/dagger.png", "Simple iron dagger", 6, 10);
 	p1->equipWeapon(weapon);
 	//hud = new GUI(p1);
 	Wsize = sf::Vector2f(engine->window.getSize());
-	map = std::make_unique<Map>(engine->window, "gfx/maps.gif", Wsize);
+	map = std::make_unique<Map>(engine->window, "gfx/BeachTileset.png", Wsize);
 	//weapon = dynamic_cast<Weapons*>(itemsDB.at(3));
 	//weapon = getItem<Weapons>(3);
 	//enemy.emplace_back(new Character("gfx/m1.png", 200));
@@ -148,8 +148,8 @@ void Game::update() {
 	
 }
 void Game::draw() {
-	engine->window.clear();
-	map->draw();
+	engine->window.clear(sf::Color::White);
+	//map->draw();
 	//hud->draw(engine->window);
 	for (auto x : gui)
 		engine->window.draw(x);
